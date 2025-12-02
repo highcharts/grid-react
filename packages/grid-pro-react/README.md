@@ -1,0 +1,67 @@
+# @highcharts/grid-pro-react
+
+React wrapper for [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
+
+## Installation
+
+```bash
+npm install @highcharts/grid-pro-react @highcharts/grid-pro
+```
+
+## Requirements
+
+- React 19.2.0 or higher
+- @highcharts/grid-pro 2.0.1 or higher
+
+## Quick Start
+
+```tsx
+import React, { useState } from 'react';
+import { GridPro, type Options } from '@highcharts/grid-pro-react';
+
+function App() {
+  const [options] = useState<Options>({
+    dataTable: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie'],
+        age: [23, 34, 45],
+        city: ['New York', 'Oslo', 'Paris']
+      }
+    },
+    caption: {
+      text: 'My Grid'
+    }
+  });
+
+  return <GridPro options={options} />;
+}
+```
+
+## API
+
+### `GridPro`
+
+React component that wraps Highcharts Grid Pro.
+
+#### Props
+
+- `options` (required): Configuration options for the grid. Type: `Options`
+
+### `Options`
+
+Type exported from the package for TypeScript support.
+
+```tsx
+import type { Options } from '@highcharts/grid-pro-react';
+```
+
+## Documentation
+
+For detailed documentation on available options and features, see the [Highcharts Grid Pro documentation](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
+
+## License
+
+Copyright (c) 2020-2025 Highsoft AS
+
+License: www.highcharts.com/license
+

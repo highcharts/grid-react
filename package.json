@@ -1,0 +1,27 @@
+{
+    "name": "highcharts-grid-react",
+    "description": "Monorepo for Highcharts Grid Pro & Lite React libraries.",
+    "private": true,
+    "type": "module",
+    "scripts": {
+        "build": "pnpm -r --filter './packages/*' run build",
+        "test": "pnpm -r --filter './packages/*' run test",
+        "lint": "pnpm -r --filter './packages/*' run lint"
+    },
+    "packageManager": "pnpm@10.23.0",
+    "devDependencies": {
+        "@eslint/js": "^9.39.1",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "@stylistic/eslint-plugin": "^5.6.1",
+        "@types/react": "^19.0.0",
+        "@types/react-dom": "^19.0.0",
+        "eslint": "^9.39.1",
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "rollup": "^4.53.3",
+        "tsup": "^8.5.1",
+        "typescript": "^5.9.3",
+        "typescript-eslint": "^8.48.0",
+        "vitest": "^4.0.14"
+    }
+}

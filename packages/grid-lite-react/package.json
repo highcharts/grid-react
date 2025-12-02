@@ -1,0 +1,21 @@
+{
+    "name": "@highcharts/grid-lite-react",
+    "version": "0.1.0",
+    "type": "module",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "sideEffects": ["**/*.css"],
+    "scripts": {
+        "build": "tsup",
+        "test": "vitest",
+        "lint": "eslint src --ext .ts,.tsx"
+    },
+    "devDependencies": {
+        "@highcharts/grid-shared-react": "workspace:*"
+    },
+    "peerDependencies": {
+        "react": "^19.2.0",
+        "react-dom": "^19.2.0",
+        "@highcharts/grid-lite": "^2.0.1"
+    }
+}
