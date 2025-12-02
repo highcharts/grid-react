@@ -17,7 +17,6 @@ export default defineConfig(
             '@stylistic/semi': ['error', 'always'],
             '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
             '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
-            '@stylistic/comma-dangle': ['error', 'always-multiline'],
             '@stylistic/eol-last': ['error', 'always'],
             '@stylistic/no-trailing-spaces': ['error'],
         },
