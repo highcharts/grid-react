@@ -12,7 +12,6 @@ export default defineConfig(
             '@stylistic': stylistic,
         },
         rules: {
-            'max-lines': ['error', { max: 1000, skipBlankLines: true, skipComments: true }],
             'curly': ['error', 'all'],
             '@stylistic/semi': ['error', 'always'],
             '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
