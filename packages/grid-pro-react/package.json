@@ -1,9 +1,41 @@
 {
     "name": "@highcharts/grid-pro-react",
     "version": "0.1.0",
+    "description": "Official React wrapper for Highcharts Grid Pro",
     "type": "module",
+    "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "keywords": [
+        "highcharts",
+        "grid",
+        "react",
+        "data-grid",
+        "table",
+        "pro"
+    ],
+    "author": "Highsoft AS",
+    "license": "SEE LICENSE IN LICENSE",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/highcharts/grid-react.git",
+        "directory": "packages/grid-pro-react"
+    },
+    "homepage": "https://www.highcharts.com",
+    "bugs": {
+        "url": "https://github.com/highcharts/grid-react/issues"
+    },
     "sideEffects": ["**/*.css"],
     "scripts": {
         "build": "tsup",
