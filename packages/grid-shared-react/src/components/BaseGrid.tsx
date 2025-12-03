@@ -1,14 +1,11 @@
-/* *
+/**
+ * Grid React integration.
+ * Copyright (c) 2025, Highsoft
  *
- *  Base Grid React Component
+ * A valid license is required for using this software.
+ * See highcharts.com/license
  *
- *  (c) 2020-2025 Highsoft AS
- *
- *  License: www.highcharts.com/license
- *
- * */
-
-// 'use strict';
+ */
 
 import React, { useRef } from 'react';
 import {

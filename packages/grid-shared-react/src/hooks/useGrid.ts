@@ -1,14 +1,11 @@
-/* *
+/**
+ * Grid React integration.
+ * Copyright (c) 2025, Highsoft
  *
- *  Custom hook for Highcharts Grid React wrappers
+ * A valid license is required for using this software.
+ * See highcharts.com/license
  *
- *  (c) 2020-2025 Highsoft AS
- *
- *  License: www.highcharts.com/license
- *
- * */
-
-// 'use strict';
+ */
 
 import { useEffect, RefObject } from 'react';
 import { BaseGridProps } from '../components/BaseGrid';
