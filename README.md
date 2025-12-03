@@ -144,7 +144,5 @@ pnpm dev
 
 ## License
 
-Copyright (c) 2020-2025 Highsoft AS
-
-License: www.highcharts.com/license
+SEE LICENSE IN [LICENSE.md](https://github.com/highcharts/highcharts-dist/blob/master/LICENSE.md).
 

@@ -61,7 +61,4 @@ For detailed documentation on available options and features, see the [Highchart
 
 ## License
 
-Copyright (c) 2020-2025 Highsoft AS
-
-License: www.highcharts.com/license
-
+SEE LICENSE IN [LICENSE.md](https://github.com/highcharts/highcharts-dist/blob/master/LICENSE.md).
