@@ -30,15 +30,15 @@ export interface GridType<TOptions> {
     grid(container: HTMLDivElement, options: TOptions): GridInstance;
 }
 
-export interface UseGridOptions<TOptions, TGrid extends GridType<TOptions> = GridType<TOptions>> extends BaseGridProps<TOptions, TGrid> {
-    containerRef: RefObject<HTMLDivElement|null>;
+export interface UseGridOptions<TOptions> extends BaseGridProps<TOptions> {
+    containerRef: RefObject<HTMLDivElement | null>;
 }
 
-export function useGrid<TOptions, TGrid extends GridType<TOptions> = GridType<TOptions>>({
+export function useGrid<TOptions>({
     containerRef,
     options,
     Grid,
-}: UseGridOptions<TOptions, TGrid>) {
+}: UseGridOptions<TOptions>) {
     useEffect(() => {
         if (!containerRef?.current) {
             return;
@@ -51,4 +51,3 @@ export function useGrid<TOptions, TGrid extends GridType<TOptions> = GridType<TO
         };
     }, [options]);
 }
-

@@ -10,7 +10,7 @@
 
 // 'use strict';
 
-import React, { useRef } from 'react';
+import { useRef } from 'react';
 import {
     useGrid,
     GridType
@@ -29,14 +29,14 @@ export interface GridProps<TOptions> {
 /**
  * Props for BaseGrid component
  */
-export interface BaseGridProps<TOptions, TGrid extends GridType<TOptions> = GridType<TOptions>> extends GridProps<TOptions> {
+export interface BaseGridProps<TOptions> extends GridProps<TOptions> {
     /**
      * Grid instance (from @highcharts/grid-lite or @highcharts/grid-pro)
      */
-    Grid: TGrid;
+    Grid: GridType<TOptions>;
 }
 
-export function BaseGrid<TOptions, TGrid extends GridType<TOptions> = GridType<TOptions>>(props: BaseGridProps<TOptions, TGrid>) {
+export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
     const { options, Grid } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
@@ -46,9 +46,5 @@ export function BaseGrid<TOptions, TGrid extends GridType<TOptions> = GridType<T
         Grid
     });
 
-    return (
-        <div
-            ref={containerRef}
-        />
-    );
+    return <div ref={containerRef} />;
 }
