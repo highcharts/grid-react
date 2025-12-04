@@ -7,7 +7,7 @@
  *
  */
 
-import { useRef, RefObject, MutableRefObject, useEffect } from 'react';
+import { useRef, RefObject, useEffect } from 'react';
 import {
     useGrid,
     GridType,
