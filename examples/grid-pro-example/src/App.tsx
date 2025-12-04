@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import {
   GridPro,
   type Options,
@@ -30,12 +30,12 @@ function App() {
 
   const grid = useRef<GridInstance<Options> | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (grid.current) {
+      console.log('Grid instance available:', grid.current);
       // Do something with the grid instance
-      console.log('Grid instance:', grid.current);
     }
-  }, [grid.current]);
+  }, [grid.current]); // Run only once on mount
 
   return (
     <>

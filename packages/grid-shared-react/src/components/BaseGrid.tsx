@@ -7,7 +7,7 @@
  *
  */
 
-import { useRef, RefObject, useEffect } from 'react';
+import { useRef, RefObject, MutableRefObject, useEffect } from 'react';
 import {
     useGrid,
     GridType,
@@ -49,11 +49,12 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
     });
 
     // Synchronize external gridRef with internal gridRef
+    // Run on every render to check if grid is ready, but only update when grid exists
     useEffect(() => {
-        if (gridRef?.current) {
+        if (gridRef && 'current' in gridRef) {
             gridRef.current = currGridRef.current;
         }
-    }, [gridRef, options]); // Update when options change (grid is recreated/updated)
+    }); // No dependency array - runs on every render to sync ref when grid is ready
 
     return <div ref={containerRef} />;
 }
