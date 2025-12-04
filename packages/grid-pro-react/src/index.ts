@@ -9,3 +9,4 @@
 
 export { default as GridPro } from './Grid';
 export type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
+export type { GridInstance } from '@highcharts/grid-shared-react';

@@ -1,11 +1,12 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import {
   GridPro,
-  type Options
+  type Options,
+  type GridInstance
 } from '@highcharts/grid-pro-react';
 
 function App() {
-  const [options] = useState<Options>({
+  const [options, setOptions] = useState<Options>({
     dataTable: {
       columns: {
         name: ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
@@ -27,9 +28,18 @@ function App() {
     }
   });
 
+  const grid = useRef<GridInstance<Options> | null>(null);
+
+  useEffect(() => {
+    if (grid.current) {
+      // Do something with the grid instance
+      console.log('Grid instance:', grid.current);
+    }
+  }, [grid.current]);
+
   return (
     <>
-      <GridPro options={options} />
+      <GridPro options={options} gridRef={grid} />
     </>
   );
 }

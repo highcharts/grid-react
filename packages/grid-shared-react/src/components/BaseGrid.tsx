@@ -7,10 +7,11 @@
  *
  */
 
-import { useRef } from 'react';
+import { useRef, RefObject, useEffect } from 'react';
 import {
     useGrid,
-    GridType
+    GridType,
+    GridInstance
 } from '../hooks/useGrid';
 
 /**
@@ -21,6 +22,10 @@ export interface GridProps<TOptions> {
      * Grid configuration options
      */
     options: TOptions;
+    /**
+     * Optional ref to access the grid instance
+     */
+    gridRef?: RefObject<GridInstance<TOptions> | null>;
 }
 
 /**
@@ -34,14 +39,21 @@ export interface BaseGridProps<TOptions> extends GridProps<TOptions> {
 }
 
 export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
-    const { options, Grid } = props;
+    const { options, Grid, gridRef } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
-    useGrid({
+    const { currGridRef } = useGrid({
         containerRef,
         options,
         Grid
     });
+
+    // Synchronize external gridRef with internal gridRef
+    useEffect(() => {
+        if (gridRef?.current) {
+            gridRef.current = currGridRef.current;
+        }
+    }, [gridRef, options]); // Update when options change (grid is recreated/updated)
 
     return <div ref={containerRef} />;
 }

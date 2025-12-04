@@ -37,26 +37,26 @@ export function useGrid<TOptions>({
     options,
     Grid,
 }: UseGridOptions<TOptions>) {
-    const gridRef = useRef<GridInstance<TOptions> | null>(null);
+    const currGridRef = useRef<GridInstance<TOptions> | null>(null);
 
     useEffect(() => {
         if (!containerRef?.current) {
             return;
-        } else if (gridRef.current) {
-            gridRef.current?.update(options);
+        } else if (currGridRef.current) {
+            currGridRef.current?.update(options, true);
         } else {
-            gridRef.current = Grid.grid(containerRef.current, options);
+            currGridRef.current = Grid.grid(containerRef.current, options);
         }
     }, [options]);
 
     useEffect(() => {
         return () => {
-            if (gridRef.current) {
-                gridRef.current.destroy();
-                gridRef.current = null;
+            if (currGridRef.current) {
+                currGridRef.current.destroy();
+                currGridRef.current = null;
             }
         };
     }, []);
 
-    return { gridRef };
+    return { currGridRef };
 }
