@@ -1,15 +1,14 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
-import { resolve } from 'path';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: [
-      {
-        find: /^@highcharts\/grid-lite(\/.*)?$/,
-        replacement: resolve(__dirname, 'node_modules/@highcharts/grid-lite$1')
-      },
       {
         find: /^@highcharts\/grid-pro(\/.*)?$/,
         replacement: resolve(__dirname, 'node_modules/@highcharts/grid-pro$1')

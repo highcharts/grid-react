@@ -21,10 +21,10 @@ This monorepo contains the following packages:
 
 ```bash
 # For Grid Lite
-npm install @highcharts/grid-lite-react @highcharts/grid-lite
+npm install @highcharts/grid-lite-react
 
 # For Grid Pro
-npm install @highcharts/grid-pro-react @highcharts/grid-pro
+npm install @highcharts/grid-pro-react
 ```
 
 ### Usage
