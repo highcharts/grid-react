@@ -48,13 +48,10 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
         Grid
     });
 
-    // Synchronize external gridRef with internal gridRef
-    // Run on every render to check if grid is ready, but only update when grid exists
     useEffect(() => {
         if (gridRef && 'current' in gridRef) {
             gridRef.current = currGridRef.current;
         }
-    }); // No dependency array - runs on every render to sync ref when grid is ready
-
+    });
     return <div ref={containerRef} />;
 }
