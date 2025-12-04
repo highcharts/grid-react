@@ -33,10 +33,10 @@ npm install @highcharts/grid-pro-react
 
 ```tsx
 import React, { useState } from 'react';
-import { GridLite, type Options } from '@highcharts/grid-lite-react';
+import { GridLite, type GridOptions } from '@highcharts/grid-lite-react';
 
 function App() {
-  const [options] = useState<Options>({
+  const [options] = useState<GridOptions>({
     dataTable: {
       columns: {
         name: ['Alice', 'Bob', 'Charlie'],
@@ -53,7 +53,7 @@ function App() {
 
 ```tsx
 import React, { useState } from 'react';
-import { GridPro, type Options } from '@highcharts/grid-pro-react';
+import { GridPro, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const [options] = useState<Options>({

@@ -1,11 +1,11 @@
 import { useState } from 'react';
 import {
   GridLite,
-  type Options
+  type GridOptions
 } from '@highcharts/grid-lite-react';
 
 function App() {
-  const [options] = useState<Options>({
+  const [options] = useState<GridOptions>({
     dataTable: {
       columns: {
         name: ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],

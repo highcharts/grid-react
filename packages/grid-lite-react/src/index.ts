@@ -7,5 +7,7 @@
  *
  */
 
+import GridLite from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
+
 export { default as GridLite } from './Grid';
-export type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
+export type GridOptions = GridLite.Options;

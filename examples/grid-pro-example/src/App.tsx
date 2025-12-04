@@ -1,18 +1,26 @@
 import { useState, useRef, useEffect } from 'react';
 import {
   GridPro,
-  type Options,
+  type GridOptions,
   type GridInstance
 } from '@highcharts/grid-pro-react';
 
 function App() {
-  const [options] = useState<Options>({
+  const [options] = useState<GridOptions>({
     dataTable: {
       columns: {
         name: ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
         age: [23, 34, 45, 56, 67],
         city: ['New York', 'Oslo', 'Paris', 'Tokyo', 'London'],
-        salary: [50000, 60000, 70000, 80000, 90000]
+        salary: [50000, 60000, 70000, 80000, 90000],
+        active: [true, false, true, false, true]
+      }
+    },
+    columnDefaults: {
+      cells: {
+        editMode: {
+          enabled: true
+        }
       }
     },
     caption: {
@@ -25,10 +33,18 @@ function App() {
         pageSizeSelector: true,
         pageButtons: true
       }
-    }
+    },
+    columns: [{
+      id: 'active',
+      cells: {
+        renderer: {
+          type: 'checkbox'
+        }
+      }
+    }]
   });
 
-  const grid = useRef<GridInstance<Options> | null>(null);
+  const grid = useRef<GridInstance<GridOptions> | null>(null);
 
   useEffect(() => {
     if (grid.current) {
