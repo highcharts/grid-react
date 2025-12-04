@@ -7,8 +7,8 @@
     "module": "src/index.ts",
     "types": "src/index.ts",
     "scripts": {
-        "test": "vitest",
-        "lint": "eslint src --ext .ts,.tsx"
+        "lint": "eslint src --ext .ts,.tsx",
+        "clean": "rimraf node_modules"
     },
     "devDependencies": {
         "@types/react": ">=18",

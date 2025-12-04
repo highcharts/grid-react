@@ -38,8 +38,8 @@
     },
     "scripts": {
         "build": "tsup",
-        "test": "vitest",
-        "lint": "eslint src --ext .ts,.tsx"
+        "lint": "eslint src --ext .ts,.tsx",
+        "clean": "rimraf node_modules dist"
     },
     "dependencies": {
         "@highcharts/grid-pro": ">=2"
@@ -49,7 +49,8 @@
         "@types/react": ">=18",
         "@types/react-dom": ">=18",
         "react": ">=18",
-        "react-dom": ">=18"
+        "react-dom": ">=18",
+        "tsup": "^8.5.1"
     },
     "peerDependencies": {
         "@types/react": ">=18",

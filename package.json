@@ -5,17 +5,15 @@
     "type": "module",
     "scripts": {
         "build": "pnpm -r --filter './packages/*' run build",
-        "test": "pnpm -r --filter './packages/*' run test",
-        "lint": "pnpm -r --filter './packages/*' run lint"
+        "lint": "pnpm -r --filter './packages/*' run lint",
+        "clean": "pnpm -r --filter './packages/*' run clean && rimraf node_modules"
     },
     "packageManager": "pnpm@10.23.0",
     "devDependencies": {
         "@eslint/js": "^9.39.1",
-        "@rollup/plugin-typescript": "^12.3.0",
         "@stylistic/eslint-plugin": "^5.6.1",
         "eslint": "^9.39.1",
-        "rollup": "^4.53.3",
-        "tsup": "^8.5.1",
+        "rimraf": "^6.1.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.48.0",
         "vitest": "^4.0.14"
