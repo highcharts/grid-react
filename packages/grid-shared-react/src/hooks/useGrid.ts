@@ -7,14 +7,15 @@
  *
  */
 
-import { useEffect, RefObject } from 'react';
+import { useEffect, RefObject, useRef } from 'react';
 import { BaseGridProps } from '../components/BaseGrid';
 
 /**
  * Interface describing the shape of a Grid instance returned by Grid.grid()
  */
-export interface GridInstance {
+export interface GridInstance<TOptions> {
     destroy(): void;
+    update(options: TOptions, redraw?: boolean): void;
 }
 
 /**
@@ -24,28 +25,38 @@ export interface GridInstance {
  * directly depending on their types.
  */
 export interface GridType<TOptions> {
-    grid(container: HTMLDivElement, options: TOptions): GridInstance;
+    grid(container: HTMLDivElement, options: TOptions): GridInstance<TOptions>;
 }
 
-export interface UseGridOptions<TOptions, TGrid extends GridType<TOptions> = GridType<TOptions>> extends BaseGridProps<TOptions, TGrid> {
-    containerRef: RefObject<HTMLDivElement|null>;
+export interface UseGridOptions<TOptions> extends BaseGridProps<TOptions> {
+    containerRef: RefObject<HTMLDivElement | null>;
 }
 
-export function useGrid<TOptions, TGrid extends GridType<TOptions> = GridType<TOptions>>({
+export function useGrid<TOptions>({
     containerRef,
     options,
     Grid,
-}: UseGridOptions<TOptions, TGrid>) {
+}: UseGridOptions<TOptions>) {
+    const gridRef = useRef<GridInstance<TOptions> | null>(null);
+
     useEffect(() => {
         if (!containerRef?.current) {
             return;
+        } else if (gridRef.current) {
+            gridRef.current?.update(options);
+        } else {
+            gridRef.current = Grid.grid(containerRef.current, options);
         }
-
-        const grid = Grid.grid(containerRef.current, options);
-
-        return () => {
-            grid?.destroy();
-        };
     }, [options]);
-}
 
+    useEffect(() => {
+        return () => {
+            if (gridRef.current) {
+                gridRef.current.destroy();
+                gridRef.current = null;
+            }
+        };
+    }, []);
+
+    return { gridRef };
+}
