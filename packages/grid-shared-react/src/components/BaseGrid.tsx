@@ -7,7 +7,7 @@
  *
  */
 
-import { useRef, RefObject, useEffect } from 'react';
+import { useRef, RefObject, useImperativeHandle } from 'react';
 import {
     useGrid,
     GridType,
@@ -23,7 +23,7 @@ export interface GridProps<TOptions> {
      */
     options: TOptions;
     /**
-     * Optional ref to access the grid instance
+     * Optional ref to access the grid instance (React 17 compatible)
      */
     gridRef?: RefObject<GridInstance<TOptions> | null>;
 }
@@ -48,12 +48,12 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
         Grid
     });
 
-    // Synchronize external gridRef with internal gridRef
-    useEffect(() => {
-        if (gridRef?.current) {
-            gridRef.current = currGridRef.current;
-        }
-    }, [gridRef, options]); // Update when options change (grid is recreated/updated)
+    // Use useImperativeHandle to expose grid instance through gridRef prop (React 17 compatible)
+    useImperativeHandle<GridInstance<TOptions> | null, GridInstance<TOptions> | null>(
+        gridRef,
+        () => currGridRef.current,
+        [currGridRef.current]
+    );
 
     return <div ref={containerRef} />;
 }

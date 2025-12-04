@@ -31,9 +31,10 @@ function App() {
   const grid = useRef<GridInstance<Options> | null>(null);
 
   useEffect(() => {
+    console.log('Grid instance3:', grid);
     if (grid.current) {
       // Do something with the grid instance
-      console.log('Grid instance:', grid.current);
+      console.log('Grid instance2:', grid.current);
     }
   }, [grid.current]);
 
