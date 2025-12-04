@@ -112,9 +112,6 @@ pnpm install
 # Build all packages
 pnpm build
 
-# Run tests
-pnpm test
-
 # Lint all packages
 pnpm lint
 ```
