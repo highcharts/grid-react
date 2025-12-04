@@ -49,7 +49,7 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
     });
 
     useEffect(() => {
-        if (gridRef && 'current' in gridRef) {
+        if (gridRef && currGridRef.current) {
             gridRef.current = currGridRef.current;
         }
     });
