@@ -6,7 +6,7 @@ import {
 } from '@highcharts/grid-pro-react';
 
 function App() {
-  const [options, setOptions] = useState<Options>({
+  const [options] = useState<Options>({
     dataTable: {
       columns: {
         name: ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
