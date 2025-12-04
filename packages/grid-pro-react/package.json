@@ -1,6 +1,6 @@
 {
     "name": "@highcharts/grid-pro-react",
-    "version": "0.1.0",
+    "version": "1.0.0",
     "description": "Official React wrapper for Highcharts Grid Pro",
     "type": "module",
     "main": "dist/index.js",
@@ -36,22 +36,29 @@
     "bugs": {
         "url": "https://github.com/highcharts/grid-react/issues"
     },
-    "sideEffects": ["**/*.css"],
     "scripts": {
         "build": "tsup",
         "test": "vitest",
         "lint": "eslint src --ext .ts,.tsx"
     },
+    "dependencies": {
+        "@highcharts/grid-pro": ">=2"
+    },
     "devDependencies": {
         "@highcharts/grid-shared-react": "workspace:*",
-        "@types/react": "^19.0.0",
-        "@types/react-dom": "^19.0.0",
-        "react": "^19.2.0",
-        "react-dom": "^19.2.0"
+        "@types/react": ">=18",
+        "@types/react-dom": ">=18",
+        "react": ">=18",
+        "react-dom": ">=18"
     },
     "peerDependencies": {
-        "react": "^19.2.0",
-        "react-dom": "^19.2.0",
-        "@highcharts/grid-pro": "^2.0.1"
+        "@types/react": ">=18",
+        "@types/react-dom": ">=18",
+        "react": ">=18",
+        "react-dom": ">=18"
+    },
+    "peerDependenciesMeta": {
+        "@types/react": { "optional": true },
+        "@types/react-dom": { "optional": true }
     }
 }
