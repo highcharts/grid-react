@@ -141,5 +141,5 @@ pnpm dev
 
 ## License
 
-SEE LICENSE IN [LICENSE.md](https://github.com/highcharts/highcharts-dist/blob/master/LICENSE.md).
+SEE LICENSE IN [LICENSE.md](https://github.com/highcharts/grid-react/blob/main/LICENSE).
 
