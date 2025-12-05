@@ -48,12 +48,11 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
         Grid
     });
 
-    // Synchronize external gridRef with internal gridRef
     useEffect(() => {
-        if (gridRef?.current) {
+        if (gridRef && currGridRef.current) {
             gridRef.current = currGridRef.current;
         }
-    }, [gridRef, options]); // Update when options change (grid is recreated/updated)
+    }, []);
 
     return <div ref={containerRef} />;
 }

@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import {
   GridPro,
   type GridOptions,
@@ -46,10 +46,9 @@ function App() {
 
   const grid = useRef<GridInstance<GridOptions> | null>(null);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     if (grid.current) {
-      // Do something with the grid instance
-      console.log('Grid instance:', grid.current);
+      console.log('Grid instance available:', grid.current);
     }
   }, [grid.current]);
 
