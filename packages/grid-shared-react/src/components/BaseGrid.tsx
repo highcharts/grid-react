@@ -7,7 +7,7 @@
  *
  */
 
-import { useRef, RefObject, useEffect } from 'react';
+import { useRef, RefObject, useEffect, MutableRefObject } from 'react';
 import {
     useGrid,
     GridType,
@@ -50,7 +50,8 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
 
     useEffect(() => {
         if (gridRef && currGridRef.current) {
-            gridRef.current = currGridRef.current;
+            // Type assertion for React 18 compatibility (RefObject.current is read-only in React 18 types)
+            (gridRef as MutableRefObject<GridInstance<TOptions> | null>).current = currGridRef.current;
         }
     }, []);
 
