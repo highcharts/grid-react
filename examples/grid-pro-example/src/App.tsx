@@ -33,9 +33,8 @@ function App() {
   useLayoutEffect(() => {
     if (grid.current) {
       console.log('Grid instance available:', grid.current);
-      // Do something with the grid instance
     }
-  }, [grid.current]); // Run only once on mount
+  }, [grid.current]);
 
   return (
     <>

@@ -52,6 +52,7 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
         if (gridRef && currGridRef.current) {
             gridRef.current = currGridRef.current;
         }
-    });
+    }, []);
+
     return <div ref={containerRef} />;
 }
