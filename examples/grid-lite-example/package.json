@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "clean": "rimraf node_modules"
   },
   "dependencies": {
     "@highcharts/grid-lite": "^2.0.1",
