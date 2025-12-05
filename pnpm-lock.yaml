@@ -148,16 +148,16 @@ importers:
   packages/grid-shared-react:
     devDependencies:
       '@types/react':
-        specifier: '>=19'
+        specifier: '>=18'
         version: 19.2.7
       '@types/react-dom':
-        specifier: '>=19'
+        specifier: '>=18'
         version: 19.2.3(@types/react@19.2.7)
       react:
-        specifier: '>=19'
+        specifier: '>=18'
         version: 19.2.1
       react-dom:
-        specifier: '>=19'
+        specifier: '>=18'
         version: 19.2.1(react@19.2.1)
 
 packages:
