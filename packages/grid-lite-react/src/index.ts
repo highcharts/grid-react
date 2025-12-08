@@ -10,4 +10,5 @@
 import GridLite from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
 
 export { default as GridLite } from './Grid';
+export type { GridInstance } from '@highcharts/grid-shared-react';
 export type GridOptions = GridLite.Options;

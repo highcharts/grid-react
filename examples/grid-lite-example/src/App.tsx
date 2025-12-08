@@ -1,7 +1,8 @@
-import { useState } from 'react';
+import { useState, useRef, useLayoutEffect } from 'react';
 import {
   GridLite,
-  type GridOptions
+  type GridOptions,
+  type GridInstance
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -27,7 +28,15 @@ function App() {
     }
   });
 
-  return <GridLite options={options} />
+  const grid = useRef<GridInstance<GridOptions> | null>(null);
+
+  useLayoutEffect(() => {
+    if (grid.current) {
+      console.log('Grid instance available:', grid.current);
+    }
+  }, [grid.current]);
+
+  return <GridLite options={options} gridRef={grid} />;
 }
 
 export default App;
