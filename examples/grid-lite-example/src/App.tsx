@@ -27,11 +27,7 @@ function App() {
     }
   });
 
-  return (
-    <>
-      <GridLite options={options} />
-    </>
-  );
+  return <GridLite options={options} />
 }
 
 export default App;

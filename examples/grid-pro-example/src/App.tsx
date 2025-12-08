@@ -52,11 +52,7 @@ function App() {
     }
   }, [grid.current]);
 
-  return (
-    <>
-      <GridPro options={options} gridRef={grid} />
-    </>
-  );
+  return <GridPro options={options} gridRef={grid} />;
 }
 
 export default App;
