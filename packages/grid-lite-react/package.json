@@ -1,0 +1,65 @@
+{
+    "name": "@highcharts/grid-lite-react",
+    "version": "0.1.0",
+    "description": "Official React wrapper for Highcharts Grid Lite",
+    "type": "module",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "files": [
+        "dist",
+        "LICENSE",
+        "README.md"
+    ],
+    "keywords": [
+        "highcharts",
+        "grid",
+        "react",
+        "data-grid",
+        "table"
+    ],
+    "author": "Highsoft AS",
+    "license": "SEE LICENSE IN LICENSE",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/highcharts/grid-react.git",
+        "directory": "packages/grid-lite-react"
+    },
+    "homepage": "https://www.highcharts.com",
+    "bugs": {
+        "url": "https://github.com/highcharts/grid-react/issues"
+    },
+    "scripts": {
+        "build": "tsup",
+        "lint": "eslint src --ext .ts,.tsx",
+        "clean": "rimraf node_modules dist",
+        "prepublishOnly": "pnpm build"
+    },
+    "dependencies": {
+        "@highcharts/grid-lite": ">=2"
+    },
+    "devDependencies": {
+        "@highcharts/grid-shared-react": "workspace:*",
+        "@types/react": ">=18",
+        "@types/react-dom": ">=18",
+        "react": ">=18",
+        "react-dom": ">=18",
+        "tsup": "^8.5.1"
+    },
+    "peerDependencies": {
+        "@types/react": ">=18",
+        "@types/react-dom": ">=18",
+        "react": ">=18",
+        "react-dom": ">=18"
+    },
+    "peerDependenciesMeta": {
+        "@types/react": { "optional": true },
+        "@types/react-dom": { "optional": true }
+    }
+}
