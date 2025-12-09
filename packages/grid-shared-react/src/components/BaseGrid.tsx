@@ -53,7 +53,7 @@ export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
             // Type assertion for React 18 compatibility (RefObject.current is read-only in React 18 types)
             (gridRef as MutableRefObject<GridInstance<TOptions> | null>).current = currGridRef.current;
         }
-    }, []);
+    }, [gridRef, currGridRef]);
 
     return <div ref={containerRef} />;
 }

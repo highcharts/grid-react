@@ -47,7 +47,7 @@ export function useGrid<TOptions>({
         } else {
             currGridRef.current = Grid.grid(containerRef.current, options);
         }
-    }, [options]);
+    }, [options, containerRef, Grid]);
 
     useEffect(() => {
         return () => {
