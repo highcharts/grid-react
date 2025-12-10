@@ -8,9 +8,6 @@ import {
     type GridRefHandle
 } from '@highcharts/grid-pro-react';
 
-// Import CSS - Next.js will handle this correctly
-import '@highcharts/grid-pro/css/grid-pro.css';
-
 // Dynamically import Grid with SSR disabled to avoid window is not defined error
 const GridPro = dynamic(
   () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),

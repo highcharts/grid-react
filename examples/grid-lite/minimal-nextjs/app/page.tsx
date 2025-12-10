@@ -8,9 +8,6 @@ import {
   type GridRefHandle
 } from '@highcharts/grid-lite-react';
 
-// Import CSS - Next.js will handle this correctly
-import '@highcharts/grid-lite/css/grid-lite.css';
-
 // Dynamically import Grid with SSR disabled to avoid window is not defined error
 const GridLite = dynamic(
   () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
