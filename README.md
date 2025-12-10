@@ -78,8 +78,12 @@ highcharts-grid-react/
 │   ├── grid-pro-react/          # Grid Pro React wrapper
 │   └── grid-shared-react/         # Shared core functionality
 ├── examples/                    # Example applications
-│   ├── grid-lite-example/       # Example using Grid Lite
-│   └── grid-pro-example/        # Example using Grid Pro
+│   ├── grid-lite/               # Grid Lite examples
+│   │   ├── minimal-react/      # Minimal React example (Vite)
+│   │   └── minimal-nextjs/      # Minimal Next.js example
+│   └── grid-pro/                # Grid Pro examples
+│       ├── minimal-react/       # Minimal React example (Vite)
+│       └── minimal-nextjs/     # Minimal Next.js example
 └── README.md                    # This file
 ```
 
@@ -91,8 +95,10 @@ highcharts-grid-react/
 
 ### Examples
 
-- **`examples/grid-lite-example/`** - Example React application demonstrating how to use `@highcharts/grid-lite-react`
-- **`examples/grid-pro-example/`** - Example React application demonstrating how to use `@highcharts/grid-pro-react`
+- **`examples/grid-lite/minimal-react/`** - Minimal React application (Vite) demonstrating how to use `@highcharts/grid-lite-react`
+- **`examples/grid-lite/minimal-nextjs/`** - Minimal Next.js application demonstrating how to use `@highcharts/grid-lite-react`
+- **`examples/grid-pro/minimal-react/`** - Minimal React application (Vite) demonstrating how to use `@highcharts/grid-pro-react`
+- **`examples/grid-pro/minimal-nextjs/`** - Minimal Next.js application demonstrating how to use `@highcharts/grid-pro-react`
 
 ## Development
 
@@ -121,16 +127,76 @@ pnpm lint
 To run the example applications:
 
 ```bash
-# Run Grid Lite example
-cd examples/grid-lite-example
-pnpm install
+# Run Grid Lite React example (Vite)
+cd examples/grid-lite/minimal-react
 pnpm dev
 
-# Run Grid Pro example
-cd examples/grid-pro-example
-pnpm install
+# Run Grid Lite Next.js example
+cd examples/grid-lite/minimal-nextjs
+pnpm dev
+
+# Run Grid Pro React example (Vite)
+cd examples/grid-pro/minimal-react
+pnpm dev
+
+# Run Grid Pro Next.js example
+cd examples/grid-pro/minimal-nextjs
 pnpm dev
 ```
+
+Note: Since all examples are part of the pnpm workspace, dependencies are installed at the root level with `pnpm install` from the repository root.
+
+## Next.js Integration
+
+Highcharts Grid React components can be used in Next.js applications. Since the Grid components require browser APIs, they need to be rendered on the client side only (without Server-Side Rendering).
+
+### Setup
+
+1. Install the required packages:
+
+```bash
+npm install @highcharts/grid-lite-react @highcharts/grid-lite
+# or
+npm install @highcharts/grid-pro-react @highcharts/grid-pro
+```
+
+2. Import the Grid component dynamically with SSR disabled:
+
+```tsx
+'use client';
+
+import { useState } from 'react';
+import dynamic from 'next/dynamic';
+import { type GridOptions } from '@highcharts/grid-lite-react';
+import '@highcharts/grid-lite/css/grid-lite.css';
+
+// Disable SSR for the Grid component
+const GridLite = dynamic(
+  () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
+  { ssr: false }
+);
+
+export default function Page() {
+  const [options] = useState<GridOptions>({
+    dataTable: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie'],
+        age: [23, 34, 45]
+      }
+    }
+  });
+
+  return <GridLite options={options} />;
+}
+```
+
+### Important Notes
+
+- **SSR is disabled**: The Grid components are dynamically imported with `ssr: false` to prevent "window is not defined" errors during server-side rendering.
+- **Client Component**: The page or component using the Grid must be marked with `'use client'` directive.
+- **CSS Import**: Don't forget to import the required CSS file for the Grid component.
+
+See the [Next.js examples](./examples/) for complete working implementations.
 
 ## Documentation
 
