@@ -11,10 +11,10 @@ import {
     BaseGrid,
     GridProps
 } from '@highcharts/grid-shared-react';
-import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
+import Grid from '@highcharts/grid-lite';
 import '@highcharts/grid-lite/css/grid-lite.css';
-import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
+import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options.js';
 
-export default function GridLite({ options, gridRef }: GridProps<Options>) {
-    return <BaseGrid options={options} Grid={Grid} gridRef={gridRef} />;
+export default function GridLite({ options, gridRef, callback }: GridProps<Options>) {
+    return <BaseGrid options={options} Grid={Grid} ref={gridRef} callback={callback} />;
 }

@@ -1,23 +1,25 @@
 'use client';
 
-import { useState, useRef, useLayoutEffect } from 'react';
-import { GridLite, type GridOptions as GridLiteOptions, type GridInstance as GridLiteInstance } from '@highcharts/grid-lite-react';
-import { GridPro, type GridOptions as GridProOptions, type GridInstance as GridProInstance } from '@highcharts/grid-pro-react';
+import { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
+import { type GridInstance, type GridOptions as GridLiteOptions } from '@highcharts/grid-lite-react';
+import { type GridOptions as GridProOptions } from '@highcharts/grid-pro-react';
+import { type GridRefHandle } from '../../../packages/grid-shared-react/src/components/BaseGrid';
 
 // Import CSS - Next.js will handle this correctly
 import '@highcharts/grid-lite/css/grid-lite.css';
 import '@highcharts/grid-pro/css/grid-pro.css';
 
 // Dynamically import Grids with SSR disabled to avoid window is not defined error
-// const GridLite = dynamic(
-//   () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
-//   { ssr: false }
-// );
+const GridLite = dynamic(
+  () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
+  { ssr: false }
+);
 
-// const GridPro = dynamic(
-//   () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),
-//   { ssr: false }
-// );
+const GridPro = dynamic(
+  () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),
+  { ssr: false }
+);
 
 export default function Home() {
   const [liteOptions] = useState<GridLiteOptions>({
@@ -72,24 +74,25 @@ export default function Home() {
     },
   });
 
-  const gridLite = useRef<GridLiteInstance<GridLiteOptions> | null>(null);
-  const gridPro = useRef<GridProInstance<GridProOptions> | null>(null);
+  const gridLite = useRef<GridRefHandle<GridLiteOptions> | null>(null);
+  const gridPro = useRef<GridRefHandle<GridProOptions> | null>(null);
 
-  useLayoutEffect(() => {
-    if (gridLite.current) {
-      console.log('Grid Lite instance available:', gridLite.current);
-    }
-    if (gridPro.current) {
-      console.log('Grid Pro instance available:', gridPro.current);
-    }
-    // Don't depend on .current - it changes but shouldn't trigger re-runs
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [gridLite.current, gridPro.current]);
+  const onButtonClick = () => {
+    console.info('(ref) gridLite:', gridLite.current?.grid);
+    console.info('(ref) gridPro:', gridPro.current?.grid);
+  };
+  const onGridLiteCallback = (grid: GridInstance<GridLiteOptions>) => {
+    console.info('(callback) gridLite:', grid);
+  };
+  const onGridProCallback = (grid: GridInstance<GridProOptions>) => {
+    console.info('(callback) gridPro:', grid);
+  };
 
   return (
     <>
-        <GridLite options={liteOptions} gridRef={gridLite} />
-        <GridPro options={proOptions} gridRef={gridPro} />
+        <GridLite options={liteOptions} gridRef={gridLite} callback={onGridLiteCallback} />
+        <GridPro options={proOptions} gridRef={gridPro} callback={onGridProCallback} />
+        <button onClick={onButtonClick}>Click me</button>
     </>
   );
 }

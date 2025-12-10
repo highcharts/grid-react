@@ -1,9 +1,10 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef } from 'react';
 import {
-  GridPro,
+  type GridInstance,
   type GridOptions,
-  type GridInstance
+  GridPro,
 } from '@highcharts/grid-pro-react';
+import { type GridRefHandle } from '../../../packages/grid-shared-react/src/components/BaseGrid';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -43,16 +44,21 @@ function App() {
       }
     }]
   });
+  const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
-  const grid = useRef<GridInstance<GridOptions> | null>(null);
+  const onButtonClick = () => {
+    console.info('(ref) gridPro:', grid.current?.grid);
+  };
+  const onGridProCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) gridPro:', grid);
+  };
 
-  useLayoutEffect(() => {
-    if (grid.current) {
-      console.log('Grid instance available:', grid.current);
-    }
-  }, [grid.current]);
-
-  return <GridPro options={options} gridRef={grid} />;
+  return (
+    <>
+      <GridPro options={options} gridRef={grid} callback={onGridProCallback} />
+      <button onClick={onButtonClick}>Click me</button>
+    </>
+  );
 }
 
 export default App;
