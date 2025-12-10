@@ -1,8 +1,9 @@
-import { useState, useRef, useLayoutEffect } from 'react';
+import { useState, useRef } from 'react';
 import {
-  GridLite,
+  type GridInstance,
   type GridOptions,
-  type GridInstance
+  type GridRefHandle,
+  GridLite
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -27,16 +28,22 @@ function App() {
       }
     }
   });
+  const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
-  const grid = useRef<GridInstance<GridOptions> | null>(null);
+  const onButtonClick = () => {
+    console.info('(ref) gridLite:', grid.current?.grid);
+  };
+  const onGridLiteCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) gridLite:', grid);
+  };
 
-  useLayoutEffect(() => {
-    if (grid.current) {
-      console.log('Grid instance available:', grid.current);
-    }
-  }, [grid.current]);
-
-  return <GridLite options={options} gridRef={grid} />;
+  return (
+    <>
+      <GridLite options={options} gridRef={grid} callback={onGridLiteCallback} />
+      <button onClick={onButtonClick}>Click me</button>
+    </>
+  );
 }
 
 export default App;
+

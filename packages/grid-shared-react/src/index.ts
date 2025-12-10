@@ -9,7 +9,7 @@
 
 import { BaseGrid } from './components/BaseGrid';
 import { GridType, GridInstance } from './hooks/useGrid';
-import type { GridProps } from './components/BaseGrid';
+import type { GridProps, GridRefHandle } from './components/BaseGrid';
 
 export { BaseGrid };
-export type { GridType, GridInstance, GridProps };
+export type { GridType, GridInstance, GridProps, GridRefHandle };

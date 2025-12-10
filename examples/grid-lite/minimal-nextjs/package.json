@@ -1,0 +1,26 @@
+{
+  "name": "grid-lite-minimal-nextjs",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "clean": "rimraf .next node_modules"
+  },
+  "dependencies": {
+    "@highcharts/grid-lite": "^2.1.1",
+    "@highcharts/grid-lite-react": "workspace:*",
+    "next": "^14.0.0",
+    "react": ">=18",
+    "react-dom": ">=18"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/react": ">=18",
+    "@types/react-dom": ">=18",
+    "typescript": "^5.0.0"
+  }
+}
+

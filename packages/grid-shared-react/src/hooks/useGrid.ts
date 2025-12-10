@@ -25,7 +25,7 @@ export interface GridInstance<TOptions> {
  * directly depending on their types.
  */
 export interface GridType<TOptions> {
-    grid(container: HTMLDivElement, options: TOptions): GridInstance<TOptions>;
+    grid(container: HTMLDivElement, options: TOptions, async?: boolean): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
 }
 
 export interface UseGridOptions<TOptions> extends BaseGridProps<TOptions> {
@@ -36,27 +36,55 @@ export function useGrid<TOptions>({
     containerRef,
     options,
     Grid,
+    callback
 }: UseGridOptions<TOptions>) {
     const currGridRef = useRef<GridInstance<TOptions> | null>(null);
+    const isInitializingRef = useRef(false);
 
     useEffect(() => {
-        if (!containerRef?.current) {
+        const container = containerRef.current;
+        if (!container) {
             return;
-        } else if (currGridRef.current) {
-            currGridRef.current?.update(options, true);
-        } else {
-            currGridRef.current = Grid.grid(containerRef.current, options);
         }
-    }, [options]);
 
+        // Update grid if it already exists
+        if (currGridRef.current) {
+            currGridRef.current.update(options, true);
+            return;
+        }
+
+        // Prevent double initialization
+        if (isInitializingRef.current) {
+            return;
+        }
+
+        isInitializingRef.current = true;
+
+        const initGrid = async () => {
+            try {
+                const grid = await Grid.grid(container, options, true);
+                currGridRef.current = grid;
+                callback?.(grid);
+            } finally {
+                isInitializingRef.current = false;
+            }
+        };
+
+        initGrid();
+
+        return () => {
+            currGridRef.current?.destroy();
+            isInitializingRef.current = false;
+        };
+    }, [options, containerRef, Grid]);
+
+    // Cleanup on unmount
     useEffect(() => {
         return () => {
-            if (currGridRef.current) {
-                currGridRef.current.destroy();
-                currGridRef.current = null;
-            }
+            currGridRef.current?.destroy();
+            currGridRef.current = null;
         };
     }, []);
 
-    return { currGridRef };
+    return currGridRef;
 }

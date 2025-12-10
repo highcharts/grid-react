@@ -7,8 +7,9 @@
  *
  */
 
-import GridPro from '@highcharts/grid-pro/es-modules/masters/grid-pro.src';
+import GridPro from '@highcharts/grid-pro';
 
 export { default as GridPro } from './Grid';
 export type { GridInstance } from '@highcharts/grid-shared-react';
+export type { GridRefHandle } from '@highcharts/grid-shared-react';
 export type GridOptions = GridPro.Options;

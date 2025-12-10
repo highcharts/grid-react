@@ -1,5 +1,5 @@
 {
-  "name": "grid-lite-example",
+  "name": "grid-lite-minimal-react",
   "version": "0.0.0",
   "private": true,
   "type": "module",
@@ -10,7 +10,7 @@
     "clean": "rimraf dist node_modules"
   },
   "dependencies": {
-    "@highcharts/grid-lite": "^2.0.1",
+    "@highcharts/grid-lite": "^2.1.1",
     "@highcharts/grid-lite-react": "workspace:*",
     "react": ">=18",
     "react-dom": ">=18"
@@ -23,3 +23,4 @@
     "vite": "^5.0.0"
   }
 }
+

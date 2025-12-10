@@ -7,12 +7,22 @@
  *
  */
 
-import { useRef, RefObject, useEffect, MutableRefObject } from 'react';
+import { useRef, useImperativeHandle, forwardRef, ForwardedRef } from 'react';
 import {
     useGrid,
     GridType,
     GridInstance
 } from '../hooks/useGrid';
+
+/**
+ * Ref handle exposed by Grid components
+ */
+export interface GridRefHandle<TOptions> {
+    /**
+     * Access to the underlying grid instance
+     */
+    readonly grid: GridInstance<TOptions> | null;
+}
 
 /**
  * Props for Grid component
@@ -25,7 +35,11 @@ export interface GridProps<TOptions> {
     /**
      * Optional ref to access the grid instance
      */
-    gridRef?: RefObject<GridInstance<TOptions> | null>;
+    gridRef?: ForwardedRef<GridRefHandle<TOptions>>;
+    /**
+     * Optional callback to be called when the grid is initialized
+     */
+    callback?: (grid: GridInstance<TOptions>) => void;
 }
 
 /**
@@ -38,22 +52,29 @@ export interface BaseGridProps<TOptions> extends GridProps<TOptions> {
     Grid: GridType<TOptions>;
 }
 
-export function BaseGrid<TOptions>(props: BaseGridProps<TOptions>) {
-    const { options, Grid, gridRef } = props;
+export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
+    props: BaseGridProps<TOptions>,
+    ref: ForwardedRef<GridRefHandle<TOptions>>
+) {
+    const { options, Grid, callback } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
-    const { currGridRef } = useGrid({
+    const currGridRef = useGrid({
         containerRef,
         options,
-        Grid
+        Grid,
+        callback
     });
 
-    useEffect(() => {
-        if (gridRef && currGridRef.current) {
-            // Type assertion for React 18 compatibility (RefObject.current is read-only in React 18 types)
-            (gridRef as MutableRefObject<GridInstance<TOptions> | null>).current = currGridRef.current;
-        }
-    }, []);
+    useImperativeHandle(
+        ref,
+        () => ({
+            get grid() {
+                return currGridRef.current;
+            }
+        }),
+        []
+    );
 
     return <div ref={containerRef} />;
-}
+});
