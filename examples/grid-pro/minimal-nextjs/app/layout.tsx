@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import './globals.css';
 
 export const metadata: Metadata = {
-  title: 'Highcharts Grid - Next.js Example',
-  description: 'Example of Highcharts Grid integration with Next.js',
+  title: 'Highcharts Grid Pro - Next.js Example',
+  description: 'Example of Highcharts Grid Pro integration with Next.js',
 };
 
 export default function RootLayout({

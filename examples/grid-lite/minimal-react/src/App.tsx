@@ -4,7 +4,7 @@ import {
   type GridOptions,
   GridLite
 } from '@highcharts/grid-lite-react';
-import { type GridRefHandle } from '../../../packages/grid-shared-react/src/components/BaseGrid';
+import { type GridRefHandle } from '../../../../packages/grid-shared-react/src/components/BaseGrid';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -46,3 +46,4 @@ function App() {
 }
 
 export default App;
+

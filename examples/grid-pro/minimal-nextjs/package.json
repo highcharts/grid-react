@@ -1,5 +1,5 @@
 {
-  "name": "grid-nextjs-example",
+  "name": "grid-pro-minimal-nextjs",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,8 +10,6 @@
     "clean": "rimraf .next node_modules"
   },
   "dependencies": {
-    "@highcharts/grid-lite": "^2.1.0",
-    "@highcharts/grid-lite-react": "workspace:*",
     "@highcharts/grid-pro": "^2.1.0",
     "@highcharts/grid-pro-react": "workspace:*",
     "next": "^14.0.0",

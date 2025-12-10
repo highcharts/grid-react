@@ -1,0 +1,72 @@
+'use client';
+
+import { useState, useRef } from 'react';
+import dynamic from 'next/dynamic';
+import { type GridInstance, type GridOptions } from '@highcharts/grid-pro-react';
+import { type GridRefHandle } from '../../../../packages/grid-shared-react/src/components/BaseGrid';
+
+// Import CSS - Next.js will handle this correctly
+import '@highcharts/grid-pro/css/grid-pro.css';
+
+// Dynamically import Grid with SSR disabled to avoid window is not defined error
+const GridPro = dynamic(
+  () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),
+  { ssr: false }
+);
+
+export default function Home() {
+  const [proOptions] = useState<GridOptions>({
+    dataTable: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie', 'David', 'Eve'],
+        age: [23, 34, 45, 56, 67],
+        city: ['New York', 'Oslo', 'Paris', 'Tokyo', 'London'],
+        salary: [50000, 60000, 70000, 80000, 90000],
+        active: [true, false, true, false, true]
+      }
+    },
+    columnDefaults: {
+      cells: {
+        editMode: {
+          enabled: true
+        }
+      }
+    },
+    caption: {
+      text: 'Grid Pro'
+    },
+    pagination: {
+      enabled: true,
+      pageSize: 3,
+      controls: {
+        pageSizeSelector: true,
+        pageButtons: true
+      }
+    },
+    columns: [{
+      id: 'active',
+      cells: {
+        renderer: {
+          type: 'checkbox'
+        }
+      }
+    }]
+  });
+
+  const gridPro = useRef<GridRefHandle<GridOptions> | null>(null);
+
+  const onButtonClick = () => {
+    console.info('(ref) gridPro:', gridPro.current?.grid);
+  };
+  const onGridProCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) gridPro:', grid);
+  };
+
+  return (
+    <>
+        <GridPro options={proOptions} gridRef={gridPro} callback={onGridProCallback} />
+        <button onClick={onButtonClick}>Click me</button>
+    </>
+  );
+}
+

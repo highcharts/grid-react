@@ -33,51 +33,14 @@ importers:
         specifier: ^4.0.14
         version: 4.0.15(@types/node@20.19.25)
 
-  examples/grid-lite-example:
+  examples/grid-lite/minimal-nextjs:
     dependencies:
       '@highcharts/grid-lite':
         specifier: ^2.1.0
         version: 2.1.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
-        version: link:../../packages/grid-lite-react
-      react:
-        specifier: '>=18'
-        version: 19.2.1
-      react-dom:
-        specifier: '>=18'
-        version: 19.2.1(react@19.2.1)
-    devDependencies:
-      '@types/react':
-        specifier: '>=18'
-        version: 19.2.7
-      '@types/react-dom':
-        specifier: '>=18'
-        version: 19.2.3(@types/react@19.2.7)
-      '@vitejs/plugin-react':
-        specifier: ^4.2.0
-        version: 4.7.0(vite@5.4.21(@types/node@20.19.25))
-      typescript:
-        specifier: ^5.0.0
-        version: 5.9.3
-      vite:
-        specifier: ^5.0.0
-        version: 5.4.21(@types/node@20.19.25)
-
-  examples/grid-nextjs-example:
-    dependencies:
-      '@highcharts/grid-lite':
-        specifier: ^2.1.0
-        version: 2.1.0
-      '@highcharts/grid-lite-react':
-        specifier: workspace:*
-        version: link:../../packages/grid-lite-react
-      '@highcharts/grid-pro':
-        specifier: ^2.1.0
-        version: 2.1.0
-      '@highcharts/grid-pro-react':
-        specifier: workspace:*
-        version: link:../../packages/grid-pro-react
+        version: link:../../../packages/grid-lite-react
       next:
         specifier: ^14.0.0
         version: 14.2.33(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
@@ -101,14 +64,76 @@ importers:
         specifier: ^5.0.0
         version: 5.9.3
 
-  examples/grid-pro-example:
+  examples/grid-lite/minimal-react:
+    dependencies:
+      '@highcharts/grid-lite':
+        specifier: ^2.1.0
+        version: 2.1.0
+      '@highcharts/grid-lite-react':
+        specifier: workspace:*
+        version: link:../../../packages/grid-lite-react
+      react:
+        specifier: '>=18'
+        version: 19.2.1
+      react-dom:
+        specifier: '>=18'
+        version: 19.2.1(react@19.2.1)
+    devDependencies:
+      '@types/react':
+        specifier: '>=18'
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: '>=18'
+        version: 19.2.3(@types/react@19.2.7)
+      '@vitejs/plugin-react':
+        specifier: ^4.2.0
+        version: 4.7.0(vite@5.4.21(@types/node@20.19.25))
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+      vite:
+        specifier: ^5.0.0
+        version: 5.4.21(@types/node@20.19.25)
+
+  examples/grid-pro/minimal-nextjs:
     dependencies:
       '@highcharts/grid-pro':
         specifier: ^2.1.0
         version: 2.1.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
-        version: link:../../packages/grid-pro-react
+        version: link:../../../packages/grid-pro-react
+      next:
+        specifier: ^14.0.0
+        version: 14.2.33(react-dom@19.2.1(react@19.2.1))(react@19.2.1)
+      react:
+        specifier: '>=18'
+        version: 19.2.1
+      react-dom:
+        specifier: '>=18'
+        version: 19.2.1(react@19.2.1)
+    devDependencies:
+      '@types/node':
+        specifier: ^20.0.0
+        version: 20.19.25
+      '@types/react':
+        specifier: '>=18'
+        version: 19.2.7
+      '@types/react-dom':
+        specifier: '>=18'
+        version: 19.2.3(@types/react@19.2.7)
+      typescript:
+        specifier: ^5.0.0
+        version: 5.9.3
+
+  examples/grid-pro/minimal-react:
+    dependencies:
+      '@highcharts/grid-pro':
+        specifier: ^2.1.0
+        version: 2.1.0
+      '@highcharts/grid-pro-react':
+        specifier: workspace:*
+        version: link:../../../packages/grid-pro-react
       react:
         specifier: '>=18'
         version: 19.2.1
@@ -1160,8 +1185,8 @@ packages:
   balanced-match@1.0.2:
     resolution: {integrity: sha512-3oSeUO0TMV67hN1AmbXsK4yaqU7tjiHlbxRDZOpH0KW9+CeX4bRAaX0Anxt0tx2MrpRpWwQaPwIlISEJhYU5Pw==}
 
-  baseline-browser-mapping@2.9.2:
-    resolution: {integrity: sha512-PxSsosKQjI38iXkmb3d0Y32efqyA0uW4s41u4IVBsLlWLhCiYNpH/AfNOVWRqCQBlD8TFJTz6OUWNd4DFJCnmw==}
+  baseline-browser-mapping@2.9.5:
+    resolution: {integrity: sha512-D5vIoztZOq1XM54LUdttJVc96ggEsIfju2JBvht06pSzpckp3C7HReun67Bghzrtdsq9XdMGbSSB3v3GhMNmAA==}
     hasBin: true
 
   brace-expansion@1.1.12:
@@ -1193,8 +1218,8 @@ packages:
     resolution: {integrity: sha512-P8BjAsXvZS+VIDUI11hHCQEv74YT67YUi5JJFNWIqL235sBmjX4+qx9Muvls5ivyNENctx46xQLQ3aTuE7ssaQ==}
     engines: {node: '>=6'}
 
-  caniuse-lite@1.0.30001759:
-    resolution: {integrity: sha512-Pzfx9fOKoKvevQf8oCXoyNRQ5QyxJj+3O0Rqx2V5oxT61KGx8+n6hV/IUyJeifUci2clnmmKVpvtiqRzgiWjSw==}
+  caniuse-lite@1.0.30001760:
+    resolution: {integrity: sha512-7AAMPcueWELt1p3mi13HR/LHH0TJLT11cnwDJEs3xA4+CK/PLKeO9Kl1oru24htkyUKtkGCvAx4ohB0Ttry8Dw==}
 
   chai@6.2.1:
     resolution: {integrity: sha512-p4Z49OGG5W/WBCPSS/dH3jQ73kD6tiMmUM+bckNK6Jr5JHMG3k9bg/BvKR8lKmtVBKmOiuVaV2ws8s9oSbwysg==}
@@ -1254,8 +1279,8 @@ packages:
   deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
-  electron-to-chromium@1.5.266:
-    resolution: {integrity: sha512-kgWEglXvkEfMH7rxP5OSZZwnaDWT7J9EoZCujhnpLbfi0bbNtRkgdX2E3gt0Uer11c61qCYktB3hwkAS325sJg==}
+  electron-to-chromium@1.5.267:
+    resolution: {integrity: sha512-0Drusm6MVRXSOJpGbaSVgcQsuB4hEkMpHXaVstcPmhu5LIedxs1xNK/nIxmQIU/RPC0+1/o0AVZfBTkTNJOdUw==}
 
   es-module-lexer@1.7.0:
     resolution: {integrity: sha512-jEQoCwk8hyb2AZziIOLhDqpm5+2ww5uIE6lkO/6jcOCusfk6LhMHpXXfBLXTZ7Ydyt0j4VoUQv6uGNYbdW+kBA==}
@@ -2705,7 +2730,7 @@ snapshots:
 
   balanced-match@1.0.2: {}
 
-  baseline-browser-mapping@2.9.2: {}
+  baseline-browser-mapping@2.9.5: {}
 
   brace-expansion@1.1.12:
     dependencies:
@@ -2718,9 +2743,9 @@ snapshots:
 
   browserslist@4.28.1:
     dependencies:
-      baseline-browser-mapping: 2.9.2
-      caniuse-lite: 1.0.30001759
-      electron-to-chromium: 1.5.266
+      baseline-browser-mapping: 2.9.5
+      caniuse-lite: 1.0.30001760
+      electron-to-chromium: 1.5.267
       node-releases: 2.0.27
       update-browserslist-db: 1.2.2(browserslist@4.28.1)
 
@@ -2737,7 +2762,7 @@ snapshots:
 
   callsites@3.1.0: {}
 
-  caniuse-lite@1.0.30001759: {}
+  caniuse-lite@1.0.30001760: {}
 
   chai@6.2.1: {}
 
@@ -2782,7 +2807,7 @@ snapshots:
 
   deep-is@0.1.4: {}
 
-  electron-to-chromium@1.5.266: {}
+  electron-to-chromium@1.5.267: {}
 
   es-module-lexer@1.7.0: {}
 
@@ -3107,7 +3132,7 @@ snapshots:
       '@next/env': 14.2.33
       '@swc/helpers': 0.5.5
       busboy: 1.6.0
-      caniuse-lite: 1.0.30001759
+      caniuse-lite: 1.0.30001760
       graceful-fs: 4.2.11
       postcss: 8.4.31
       react: 19.2.1
