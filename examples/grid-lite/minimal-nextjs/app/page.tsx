@@ -2,8 +2,11 @@
 
 import { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
-import { type GridInstance, type GridOptions } from '@highcharts/grid-lite-react';
-import { type GridRefHandle } from '../../../../packages/grid-shared-react/src/components/BaseGrid';
+import {
+  type GridInstance,
+  type GridOptions,
+  type GridRefHandle
+} from '@highcharts/grid-lite-react';
 
 // Import CSS - Next.js will handle this correctly
 import '@highcharts/grid-lite/css/grid-lite.css';

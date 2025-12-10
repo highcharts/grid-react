@@ -2,9 +2,9 @@ import { useState, useRef } from 'react';
 import {
   type GridInstance,
   type GridOptions,
+  type GridRefHandle,
   GridLite
 } from '@highcharts/grid-lite-react';
-import { type GridRefHandle } from '../../../../packages/grid-shared-react/src/components/BaseGrid';
 
 function App() {
   const [options] = useState<GridOptions>({
