@@ -192,7 +192,7 @@ export default function Page() {
 
 ### Important Notes
 
-- **SSR is disabled**: The Grid components are dynamically imported with `ssr: false` to prevent "window is not defined" errors during server-side rendering.
+- **SSR is disabled**: The Grid components require browser APIs and cannot be rendered on the server. They are dynamically imported with `ssr: false` to ensure client-side only rendering.
 - **Client Component**: The page or component using the Grid must be marked with `'use client'` directive.
 - **CSS Import**: Don't forget to import the required CSS file for the Grid component.
 
