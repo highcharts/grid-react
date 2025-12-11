@@ -56,7 +56,7 @@ export default function Home() {
   const gridPro = useRef<GridRefHandle<GridOptions> | null>(null);
 
   const onButtonClick = () => {
-    console.info('(ref) gridPro:', gridPro.current);
+    console.info('(ref) gridPro:', gridPro.current?.grid);
   };
   const onGridProCallback = (grid: GridInstance<GridOptions>) => {
     console.info('(callback) gridPro:', grid);
