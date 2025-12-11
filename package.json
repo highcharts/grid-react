@@ -4,10 +4,12 @@
     "private": true,
     "type": "module",
     "scripts": {
+        "check": "pnpm lint",
         "build": "pnpm -r --filter './packages/*' run build",
         "lint": "pnpm -r --filter './packages/*' run lint",
         "clean": "pnpm -r --filter './{packages,examples}/*' run clean && rimraf node_modules",
-        "release": "pnpm publish -r --access public"
+        "release:preflight": "pnpm check && pnpm build",
+        "release": "pnpm release:preflight && pnpm publish -r --access public"
     },
     "packageManager": "pnpm@10.23.0",
     "devDependencies": {
