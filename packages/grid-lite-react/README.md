@@ -1,6 +1,6 @@
 # @highcharts/grid-lite-react
 
-React wrapper for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/getting-started/grid-lite).
+React wrapper for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/general).
 
 ## Installation
 
@@ -153,7 +153,7 @@ export default function Page() {
 
 ## Documentation
 
-For detailed documentation on available options and features, see the [Highcharts Grid Lite documentation](https://www.highcharts.com/docs/grid/getting-started/grid-lite).
+For detailed documentation on available options and features, see the [Highcharts Grid Lite documentation](https://www.highcharts.com/docs/grid/general).
 
 ## License
 

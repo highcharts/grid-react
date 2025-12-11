@@ -1,6 +1,6 @@
 # @highcharts/grid-pro-react
 
-React wrapper for [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
+React wrapper for [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/general).
 
 ## Installation
 
@@ -153,7 +153,7 @@ export default function Page() {
 
 ## Documentation
 
-For detailed documentation on available options and features, see the [Highcharts Grid Pro documentation](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
+For detailed documentation on available options and features, see the [Highcharts Grid Pro documentation](https://www.highcharts.com/docs/grid/general).
 
 ## License
 
