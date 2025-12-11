@@ -45,6 +45,8 @@ React component that wraps Highcharts Grid Pro.
 #### Props
 
 - `options` (required): Configuration options for the grid. Type: `GridOptions`
+- `gridRef` (optional): Ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `callback` (optional): Callback function called when the grid is initialized. Receives the grid instance as parameter. Type: `(grid: GridInstance<GridOptions>) => void`
 
 ### `GridOptions`
 
@@ -54,12 +56,66 @@ Type exported from the package for TypeScript support.
 import type { GridOptions } from '@highcharts/grid-pro-react';
 ```
 
-## Examples
+### `GridRefHandle`
 
-This package includes example applications demonstrating usage:
+Type for the ref handle that provides access to the underlying grid instance.
 
-- **[React Example](../../examples/grid-pro/minimal-react/)** - Minimal React application using Vite
-- **[Next.js Example](../../examples/grid-pro/minimal-nextjs/)** - Minimal Next.js application
+```tsx
+import type { GridRefHandle } from '@highcharts/grid-pro-react';
+
+const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
+// Access the grid instance via gridRef.current?.grid
+```
+
+### `GridInstance`
+
+Type for the grid instance returned by the ref or callback.
+
+```tsx
+import type { GridInstance } from '@highcharts/grid-pro-react';
+```
+
+### Using Ref and Callback
+
+You can access the grid instance in two ways:
+
+**Using ref:**
+```tsx
+import { useRef } from 'react';
+import { GridPro, type GridRefHandle, type GridOptions } from '@highcharts/grid-pro-react';
+
+function App() {
+  const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
+  
+  const handleClick = () => {
+    // Access the grid instance
+    const gridInstance = gridRef.current?.grid;
+    if (gridInstance) {
+      console.log('Grid instance:', gridInstance);
+    }
+  };
+
+  return (
+    <>
+      <GridPro options={options} gridRef={gridRef} />
+      <button onClick={handleClick}>Access Grid</button>
+    </>
+  );
+}
+```
+
+**Using callback:**
+```tsx
+import { GridPro, type GridInstance, type GridOptions } from '@highcharts/grid-pro-react';
+
+function App() {
+  const handleGridReady = (grid: GridInstance<GridOptions>) => {
+    console.log('Grid initialized:', grid);
+  };
+
+  return <GridPro options={options} callback={handleGridReady} />;
+}
+```
 
 ### Next.js Integration
 
