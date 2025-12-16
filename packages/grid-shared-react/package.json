@@ -3,17 +3,24 @@
     "version": "0.0.0",
     "private": true,
     "type": "module",
-    "main": "src/index.ts",
-    "module": "src/index.ts",
-    "types": "src/index.ts",
+    "main": "dist/index.js",
+    "module": "dist/index.js",
+    "types": "dist/index.d.ts",
     "scripts": {
+        "build": "pnpm clean:dist && rollup -c",
         "lint": "eslint src --ext .ts,.tsx",
-        "clean": "rimraf node_modules"
+        "clean:dist": "rimraf dist",
+        "clean": "rimraf dist node_modules"
     },
     "devDependencies": {
+        "@rollup/plugin-commonjs": "^29.0.0",
+        "@rollup/plugin-node-resolve": "^16.0.3",
+        "@rollup/plugin-typescript": "^12.3.0",
         "@types/react": ">=18",
         "@types/react-dom": ">=18",
         "react": ">=18",
-        "react-dom": ">=18"
+        "react-dom": ">=18",
+        "rollup": "^4.53.3",
+        "rollup-plugin-dts": "^6.3.0"
     }
 }

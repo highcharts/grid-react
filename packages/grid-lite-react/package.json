@@ -1,19 +1,11 @@
 {
     "name": "@highcharts/grid-lite-react",
-    "version": "0.1.0",
+    "version": "0.2.0",
     "description": "Official React integration for Highcharts Grid Lite",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
     "types": "dist/index.d.ts",
-    "exports": {
-        ".": {
-            "types": "./dist/index.d.ts",
-            "import": "./dist/index.js",
-            "require": "./dist/index.js"
-        },
-        "./package.json": "./package.json"
-    },
     "files": [
         "dist",
         "LICENSE",
@@ -38,8 +30,9 @@
         "url": "https://github.com/highcharts/grid-react/issues"
     },
     "scripts": {
-        "build": "tsup",
+        "build": "pnpm clean:dist && rollup -c",
         "lint": "eslint src --ext .ts,.tsx",
+        "clean:dist": "rimraf dist",
         "clean": "rimraf node_modules dist",
         "prepublishOnly": "pnpm build"
     },
@@ -52,7 +45,11 @@
         "@types/react-dom": ">=18",
         "react": ">=18",
         "react-dom": ">=18",
-        "tsup": "^8.5.1"
+        "@rollup/plugin-commonjs": "^29.0.0",
+        "@rollup/plugin-node-resolve": "^16.0.3",
+        "@rollup/plugin-typescript": "^12.3.0",
+        "rollup": "^4.53.3",
+        "rollup-plugin-dts": "^6.3.0"
     },
     "peerDependencies": {
         "@types/react": ">=18",
@@ -61,7 +58,11 @@
         "react-dom": ">=18"
     },
     "peerDependenciesMeta": {
-        "@types/react": { "optional": true },
-        "@types/react-dom": { "optional": true }
+        "@types/react": {
+            "optional": true
+        },
+        "@types/react-dom": {
+            "optional": true
+        }
     }
 }
