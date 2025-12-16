@@ -1,6 +1,6 @@
 # @highcharts/grid-pro-react
 
-React wrapper for [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/general).
+React integration for [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/general).
 
 ## Installation
 

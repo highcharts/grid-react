@@ -1,6 +1,6 @@
 # @highcharts/grid-lite-react
 
-React wrapper for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/general).
+React integration for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/general).
 
 ## Installation
 

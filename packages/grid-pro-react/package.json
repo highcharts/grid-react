@@ -1,7 +1,7 @@
 {
     "name": "@highcharts/grid-pro-react",
     "version": "0.1.0",
-    "description": "Official React wrapper for Highcharts Grid Pro",
+    "description": "Official React integration for Highcharts Grid Pro",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",

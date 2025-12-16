@@ -1,7 +1,7 @@
 {
     "name": "@highcharts/grid-lite-react",
     "version": "0.1.0",
-    "description": "Official React wrapper for Highcharts Grid Lite",
+    "description": "Official React integration for Highcharts Grid Lite",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
