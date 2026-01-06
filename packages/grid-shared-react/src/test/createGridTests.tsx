@@ -1,12 +1,12 @@
-import { render, waitFor } from '@testing-library/react';
-import { useRef, ComponentType } from 'react';
+import { render, waitFor, fireEvent } from '@testing-library/react';
+import { useRef, useState, ComponentType } from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { GridProps, GridRefHandle } from '../components/BaseGrid';
 import { GridInstance } from '../hooks/useGrid';
 
 interface TestOptions {
-    dataTable: {
-        columns: Record<string, unknown[]>;
+    dataTable?: {
+        columns?: Record<string, any>;
     };
 }
 
@@ -16,16 +16,10 @@ interface TestOptions {
  */
 export function createGridTests<TOptions extends TestOptions>(
     name: string,
-    GridComponent: ComponentType<GridProps<TOptions>>
+    GridComponent: ComponentType<GridProps<TOptions>>,
+    testOptions: TOptions,
+    updatedOptions: TOptions
 ) {
-    const testOptions = {
-        dataTable: {
-            columns: {
-                name: ['Alice', 'Bob'],
-                age: [30, 25]
-            }
-        }
-    } as TOptions;
 
     describe(name, () => {
         it('renders a container div and initializes grid', async () => {
@@ -77,5 +71,69 @@ export function createGridTests<TOptions extends TestOptions>(
                 expect(callback).toHaveBeenCalled();
             });
         });
+
+        it('updates grid when options change', async () => {
+            let gridInstance: GridInstance<TOptions> | null = null;
+
+            function TestComponent() {
+                const [opts, setOpts] = useState(testOptions);
+
+                const onGridReady = (grid: GridInstance<TOptions>) => {
+                    gridInstance = grid;
+                };
+
+                return (
+                    <>
+                        <GridComponent options={opts} callback={onGridReady} />
+                        <button
+                            data-testid="update-options"
+                            onClick={() => setOpts(updatedOptions)}
+                        >
+                            Update
+                        </button>
+                    </>
+                );
+            }
+
+            const { getByTestId, container } = render(<TestComponent />);
+
+            // Wait for initial grid creation
+            await waitFor(() => {
+                expect(gridInstance).not.toBeNull();
+            });
+
+            // Trigger options change
+            fireEvent.click(getByTestId('update-options'));
+
+            // Wait for the grid to update with new data
+            await waitFor(() => {
+                const cells = container.querySelectorAll('td[data-value]');
+                const values = Array.from(cells).map(c => c.getAttribute('data-value'));
+                expect(values).toContain('Charlie');
+            });
+        });
+
+        it('calls destroy() on unmount', async () => {
+            let destroySpy: ReturnType<typeof vi.fn> | null = null;
+
+            const onGridReady = (grid: GridInstance<TOptions>) => {
+                destroySpy = vi.spyOn(grid, 'destroy');
+            };
+
+            const { unmount } = render(
+                <GridComponent options={testOptions} callback={onGridReady} />
+            );
+
+            // Wait for grid to initialize
+            await waitFor(() => {
+                expect(destroySpy).not.toBeNull();
+            });
+
+            // Unmount and verify destroy was called
+            unmount();
+
+            expect(destroySpy).toHaveBeenCalledTimes(1);
+        });
+
     });
 }
