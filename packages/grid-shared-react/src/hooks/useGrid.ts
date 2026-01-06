@@ -74,17 +74,10 @@ export function useGrid<TOptions>({
 
         return () => {
             currGridRef.current?.destroy();
+            currGridRef.current = null;
             isInitializingRef.current = false;
         };
     }, [options, containerRef, Grid]);
-
-    // Cleanup on unmount
-    useEffect(() => {
-        return () => {
-            currGridRef.current?.destroy();
-            currGridRef.current = null;
-        };
-    }, []);
 
     return currGridRef;
 }
