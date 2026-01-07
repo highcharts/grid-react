@@ -204,6 +204,7 @@ See the [Next.js examples](./examples/) for complete working implementations.
 - [Grid Pro React Documentation](./packages/grid-pro-react/README.md)
 - [Highcharts Grid Lite Documentation](https://www.highcharts.com/docs/grid/getting-started/grid-lite)
 - [Highcharts Grid Pro Documentation](https://www.highcharts.com/docs/grid/getting-started/grid-pro)
+- [Changelog](./CHANGELOG.md)
 
 ## License
 
