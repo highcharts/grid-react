@@ -10,6 +10,18 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 const ROOT_DIR = join(__dirname, '..');
 
+// Terminal colors
+const c = {
+    reset: '\x1b[0m',
+    bold: '\x1b[1m',
+    dim: '\x1b[2m',
+    red: '\x1b[31m',
+    green: '\x1b[32m',
+    yellow: '\x1b[33m',
+    blue: '\x1b[34m',
+    cyan: '\x1b[36m',
+};
+
 const CHANGELOG_LABELS = ['Feature', 'Bugfix', 'Breaking'];
 const PACKAGE_PATHS = [
     'packages/grid-lite-react/package.json',
@@ -55,7 +67,7 @@ function getMergedPRs(sinceTag) {
     const result = exec(cmd);
 
     if (!result) {
-        console.error('Failed to fetch PRs. Is GitHub CLI (gh) installed and authenticated?');
+        console.error(`${c.red}Failed to fetch PRs.${c.reset} Is GitHub CLI (gh) installed and authenticated?`);
         process.exit(1);
     }
 
@@ -213,26 +225,28 @@ async function main() {
         process.exit(0);
     }
 
-    console.log(dryRun ? '\n[DRY RUN MODE]\n' : '');
+    if (dryRun) {
+        console.log(`\n${c.yellow}${c.bold}[DRY RUN MODE]${c.reset}\n`);
+    }
 
     // Get latest tag and current version
     const latestTag = getLatestTag();
     const currentVersion = getCurrentVersion();
 
-    console.log(`Current version: ${currentVersion}`);
-    console.log(`Latest tag: ${latestTag || '(none)'}\n`);
+    console.log(`${c.dim}Current version:${c.reset} ${c.bold}${currentVersion}${c.reset}`);
+    console.log(`${c.dim}Latest tag:${c.reset} ${c.bold}${latestTag || '(none)'}${c.reset}\n`);
 
     // Fetch PRs
-    console.log(`Fetching merged PRs${latestTag ? ` since ${latestTag}` : ''}...`);
+    console.log(`${c.cyan}Fetching merged PRs${latestTag ? ` since ${latestTag}` : ''}...${c.reset}`);
     const prs = getMergedPRs(latestTag);
 
     if (prs.length === 0) {
-        console.log('\nNo merged PRs found since last release.');
+        console.log(`\n${c.yellow}No merged PRs found since last release.${c.reset}`);
         process.exit(0);
     }
 
     // Display PRs
-    console.log(`\nFound ${prs.length} PR(s):\n`);
+    console.log(`\n${c.cyan}Found ${c.bold}${prs.length}${c.reset}${c.cyan} PR(s):${c.reset}\n`);
 
     for (const pr of prs) {
         const label = getPRLabel(pr);
@@ -240,25 +254,24 @@ async function main() {
         const shortDesc = description.length > 60 ? description.slice(0, 57) + '...' : description;
 
         if (label) {
-            console.log(`  \u2713 #${pr.number} "${shortDesc}" (${label})`);
+            console.log(`  ${c.green}\u2713${c.reset} ${c.dim}#${pr.number}${c.reset} ${shortDesc} ${c.blue}(${label})${c.reset}`);
         } else {
-            console.log(`  \u2022 #${pr.number} "${shortDesc}" (Other)`);
+            console.log(`  ${c.dim}\u2022 #${pr.number}${c.reset} ${shortDesc} ${c.dim}(Other)${c.reset}`);
         }
     }
 
     // Version recommendation
     const recommended = recommendVersion(currentVersion, prs);
-    console.log(`\nRecommended version: ${recommended}`);
+    console.log(`\n${c.dim}Recommended version:${c.reset} ${c.green}${c.bold}${recommended}${c.reset}`);
 
     // Generate changelog preview
     const changelogEntry = generateChangelog(recommended, prs);
-    console.log('\n--- Changelog Preview ---');
-    console.log(changelogEntry);
-    console.log('-------------------------\n');
+    console.log(`\n${c.cyan}── Changelog Preview ──${c.reset}`);
+    console.log(`${c.dim}${changelogEntry}${c.reset}`);
 
     if (dryRun) {
-        console.log('[DRY RUN] No changes made.\n');
-        console.log('Run without --dry-run to create the release.');
+        console.log(`${c.yellow}[DRY RUN]${c.reset} No changes made.\n`);
+        console.log(`Run without ${c.bold}--dry-run${c.reset} to create the release.`);
         process.exit(0);
     }
 
@@ -266,15 +279,15 @@ async function main() {
     let newVersion;
     if (ciMode) {
         newVersion = versionArg || recommended;
-        console.log(`\nUsing version: ${newVersion}`);
+        console.log(`\nUsing version: ${c.bold}${newVersion}${c.reset}`);
     } else {
-        const inputVersion = await prompt(`\nEnter new version [${recommended}]: `);
+        const inputVersion = await prompt(`\n${c.yellow}Enter new version${c.reset} [${c.bold}${recommended}${c.reset}]: `);
         newVersion = inputVersion.trim() || recommended;
     }
 
     // Validate version format (allow pre-release like 1.0.0-beta.1)
     if (!/^\d+\.\d+\.\d+(-[\w.]+)?$/.test(newVersion)) {
-        console.error('Invalid version format. Use semver (e.g., 1.2.3 or 1.2.3-beta.1)');
+        console.error(`${c.red}Invalid version format.${c.reset} Use semver (e.g., 1.2.3 or 1.2.3-beta.1)`);
         process.exit(1);
     }
 
@@ -284,28 +297,36 @@ async function main() {
         : changelogEntry;
 
     // Update files
-    console.log('\nUpdating CHANGELOG.md...');
+    console.log(`\n${c.cyan}Updating files...${c.reset}`);
     updateChangelog(finalChangelog);
-
-    console.log('Updating package.json files...');
     updatePackageVersions(newVersion);
 
+    // Pause to allow editing
+    if (!ciMode) {
+        console.log(`\n${c.green}Files updated:${c.reset}`);
+        console.log(`  ${c.dim}-${c.reset} CHANGELOG.md`);
+        console.log(`  ${c.dim}-${c.reset} packages/grid-lite-react/package.json`);
+        console.log(`  ${c.dim}-${c.reset} packages/grid-pro-react/package.json`);
+        console.log(`\n${c.yellow}Edit CHANGELOG.md now if needed.${c.reset}`);
+        await prompt(`${c.dim}Press Enter to continue with commit...${c.reset}`);
+    }
+
     // Git commit and tag
-    console.log('Creating git commit...');
+    console.log(`\n${c.cyan}Creating git commit...${c.reset}`);
     exec('git add CHANGELOG.md packages/*/package.json');
     exec(`git commit -m "Release v${newVersion}"`);
 
-    console.log(`Creating git tag v${newVersion}...`);
+    console.log(`${c.cyan}Creating git tag ${c.bold}v${newVersion}${c.reset}${c.cyan}...${c.reset}`);
     exec(`git tag v${newVersion}`);
 
-    console.log('\n\u2705 Release prepared!\n');
-    console.log('Next steps:');
-    console.log('  1. Review: git show HEAD');
-    console.log('  2. Push: git push && git push --tags');
-    console.log('  3. Publish: pnpm release');
+    console.log(`\n${c.green}${c.bold}\u2705 Release v${newVersion} prepared!${c.reset}\n`);
+    console.log(`${c.cyan}Next steps:${c.reset}`);
+    console.log(`  ${c.bold}1.${c.reset} Review:  ${c.dim}git show HEAD${c.reset}`);
+    console.log(`  ${c.bold}2.${c.reset} Push:    ${c.dim}git push && git push --tags${c.reset}`);
+    console.log(`  ${c.bold}3.${c.reset} Publish: ${c.dim}pnpm release${c.reset}`);
 }
 
 main().catch(err => {
-    console.error('Error:', err.message);
+    console.error(`${c.red}Error:${c.reset} ${err.message}`);
     process.exit(1);
 });
