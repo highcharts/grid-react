@@ -9,6 +9,7 @@
         "lint": "pnpm -r --filter './packages/*' run lint",
         "clean": "pnpm -r --filter './{packages,examples}/*' run clean && rimraf node_modules",
         "release:preflight": "pnpm check && pnpm build",
+        "release:prepare": "node scripts/release.js",
         "release": "pnpm release:preflight && pnpm publish -r --access public"
     },
     "packageManager": "pnpm@10.23.0",
