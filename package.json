@@ -14,7 +14,7 @@
         "release:prepare": "node scripts/release.js",
         "release": "pnpm release:preflight && pnpm publish -r --access public"
     },
-    "packageManager": "pnpm@10.23.0",
+    "packageManager": "pnpm@10.27.0",
     "devDependencies": {
         "@eslint/js": "^9.39.1",
         "@stylistic/eslint-plugin": "^5.6.1",
@@ -23,8 +23,8 @@
         "@vitest/browser": "^4.0.16",
         "@vitest/browser-playwright": "^4.0.16",
         "eslint": "^9.39.1",
-        "playwright": "^1.57.0",
         "globals": "^17.0.0",
+        "playwright": "^1.57.0",
         "rimraf": "^6.1.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.48.0",
