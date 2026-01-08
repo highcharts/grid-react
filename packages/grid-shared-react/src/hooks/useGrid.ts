@@ -43,6 +43,13 @@ export function useGrid<TOptions>({
     const pendingOptionsRef = useRef<TOptions | null>(null);
     const initStartedRef = useRef(false);
 
+    // StrictMode runs effects twice: mount → cleanup → mount.
+    // This ref tracks if cleanup ran while async init was in-flight.
+    // The second mount resets it to false, allowing the init to complete
+    // and commit. Without this, the grid would be destroyed immediately
+    // after creation due to the cleanup setting this flag.
+    const destroyOnInitRef = useRef(false);
+
     // Keep callback ref in sync
     callbackRef.current = callback;
 
@@ -53,14 +60,14 @@ export function useGrid<TOptions>({
             return;
         }
 
+        // StrictMode cleanup runs before re-mount; allow init to complete if re-mounted.
+        destroyOnInitRef.current = false;
+
         // Prevent double initialization
         if (initStartedRef.current || currGridRef.current) {
             return;
         }
         initStartedRef.current = true;
-
-        // Track if this effect has been cleaned up to handle race conditions
-        let isCleanedUp = false;
 
         const initGrid = async () => {
             try {
@@ -70,7 +77,7 @@ export function useGrid<TOptions>({
 
                 const grid = await Grid.grid(container, initOptions, true);
 
-                if (isCleanedUp) {
+                if (destroyOnInitRef.current) {
                     // Component unmounted while we were initializing - destroy immediately
                     grid.destroy();
                     return;
@@ -87,17 +94,18 @@ export function useGrid<TOptions>({
                 callbackRef.current?.(grid);
             } catch (error) {
                 // Re-throw unless we've been cleaned up (component unmounted)
-                if (!isCleanedUp) {
+                if (!destroyOnInitRef.current) {
                     throw error;
                 }
+            } finally {
+                initStartedRef.current = false;
             }
         };
 
         initGrid();
 
         return () => {
-            isCleanedUp = true;
-            initStartedRef.current = false;
+            destroyOnInitRef.current = true;
             if (currGridRef.current) {
                 currGridRef.current.destroy();
                 currGridRef.current = null;

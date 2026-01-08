@@ -29,12 +29,12 @@ importers:
       eslint:
         specifier: ^9.39.1
         version: 9.39.1
-      playwright:
-        specifier: ^1.57.0
-        version: 1.57.0
       globals:
         specifier: ^17.0.0
         version: 17.0.0
+      playwright:
+        specifier: ^1.57.0
+        version: 1.57.0
       rimraf:
         specifier: ^6.1.2
         version: 6.1.2

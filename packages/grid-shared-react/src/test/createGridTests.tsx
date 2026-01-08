@@ -4,9 +4,11 @@ import { describe, it, expect, vi } from 'vitest';
 import { GridProps, GridRefHandle } from '../components/BaseGrid';
 import { GridInstance } from '../hooks/useGrid';
 
+type CellValue = string | number | boolean | null;
+
 interface TestOptions {
     dataTable?: {
-        columns?: Record<string, any>;
+        columns?: Record<string, CellValue[]>;
     };
 }
 
