@@ -63,3 +63,6 @@ vite.config.ts.timestamp-*
 .vite/
 .turbo/
 *.DS_Store
+
+# Test artifacts
+__screenshots__/
