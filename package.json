@@ -9,14 +9,16 @@
         "lint": "pnpm -r --filter './packages/*' run lint",
         "clean": "pnpm -r --filter './{packages,examples}/*' run clean && rimraf node_modules",
         "release:preflight": "pnpm check && pnpm build",
+        "release:prepare": "node scripts/release.js",
         "release": "pnpm release:preflight && pnpm publish -r --access public"
     },
     "packageManager": "pnpm@10.23.0",
     "devDependencies": {
-        "@types/node": "^20.0.0",
         "@eslint/js": "^9.39.1",
         "@stylistic/eslint-plugin": "^5.6.1",
+        "@types/node": "^20.0.0",
         "eslint": "^9.39.1",
+        "globals": "^17.0.0",
         "rimraf": "^6.1.2",
         "typescript": "^5.9.3",
         "typescript-eslint": "^8.48.0",
