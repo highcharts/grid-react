@@ -85,7 +85,9 @@ function getMergedPRs(sinceTag) {
 }
 
 function getFirstLineOfBody(body) {
-    if (!body) return null;
+    if (!body) {
+        return null;
+    }
     const lines = body.split('\n').filter(line => line.trim());
     return lines[0]?.trim() || null;
 }
