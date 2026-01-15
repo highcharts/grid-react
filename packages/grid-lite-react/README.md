@@ -16,7 +16,7 @@ npm install @highcharts/grid-lite-react
 
 ```tsx
 import React, { useState } from 'react';
-import { GridLite, type GridOptions } from '@highcharts/grid-lite-react';
+import { Grid, type GridOptions } from '@highcharts/grid-lite-react';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -32,20 +32,21 @@ function App() {
     }
   });
 
-  return <GridLite options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
 ## API
 
-### `GridLite`
+### `Grid`
 
 React component that wraps Highcharts Grid Lite.
 
 #### Props
 
 - `options` (required): Configuration options for the grid. Type: `GridOptions`
-- `gridRef` (optional): Ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `ref` (optional): React ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `gridRef` (optional): Alternative prop-based ref. Type: `RefObject<GridRefHandle<GridOptions>>`
 - `callback` (optional): Callback function called when the grid is initialized. Receives the grid instance as parameter. Type: `(grid: GridInstance<GridOptions>) => void`
 
 ### `GridOptions`
@@ -82,7 +83,7 @@ You can access the grid instance in two ways:
 **Using ref:**
 ```tsx
 import { useRef } from 'react';
-import { GridLite, type GridRefHandle, type GridOptions } from '@highcharts/grid-lite-react';
+import { Grid, type GridRefHandle, type GridOptions } from '@highcharts/grid-lite-react';
 
 function App() {
   const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
@@ -97,7 +98,7 @@ function App() {
 
   return (
     <>
-      <GridLite options={options} gridRef={gridRef} />
+      <Grid options={options} ref={gridRef} />
       <button onClick={handleClick}>Access Grid</button>
     </>
   );
@@ -106,14 +107,14 @@ function App() {
 
 **Using callback:**
 ```tsx
-import { GridLite, type GridInstance, type GridOptions } from '@highcharts/grid-lite-react';
+import { Grid, type GridInstance, type GridOptions } from '@highcharts/grid-lite-react';
 
 function App() {
   const handleGridReady = (grid: GridInstance<GridOptions>) => {
     console.log('Grid initialized:', grid);
   };
 
-  return <GridLite options={options} callback={handleGridReady} />;
+  return <Grid options={options} callback={handleGridReady} />;
 }
 ```
 
@@ -130,8 +131,8 @@ import { type GridOptions } from '@highcharts/grid-lite-react';
 import '@highcharts/grid-lite/css/grid-lite.css';
 
 // Disable SSR for the Grid component
-const GridLite = dynamic(
-  () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
+const Grid = dynamic(
+  () => import('@highcharts/grid-lite-react').then((mod) => mod.Grid),
   { ssr: false }
 );
 
@@ -145,7 +146,7 @@ export default function Page() {
     }
   });
 
-  return <GridLite options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
@@ -158,4 +159,3 @@ For detailed documentation on available options and features, see the [Highchart
 ## License
 
 SEE LICENSE IN [LICENSE](https://github.com/highcharts/grid-react/blob/main/packages/grid-lite-react/LICENSE).
-

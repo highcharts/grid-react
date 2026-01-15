@@ -6,6 +6,7 @@
     "scripts": {
         "test": "vitest run",
         "test:watch": "vitest",
+        "pretest:e2e": "pnpm build",
         "test:e2e": "vitest run --config vitest.e2e.config.ts",
         "test:all": "pnpm test && pnpm test:e2e",
         "check": "pnpm lint && pnpm test",

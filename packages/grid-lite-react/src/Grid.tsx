@@ -7,14 +7,23 @@
  *
  */
 
+import { forwardRef, type ForwardedRef } from 'react';
 import {
     BaseGrid,
-    GridProps
+    GridProps,
+    type GridRefHandle
 } from '@highcharts/grid-shared-react';
 import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
 import '@highcharts/grid-lite/css/grid-lite.css';
 import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
 
-export default function GridLite({ options, gridRef, callback }: GridProps<Options>) {
-    return <BaseGrid options={options} Grid={Grid} ref={gridRef} callback={callback} />;
-}
+const GridLite = forwardRef(function GridLite(
+    { options, gridRef, callback }: GridProps<Options>,
+    ref: ForwardedRef<GridRefHandle<Options>>
+) {
+    const resolvedRef = ref ?? gridRef;
+
+    return <BaseGrid options={options} Grid={Grid} ref={resolvedRef} callback={callback} />;
+});
+
+export default GridLite;

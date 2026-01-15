@@ -9,8 +9,8 @@ import {
 } from '@highcharts/grid-lite-react';
 
 // Dynamically import Grid with SSR disabled to avoid window is not defined error
-const GridLite = dynamic(
-  () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
+const Grid = dynamic(
+  () => import('@highcharts/grid-lite-react').then((mod) => mod.Grid),
   { ssr: false }
 );
 
@@ -37,20 +37,19 @@ export default function Home() {
     }
   });
 
-  const gridLite = useRef<GridRefHandle<GridOptions> | null>(null);
+  const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
 
   const onButtonClick = () => {
-    console.info('(ref) gridLite:', gridLite.current?.grid);
+    console.info('(ref) grid:', gridRef.current?.grid);
   };
-  const onGridLiteCallback = (grid: GridInstance<GridOptions>) => {
-    console.info('(callback) gridLite:', grid);
+  const onGridCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) grid:', grid);
   };
 
   return (
     <>
-        <GridLite options={liteOptions} gridRef={gridLite} callback={onGridLiteCallback} />
+        <Grid options={liteOptions} ref={gridRef} callback={onGridCallback} />
         <button onClick={onButtonClick}>Click me</button>
     </>
   );
 }
-

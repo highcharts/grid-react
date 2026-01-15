@@ -7,14 +7,23 @@
  *
  */
 
+import { forwardRef, type ForwardedRef } from 'react';
 import {
     BaseGrid,
-    GridProps
+    GridProps,
+    type GridRefHandle
 } from '@highcharts/grid-shared-react';
 import Grid from '@highcharts/grid-pro/es-modules/masters/grid-pro.src';
 import '@highcharts/grid-pro/css/grid-pro.css';
 import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
 
-export default function GridPro({ options, gridRef, callback }: GridProps<Options>) {
-    return <BaseGrid options={options} Grid={Grid} ref={gridRef} callback={callback} />;
-}
+const GridPro = forwardRef(function GridPro(
+    { options, gridRef, callback }: GridProps<Options>,
+    ref: ForwardedRef<GridRefHandle<Options>>
+) {
+    const resolvedRef = ref ?? gridRef;
+
+    return <BaseGrid options={options} Grid={Grid} ref={resolvedRef} callback={callback} />;
+});
+
+export default GridPro;

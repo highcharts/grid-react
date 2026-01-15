@@ -1,6 +1,6 @@
 # Highcharts Grid React
 
-Monorepo containing React wrappers for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/getting-started/grid-lite) and [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
+Monorepo containing React packages for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/getting-started/grid-lite) and [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
 
 ## Packages
 
@@ -8,12 +8,12 @@ This monorepo contains the following packages:
 
 ### Published Packages
 
-- **[@highcharts/grid-lite-react](./packages/grid-lite-react/)** - React wrapper for Highcharts Grid Lite
-- **[@highcharts/grid-pro-react](./packages/grid-pro-react/)** - React wrapper for Highcharts Grid Pro
+- **[@highcharts/grid-lite-react](./packages/grid-lite-react/)** - React package for Highcharts Grid Lite
+- **[@highcharts/grid-pro-react](./packages/grid-pro-react/)** - React package for Highcharts Grid Pro
 
 ### Internal Packages
 
-- **[@highcharts/grid-shared-react](./packages/grid-shared-react/)** - Shared core functionality used by both Grid Lite and Grid Pro React wrappers
+- **[@highcharts/grid-shared-react](./packages/grid-shared-react/)** - Shared core functionality used by both Grid Lite and Grid Pro React packages
 
 ## Quick Start
 
@@ -33,7 +33,7 @@ npm install @highcharts/grid-pro-react
 
 ```tsx
 import React, { useState } from 'react';
-import { GridLite, type GridOptions } from '@highcharts/grid-lite-react';
+import { Grid, type GridOptions } from '@highcharts/grid-lite-react';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -45,7 +45,7 @@ function App() {
     }
   });
 
-  return <GridLite options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
@@ -53,7 +53,7 @@ function App() {
 
 ```tsx
 import React, { useState } from 'react';
-import { GridPro, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -65,7 +65,7 @@ function App() {
     }
   });
 
-  return <GridPro options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
@@ -74,8 +74,8 @@ function App() {
 ```
 highcharts-grid-react/
 ├── packages/                    # Source packages
-│   ├── grid-lite-react/        # Grid Lite React wrapper
-│   ├── grid-pro-react/          # Grid Pro React wrapper
+│   ├── grid-lite-react/        # Grid Lite React package
+│   ├── grid-pro-react/          # Grid Pro React package
 │   └── grid-shared-react/         # Shared core functionality
 ├── examples/                    # Example applications
 │   ├── grid-lite/               # Grid Lite examples
@@ -89,9 +89,9 @@ highcharts-grid-react/
 
 ### Packages
 
-- **`packages/grid-lite-react/`** - React component wrapper for Highcharts Grid Lite. See [README](./packages/grid-lite-react/README.md) for details.
-- **`packages/grid-pro-react/`** - React component wrapper for Highcharts Grid Pro. See [README](./packages/grid-pro-react/README.md) for details.
-- **`packages/grid-shared-react/`** - Internal package containing shared React components and hooks used by both wrappers.
+- **`packages/grid-lite-react/`** - React component package for Highcharts Grid Lite. See [README](./packages/grid-lite-react/README.md) for details.
+- **`packages/grid-pro-react/`** - React component package for Highcharts Grid Pro. See [README](./packages/grid-pro-react/README.md) for details.
+- **`packages/grid-shared-react/`** - Internal package containing shared React components and hooks used by both packages.
 
 ### Examples
 
@@ -171,8 +171,8 @@ import { type GridOptions } from '@highcharts/grid-lite-react';
 import '@highcharts/grid-lite/css/grid-lite.css';
 
 // Disable SSR for the Grid component
-const GridLite = dynamic(
-  () => import('@highcharts/grid-lite-react').then((mod) => mod.GridLite),
+const Grid = dynamic(
+  () => import('@highcharts/grid-lite-react').then((mod) => mod.Grid),
   { ssr: false }
 );
 
@@ -186,7 +186,7 @@ export default function Page() {
     }
   });
 
-  return <GridLite options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
@@ -210,4 +210,3 @@ See the [Next.js examples](./examples/) for complete working implementations.
 ## License
 
 SEE LICENSE IN [LICENSE](https://github.com/highcharts/grid-react/blob/main/LICENSE).
-

@@ -3,14 +3,14 @@
 import { useState, useRef } from 'react';
 import dynamic from 'next/dynamic';
 import {
-    type GridInstance,
-    type GridOptions,
-    type GridRefHandle
+  type GridInstance,
+  type GridOptions,
+  type GridRefHandle
 } from '@highcharts/grid-pro-react';
 
 // Dynamically import Grid with SSR disabled to avoid window is not defined error
-const GridPro = dynamic(
-  () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),
+const Grid = dynamic(
+  () => import('@highcharts/grid-pro-react').then((mod) => mod.Grid),
   { ssr: false }
 );
 
@@ -53,20 +53,19 @@ export default function Home() {
     }]
   });
 
-  const gridPro = useRef<GridRefHandle<GridOptions> | null>(null);
+  const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
 
   const onButtonClick = () => {
-    console.info('(ref) gridPro:', gridPro.current?.grid);
+    console.info('(ref) grid:', gridRef.current?.grid);
   };
-  const onGridProCallback = (grid: GridInstance<GridOptions>) => {
-    console.info('(callback) gridPro:', grid);
+  const onGridCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) grid:', grid);
   };
 
   return (
     <>
-        <GridPro options={proOptions} gridRef={gridPro} callback={onGridProCallback} />
+        <Grid options={proOptions} ref={gridRef} callback={onGridCallback} />
         <button onClick={onButtonClick}>Click me</button>
     </>
   );
 }
-
