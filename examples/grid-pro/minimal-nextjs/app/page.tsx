@@ -8,7 +8,8 @@ import {
   type GridRefHandle
 } from '@highcharts/grid-pro-react';
 
-// Dynamically import Grid with SSR disabled to avoid window is not defined error
+// Dynamic import with ssr:false is required because @highcharts/grid-pro
+// accesses `window` at module load time
 const Grid = dynamic(
   () => import('@highcharts/grid-pro-react').then((mod) => mod.Grid),
   { ssr: false }
@@ -64,7 +65,7 @@ export default function Home() {
 
   return (
     <>
-        <Grid options={proOptions} ref={gridRef} callback={onGridCallback} />
+        <Grid options={proOptions} gridRef={gridRef} callback={onGridCallback} />
         <button onClick={onButtonClick}>Click me</button>
     </>
   );

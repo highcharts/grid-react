@@ -55,7 +55,7 @@ function App() {
 
   return (
     <>
-      <Grid options={options} ref={grid} callback={onGridCallback} />
+      <Grid options={options} gridRef={grid} callback={onGridCallback} />
       <button onClick={onButtonClick}>Click me</button>
     </>
   );

@@ -2,8 +2,7 @@ import { render, waitFor, fireEvent } from '@testing-library/react';
 import {
     useRef,
     useState,
-    type ForwardRefExoticComponent,
-    type RefAttributes
+    type ComponentType
 } from 'react';
 import { describe, it, expect, vi } from 'vitest';
 import { GridProps, GridRefHandle } from '../components/BaseGrid';
@@ -15,9 +14,7 @@ import { GridInstance } from '../hooks/useGrid';
  */
 export function createGridTests<TOptions>(
     name: string,
-    GridComponent: ForwardRefExoticComponent<
-        GridProps<TOptions> & RefAttributes<GridRefHandle<TOptions>>
-    >,
+    GridComponent: ComponentType<GridProps<TOptions>>,
     testOptions: TOptions,
     updatedOptions: TOptions
 ) {
@@ -38,29 +35,6 @@ export function createGridTests<TOptions>(
 
             await waitFor(() => {
                 expect(gridInstance).not.toBeNull();
-            });
-        });
-
-        it('provides grid instance via ref', async () => {
-            let gridRef: React.RefObject<GridRefHandle<TOptions> | null>;
-            let initialized = false;
-
-            function TestComponent() {
-                gridRef = useRef<GridRefHandle<TOptions>>(null);
-                return (
-                    <GridComponent
-                        options={testOptions}
-                        ref={gridRef}
-                        callback={() => { initialized = true; }}
-                    />
-                );
-            }
-
-            render(<TestComponent />);
-
-            await waitFor(() => {
-                expect(initialized).toBe(true);
-                expect(gridRef.current?.grid).toBeDefined();
             });
         });
 

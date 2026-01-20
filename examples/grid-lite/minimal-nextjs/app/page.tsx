@@ -8,7 +8,8 @@ import {
   type GridRefHandle
 } from '@highcharts/grid-lite-react';
 
-// Dynamically import Grid with SSR disabled to avoid window is not defined error
+// Dynamic import with ssr:false is required because @highcharts/grid-lite
+// accesses `window` at module load time
 const Grid = dynamic(
   () => import('@highcharts/grid-lite-react').then((mod) => mod.Grid),
   { ssr: false }
@@ -48,7 +49,7 @@ export default function Home() {
 
   return (
     <>
-        <Grid options={liteOptions} ref={gridRef} callback={onGridCallback} />
+        <Grid options={liteOptions} gridRef={gridRef} callback={onGridCallback} />
         <button onClick={onButtonClick}>Click me</button>
     </>
   );
