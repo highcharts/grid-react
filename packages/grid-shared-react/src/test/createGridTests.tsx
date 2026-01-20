@@ -9,19 +9,11 @@ import { describe, it, expect, vi } from 'vitest';
 import { GridProps, GridRefHandle } from '../components/BaseGrid';
 import { GridInstance } from '../hooks/useGrid';
 
-type CellValue = string | number | boolean | null;
-
-interface TestOptions {
-    dataTable?: {
-        columns?: Record<string, CellValue[]>;
-    };
-}
-
 /**
  * Creates a standard test suite for a Grid component.
  * Use this to avoid duplicating tests between grid-lite-react and grid-pro-react.
  */
-export function createGridTests<TOptions extends TestOptions>(
+export function createGridTests<TOptions>(
     name: string,
     GridComponent: ForwardRefExoticComponent<
         GridProps<TOptions> & RefAttributes<GridRefHandle<TOptions>>
