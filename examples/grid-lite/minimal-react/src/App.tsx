@@ -3,7 +3,7 @@ import {
   type GridInstance,
   type GridOptions,
   type GridRefHandle,
-  GridLite
+  Grid
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -31,19 +31,18 @@ function App() {
   const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
   const onButtonClick = () => {
-    console.info('(ref) gridLite:', grid.current?.grid);
+    console.info('(ref) grid:', grid.current?.grid);
   };
-  const onGridLiteCallback = (grid: GridInstance<GridOptions>) => {
-    console.info('(callback) gridLite:', grid);
+  const onGridCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) grid:', grid);
   };
 
   return (
     <>
-      <GridLite options={options} gridRef={grid} callback={onGridLiteCallback} />
+      <Grid options={options} gridRef={grid} callback={onGridCallback} />
       <button onClick={onButtonClick}>Click me</button>
     </>
   );
 }
 
 export default App;
-

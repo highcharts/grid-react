@@ -1,9 +1,9 @@
 import { createGridTests } from '@highcharts/grid-shared-react/src/test/createGridTests';
-import { GridLite, GridOptions } from '../index';
+import { Grid, GridOptions } from '../index';
 
 createGridTests<GridOptions>(
-    'GridLite',
-    GridLite,
+    'Grid Lite',
+    Grid,
     {
         dataTable: {
             columns: {

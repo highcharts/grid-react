@@ -16,7 +16,7 @@ npm install @highcharts/grid-pro-react
 
 ```tsx
 import React, { useState } from 'react';
-import { GridPro, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -32,20 +32,21 @@ function App() {
     }
   });
 
-  return <GridPro options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
 ## API
 
-### `GridPro`
+### `Grid`
 
 React component that wraps Highcharts Grid Pro.
 
 #### Props
 
 - `options` (required): Configuration options for the grid. Type: `GridOptions`
-- `gridRef` (optional): Ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `ref` (optional): React ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `gridRef` (optional): Alternative prop-based ref. Type: `RefObject<GridRefHandle<GridOptions>>`
 - `callback` (optional): Callback function called when the grid is initialized. Receives the grid instance as parameter. Type: `(grid: GridInstance<GridOptions>) => void`
 
 ### `GridOptions`
@@ -82,7 +83,7 @@ You can access the grid instance in two ways:
 **Using ref:**
 ```tsx
 import { useRef } from 'react';
-import { GridPro, type GridRefHandle, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridRefHandle, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
@@ -97,7 +98,7 @@ function App() {
 
   return (
     <>
-      <GridPro options={options} gridRef={gridRef} />
+      <Grid options={options} ref={gridRef} />
       <button onClick={handleClick}>Access Grid</button>
     </>
   );
@@ -106,14 +107,14 @@ function App() {
 
 **Using callback:**
 ```tsx
-import { GridPro, type GridInstance, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridInstance, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const handleGridReady = (grid: GridInstance<GridOptions>) => {
     console.log('Grid initialized:', grid);
   };
 
-  return <GridPro options={options} callback={handleGridReady} />;
+  return <Grid options={options} callback={handleGridReady} />;
 }
 ```
 
@@ -130,8 +131,8 @@ import { type GridOptions } from '@highcharts/grid-pro-react';
 import '@highcharts/grid-pro/css/grid-pro.css';
 
 // Disable SSR for the Grid component
-const GridPro = dynamic(
-  () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),
+const Grid = dynamic(
+  () => import('@highcharts/grid-pro-react').then((mod) => mod.Grid),
   { ssr: false }
 );
 
@@ -145,7 +146,7 @@ export default function Page() {
     }
   });
 
-  return <GridPro options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
