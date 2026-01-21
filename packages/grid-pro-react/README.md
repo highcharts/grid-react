@@ -45,8 +45,7 @@ React component that wraps Highcharts Grid Pro.
 #### Props
 
 - `options` (required): Configuration options for the grid. Type: `GridOptions`
-- `ref` (optional): React ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
-- `gridRef` (optional): Alternative prop-based ref. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `gridRef` (optional): React ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
 - `callback` (optional): Callback function called when the grid is initialized. Receives the grid instance as parameter. Type: `(grid: GridInstance<GridOptions>) => void`
 
 ### `GridOptions`
@@ -59,7 +58,7 @@ import type { GridOptions } from '@highcharts/grid-pro-react';
 
 ### `GridRefHandle`
 
-Type for the ref handle that provides access to the underlying grid instance.
+Type for the gridRef handle that provides access to the underlying grid instance.
 
 ```tsx
 import type { GridRefHandle } from '@highcharts/grid-pro-react';
@@ -70,17 +69,17 @@ const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
 
 ### `GridInstance`
 
-Type for the grid instance returned by the ref or callback.
+Type for the grid instance returned by gridRef or callback.
 
 ```tsx
 import type { GridInstance } from '@highcharts/grid-pro-react';
 ```
 
-### Using Ref and Callback
+### Using gridRef and Callback
 
 You can access the grid instance in two ways:
 
-**Using ref:**
+**Using gridRef:**
 ```tsx
 import { useRef } from 'react';
 import { Grid, type GridRefHandle, type GridOptions } from '@highcharts/grid-pro-react';
@@ -98,7 +97,7 @@ function App() {
 
   return (
     <>
-      <Grid options={options} ref={gridRef} />
+      <Grid options={options} gridRef={gridRef} />
       <button onClick={handleClick}>Access Grid</button>
     </>
   );
