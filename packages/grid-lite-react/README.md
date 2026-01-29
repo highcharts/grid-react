@@ -2,6 +2,17 @@
 
 React integration for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/general).
 
+## Links
+
+* Official website: [www.highcharts.com](https://www.highcharts.com)
+* Product page: [www.highcharts.com/products/grid](https://www.highcharts.com/products/grid)
+* Download: [www.highcharts.com/download](https://www.highcharts.com/download)
+* License: [www.highcharts.com/license](https://www.highcharts.com/license)
+* Documentation: [www.highcharts.com/docs](https://www.highcharts.com/docs/grid/frameworks/grid-with-react)
+* Support: [www.highcharts.com/support](https://www.highcharts.com/support)
+* Issues: [Working repo](https://github.com/highcharts/highcharts/issues)
+
+
 ## Installation
 
 ```bash

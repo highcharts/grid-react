@@ -8,7 +8,7 @@
     "types": "dist/index.d.ts",
     "files": [
         "dist",
-        "LICENSE",
+        "LICENSE.",
         "README.md"
     ],
     "keywords": [
@@ -20,7 +20,7 @@
         "pro"
     ],
     "author": "Highsoft AS",
-    "license": "SEE LICENSE IN LICENSE",
+    "license": "SEE LICENSE.txt",
     "repository": {
         "type": "git",
         "url": "https://github.com/highcharts/grid-react.git",
