@@ -38,7 +38,7 @@
         "prepublishOnly": "pnpm build"
     },
     "dependencies": {
-        "@highcharts/grid-pro": "^2.1.0"
+        "@highcharts/grid-pro": ">=3.0.0"
     },
     "devDependencies": {
         "@highcharts/grid-shared-react": "workspace:*",
