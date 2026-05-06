@@ -2,6 +2,13 @@
 
 ## [3.0.0] - 2026-05-06
 
+### Other
+- Updated to Grid v3.0 (#12) - 2026-05-06
+- Standardise license references (#11) - 2026-01-29
+
+
+## [3.0.0] - 2026-05-06
+
 ### Features
 - Update integration with Grid v3.0.
 
