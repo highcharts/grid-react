@@ -2,6 +2,16 @@
 
 React integration for [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/general).
 
+## Links
+
+* Official website: [www.highcharts.com](https://www.highcharts.com)
+* Product page: [www.highcharts.com/products/grid](https://www.highcharts.com/products/grid)
+* Download: [www.highcharts.com/download](https://www.highcharts.com/download)
+* License: [www.highcharts.com/license](https://www.highcharts.com/license)
+* Documentation: [www.highcharts.com/docs](https://www.highcharts.com/docs/grid/frameworks/grid-with-react)
+* Support: [www.highcharts.com/support](https://www.highcharts.com/support)
+* Issues: [Working repo](https://github.com/highcharts/highcharts/issues)
+
 ## Installation
 
 ```bash
@@ -16,7 +26,7 @@ npm install @highcharts/grid-pro-react
 
 ```tsx
 import React, { useState } from 'react';
-import { GridPro, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const [options] = useState<GridOptions>({
@@ -32,20 +42,20 @@ function App() {
     }
   });
 
-  return <GridPro options={options} />;
+  return <Grid options={options} />;
 }
 ```
 
 ## API
 
-### `GridPro`
+### `Grid`
 
 React component that wraps Highcharts Grid Pro.
 
 #### Props
 
 - `options` (required): Configuration options for the grid. Type: `GridOptions`
-- `gridRef` (optional): Ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
+- `gridRef` (optional): React ref to access the underlying grid instance. Type: `RefObject<GridRefHandle<GridOptions>>`
 - `callback` (optional): Callback function called when the grid is initialized. Receives the grid instance as parameter. Type: `(grid: GridInstance<GridOptions>) => void`
 
 ### `GridOptions`
@@ -58,7 +68,7 @@ import type { GridOptions } from '@highcharts/grid-pro-react';
 
 ### `GridRefHandle`
 
-Type for the ref handle that provides access to the underlying grid instance.
+Type for the gridRef handle that provides access to the underlying grid instance.
 
 ```tsx
 import type { GridRefHandle } from '@highcharts/grid-pro-react';
@@ -69,20 +79,20 @@ const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
 
 ### `GridInstance`
 
-Type for the grid instance returned by the ref or callback.
+Type for the grid instance returned by gridRef or callback.
 
 ```tsx
 import type { GridInstance } from '@highcharts/grid-pro-react';
 ```
 
-### Using Ref and Callback
+### Using gridRef and Callback
 
 You can access the grid instance in two ways:
 
-**Using ref:**
+**Using gridRef:**
 ```tsx
 import { useRef } from 'react';
-import { GridPro, type GridRefHandle, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridRefHandle, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const gridRef = useRef<GridRefHandle<GridOptions> | null>(null);
@@ -97,7 +107,7 @@ function App() {
 
   return (
     <>
-      <GridPro options={options} gridRef={gridRef} />
+      <Grid options={options} gridRef={gridRef} />
       <button onClick={handleClick}>Access Grid</button>
     </>
   );
@@ -106,14 +116,14 @@ function App() {
 
 **Using callback:**
 ```tsx
-import { GridPro, type GridInstance, type GridOptions } from '@highcharts/grid-pro-react';
+import { Grid, type GridInstance, type GridOptions } from '@highcharts/grid-pro-react';
 
 function App() {
   const handleGridReady = (grid: GridInstance<GridOptions>) => {
     console.log('Grid initialized:', grid);
   };
 
-  return <GridPro options={options} callback={handleGridReady} />;
+  return <Grid options={options} callback={handleGridReady} />;
 }
 ```
 
@@ -130,8 +140,8 @@ import { type GridOptions } from '@highcharts/grid-pro-react';
 import '@highcharts/grid-pro/css/grid-pro.css';
 
 // Disable SSR for the Grid component
-const GridPro = dynamic(
-  () => import('@highcharts/grid-pro-react').then((mod) => mod.GridPro),
+const Grid = dynamic(
+  () => import('@highcharts/grid-pro-react').then((mod) => mod.Grid),
   { ssr: false }
 );
 
@@ -145,7 +155,7 @@ export default function Page() {
     }
   });
 
-  return <GridPro options={options} />;
+  return <Grid options={options} />;
 }
 ```
 

@@ -9,6 +9,7 @@
 
 import GridLite from '@highcharts/grid-lite';
 
+export { default as Grid } from './Grid';
 export { default as GridLite } from './Grid';
 export type { GridInstance } from '@highcharts/grid-shared-react';
 export type { GridRefHandle } from '@highcharts/grid-shared-react';

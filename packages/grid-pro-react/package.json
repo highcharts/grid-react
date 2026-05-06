@@ -1,6 +1,6 @@
 {
     "name": "@highcharts/grid-pro-react",
-    "version": "0.2.0",
+    "version": "1.0.0",
     "description": "Official React integration for Highcharts Grid Pro",
     "type": "module",
     "main": "dist/index.js",
@@ -8,7 +8,7 @@
     "types": "dist/index.d.ts",
     "files": [
         "dist",
-        "LICENSE",
+        "LICENSE.",
         "README.md"
     ],
     "keywords": [
@@ -20,7 +20,7 @@
         "pro"
     ],
     "author": "Highsoft AS",
-    "license": "SEE LICENSE IN LICENSE",
+    "license": "SEE LICENSE.txt",
     "repository": {
         "type": "git",
         "url": "https://github.com/highcharts/grid-react.git",

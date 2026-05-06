@@ -9,6 +9,7 @@
 
 import GridPro from '@highcharts/grid-pro';
 
+export { default as Grid } from './Grid';
 export { default as GridPro } from './Grid';
 export type { GridInstance } from '@highcharts/grid-shared-react';
 export type { GridRefHandle } from '@highcharts/grid-shared-react';

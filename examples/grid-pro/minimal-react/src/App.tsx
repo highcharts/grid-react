@@ -3,7 +3,7 @@ import {
   type GridInstance,
   type GridOptions,
   type GridRefHandle,
-  GridPro,
+  Grid,
 } from '@highcharts/grid-pro-react';
 
 function App() {
@@ -47,19 +47,18 @@ function App() {
   const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
   const onButtonClick = () => {
-    console.info('(ref) gridPro:', grid.current?.grid);
+    console.info('(ref) grid:', grid.current?.grid);
   };
-  const onGridProCallback = (grid: GridInstance<GridOptions>) => {
-    console.info('(callback) gridPro:', grid);
+  const onGridCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) grid:', grid);
   };
 
   return (
     <>
-      <GridPro options={options} gridRef={grid} callback={onGridProCallback} />
+      <Grid options={options} gridRef={grid} callback={onGridCallback} />
       <button onClick={onButtonClick}>Click me</button>
     </>
   );
 }
 
 export default App;
-
