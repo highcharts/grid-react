@@ -1,5 +1,10 @@
 # Changelog
 
+## [3.0.0] - 2026-05-06
+
+### Features
+- Update integration with Grid v3.0.
+
 ## [1.0.0] - 2026-01-20
 
 ### Features
