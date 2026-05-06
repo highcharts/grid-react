@@ -51,8 +51,8 @@ importers:
   examples/grid-lite/minimal-nextjs:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: '>=3.0.0'
+        version: 3.0.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
         version: link:../../../packages/grid-lite-react
@@ -82,8 +82,8 @@ importers:
   examples/grid-lite/minimal-react:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: ^2.1.1
-        version: 2.1.1
+        specifier: '>=3.0.0'
+        version: 3.0.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
         version: link:../../../packages/grid-lite-react
@@ -113,8 +113,8 @@ importers:
   examples/grid-pro/minimal-nextjs:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: ^2.1.0
-        version: 2.1.1
+        specifier: '>=3.0.0'
+        version: 3.0.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
         version: link:../../../packages/grid-pro-react
@@ -144,8 +144,8 @@ importers:
   examples/grid-pro/minimal-react:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: ^2.1.0
-        version: 2.1.1
+        specifier: '>=3.0.0'
+        version: 3.0.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
         version: link:../../../packages/grid-pro-react
@@ -175,8 +175,8 @@ importers:
   packages/grid-lite-react:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: ^2.1.0
-        version: 2.1.1
+        specifier: '>=3.0.0'
+        version: 3.0.0
     devDependencies:
       '@highcharts/grid-shared-react':
         specifier: workspace:*
@@ -212,8 +212,8 @@ importers:
   packages/grid-pro-react:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: ^2.1.0
-        version: 2.1.1
+        specifier: '>=3.0.0'
+        version: 3.0.0
     devDependencies:
       '@highcharts/grid-shared-react':
         specifier: workspace:*
@@ -750,11 +750,11 @@ packages:
       '@exodus/crypto':
         optional: true
 
-  '@highcharts/grid-lite@2.1.1':
-    resolution: {integrity: sha512-ZOlX32apWXiwcaq6T5aaeZBNDtAJnCKb93rA0YskhOrBpU9g5G2g0WWdheyawml2+YuSq7inNx+Yhl/8UWxX9w==}
+  '@highcharts/grid-lite@3.0.0':
+    resolution: {integrity: sha512-e42KWpkMCQUmjzZPmpRW9GyM60+MvsSVi/4PejchFJEDpwaPJ/06baAq5hZO9VF09+qG1RDpaCwRof2A9rfhfg==}
 
-  '@highcharts/grid-pro@2.1.1':
-    resolution: {integrity: sha512-Nns0hFXwIPoDoDtu7y16t6U7gyNT8d5y8zgddgCexS+8FND8mzeO+5wfTq36jZWU4HIlnd/79z+qgBNLTRdeng==}
+  '@highcharts/grid-pro@3.0.0':
+    resolution: {integrity: sha512-zGE7EzfRxUx8w+oyKgUo6b8GrWme1i8AfKpuTjIrrxso2xLqYEpFozeJ9j5U1bwizKb39PMc7VyiK5407BZasQ==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2462,9 +2462,9 @@ snapshots:
   '@exodus/bytes@1.8.0':
     optional: true
 
-  '@highcharts/grid-lite@2.1.1': {}
+  '@highcharts/grid-lite@3.0.0': {}
 
-  '@highcharts/grid-pro@2.1.1': {}
+  '@highcharts/grid-pro@3.0.0': {}
 
   '@humanfs/core@0.19.1': {}
 
