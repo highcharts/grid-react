@@ -10,7 +10,7 @@
     "clean": "rimraf .next node_modules"
   },
   "dependencies": {
-    "@highcharts/grid-pro": "^2.1.0",
+    "@highcharts/grid-pro": ">=3.0.0",
     "@highcharts/grid-pro-react": "workspace:*",
     "next": "^14.0.0",
     "react": ">=18",

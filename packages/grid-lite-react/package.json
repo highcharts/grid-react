@@ -1,6 +1,6 @@
 {
     "name": "@highcharts/grid-lite-react",
-    "version": "1.0.0",
+    "version": "3.0.0",
     "description": "Official React integration for Highcharts Grid Lite",
     "type": "module",
     "main": "dist/index.js",
@@ -37,7 +37,7 @@
         "prepublishOnly": "pnpm build"
     },
     "dependencies": {
-        "@highcharts/grid-lite": "^2.1.0"
+        "@highcharts/grid-lite": ">=3.0.0"
     },
     "devDependencies": {
         "@highcharts/grid-shared-react": "workspace:*",
