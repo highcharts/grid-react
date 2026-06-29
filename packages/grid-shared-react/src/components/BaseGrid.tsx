@@ -7,7 +7,7 @@
  *
  */
 
-import { useRef, useImperativeHandle, forwardRef, ForwardedRef } from 'react';
+import { useRef, useImperativeHandle, forwardRef, ForwardedRef, ReactNode } from 'react';
 import {
     useGrid,
     GridType,
@@ -33,6 +33,10 @@ export interface GridProps<TOptions> {
      */
     options?: TOptions;
     /**
+     * Optional React children rendered inside the Grid wrapper.
+     */
+    children?: ReactNode;
+    /**
      * Optional ref to access the grid instance
      */
     gridRef?: ForwardedRef<GridRefHandle<TOptions>>;
@@ -56,7 +60,7 @@ export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
     props: BaseGridProps<TOptions>,
     ref: ForwardedRef<GridRefHandle<TOptions>>
 ) {
-    const { options, Grid, callback } = props;
+    const { options, Grid, callback, children } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
     const currGridRef = useGrid({
@@ -76,5 +80,10 @@ export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
         []
     );
 
-    return <div ref={containerRef} />;
+    return (
+        <div>
+            {children}
+            <div ref={containerRef} />
+        </div>
+    );
 });

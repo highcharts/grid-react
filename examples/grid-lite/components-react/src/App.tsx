@@ -1,12 +1,21 @@
 import { useState, useRef } from 'react';
 import {
-  type GridInstance,
+  // type GridInstance,
+  // type GridRefHandle,
   type GridOptions,
-  type GridRefHandle,
   Grid
 } from '@highcharts/grid-lite-react';
 
 function App() {
+  /* const grid = useRef<GridRefHandle<GridOptions> | null>(null);
+
+  const onButtonClick = () => {
+    console.info('(ref) grid:', grid.current?.grid);
+  };
+  const onGridCallback = (grid: GridInstance<GridOptions>) => {
+    console.info('(callback) grid:', grid);
+  };*/
+
   const [options] = useState<GridOptions>({
     dataTable: {
       columns: {
@@ -17,14 +26,6 @@ function App() {
       }
     }
   });
-  // const grid = useRef<GridRefHandle<GridOptions> | null>(null);
-
-  // const onButtonClick = () => {
-  //   console.info('(ref) grid:', grid.current?.grid);
-  // };
-  // const onGridCallback = (grid: GridInstance<GridOptions>) => {
-  //   console.info('(callback) grid:', grid);
-  // };
 
   return (
     <>
@@ -33,6 +34,16 @@ function App() {
         // gridRef={grid}
         // callback={onGridCallback} 
       >
+        <div>Whatever</div>
+        {/* <Caption>Grid Caption</Caption> */}
+        {/* <Description>Grid Description</Description>
+        <DataTable>
+          <Column>
+            <Header>Grid Header</Header>
+            <Cell>Grid Cell</Cell>
+          </Column>
+        </DataTable> */}
+        {/* <Pagination>Grid Pagination</Pagination> */}
       </Grid>
       {/* <button onClick={onButtonClick}>Click me</button> */}
     </>

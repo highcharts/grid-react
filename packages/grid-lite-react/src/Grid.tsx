@@ -15,6 +15,7 @@ import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
 import '@highcharts/grid-lite/css/grid-lite.css';
 import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
 
-export default function GridLite({ options, gridRef, callback }: GridProps<Options>) {
-    return <BaseGrid options={options} Grid={Grid} ref={gridRef} callback={callback} />;
+export default function GridLite(props: GridProps<Options>) {
+    const { gridRef, ...gridProps } = props;
+    return <BaseGrid {...gridProps} Grid={Grid} ref={gridRef} />;
 }

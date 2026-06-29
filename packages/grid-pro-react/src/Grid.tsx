@@ -15,6 +15,7 @@ import Grid from '@highcharts/grid-pro/es-modules/masters/grid-pro.src';
 import '@highcharts/grid-pro/css/grid-pro.css';
 import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
 
-export default function GridPro({ options, gridRef, callback }: GridProps<Options>) {
-    return <BaseGrid options={options} Grid={Grid} ref={gridRef} callback={callback} />;
+export default function GridPro(props: GridProps<Options>) {
+    const { gridRef, ...gridProps } = props;
+    return <BaseGrid {...gridProps} Grid={Grid} ref={gridRef} />;
 }
