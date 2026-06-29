@@ -25,7 +25,7 @@ export interface GridInstance<TOptions> {
  * directly depending on their types.
  */
 export interface GridType<TOptions> {
-    grid(container: HTMLDivElement, options: TOptions, async?: boolean): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
+    grid(container: HTMLDivElement, options?: TOptions, async?: boolean): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
 }
 
 export interface UseGridOptions<TOptions> extends BaseGridProps<TOptions> {
@@ -40,7 +40,7 @@ export function useGrid<TOptions>({
 }: UseGridOptions<TOptions>) {
     const currGridRef = useRef<GridInstance<TOptions> | null>(null);
     const callbackRef = useRef(callback);
-    const pendingOptionsRef = useRef<TOptions | null>(null);
+    const pendingOptionsRef = useRef<TOptions | undefined>(void 0);
     const initStartedRef = useRef(false);
 
     // StrictMode runs effects twice: mount → cleanup → mount.
@@ -73,7 +73,7 @@ export function useGrid<TOptions>({
             try {
                 // Use pending options if available (from rapid updates during init)
                 const initOptions = pendingOptionsRef.current ?? options;
-                pendingOptionsRef.current = null;
+                pendingOptionsRef.current = void 0;
 
                 const grid = await Grid.grid(container, initOptions, true);
 
@@ -86,9 +86,9 @@ export function useGrid<TOptions>({
                 currGridRef.current = grid;
 
                 // Apply any pending options that came in while we were initializing
-                if (pendingOptionsRef.current) {
+                if (pendingOptionsRef.current !== void 0) {
                     grid.update(pendingOptionsRef.current, true);
-                    pendingOptionsRef.current = null;
+                    pendingOptionsRef.current = void 0;
                 }
 
                 callbackRef.current?.(grid);
@@ -115,6 +115,10 @@ export function useGrid<TOptions>({
 
     // Effect for options updates - separate from init
     useEffect(() => {
+        if (options === void 0) {
+            return;
+        }
+
         if (currGridRef.current) {
             // Grid exists, update it directly
             currGridRef.current.update(options, true);

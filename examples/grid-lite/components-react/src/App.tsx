@@ -15,32 +15,26 @@ function App() {
         city: ['New York', 'Oslo', 'Paris', 'Tokyo', 'London'],
         salary: [50000, 60000, 70000, 80000, 90000]
       }
-    },
-    caption: {
-      text: 'Grid Lite'
-    },
-    pagination: {
-      enabled: true,
-      pageSize: 3,
-      controls: {
-        pageSizeSelector: true,
-        pageButtons: true
-      }
     }
   });
-  const grid = useRef<GridRefHandle<GridOptions> | null>(null);
+  // const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
-  const onButtonClick = () => {
-    console.info('(ref) grid:', grid.current?.grid);
-  };
-  const onGridCallback = (grid: GridInstance<GridOptions>) => {
-    console.info('(callback) grid:', grid);
-  };
+  // const onButtonClick = () => {
+  //   console.info('(ref) grid:', grid.current?.grid);
+  // };
+  // const onGridCallback = (grid: GridInstance<GridOptions>) => {
+  //   console.info('(callback) grid:', grid);
+  // };
 
   return (
     <>
-      <Grid options={options} gridRef={grid} callback={onGridCallback} />
-      <button onClick={onButtonClick}>Click me</button>
+      <Grid
+        options={options}
+        // gridRef={grid}
+        // callback={onGridCallback} 
+      >
+      </Grid>
+      {/* <button onClick={onButtonClick}>Click me</button> */}
     </>
   );
 }

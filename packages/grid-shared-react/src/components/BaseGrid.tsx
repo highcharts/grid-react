@@ -31,7 +31,7 @@ export interface GridProps<TOptions> {
     /**
      * Grid configuration options
      */
-    options: TOptions;
+    options?: TOptions;
     /**
      * Optional ref to access the grid instance
      */
