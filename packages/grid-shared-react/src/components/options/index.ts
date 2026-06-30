@@ -9,3 +9,5 @@
 
 export { Caption } from './caption';
 export type { CaptionProps } from './caption';
+export { Description } from './description';
+export type { DescriptionProps } from './description';
