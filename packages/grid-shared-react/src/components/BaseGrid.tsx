@@ -33,7 +33,7 @@ export interface GridProps<TOptions> {
      */
     options?: TOptions;
     /**
-     * Optional React children rendered inside the Grid wrapper.
+     * Declarative option components (e.g. Caption) passed as children.
      */
     children?: ReactNode;
     /**
@@ -49,18 +49,17 @@ export interface GridProps<TOptions> {
 /**
  * Props for BaseGrid component
  */
-export interface BaseGridProps<TOptions> extends GridProps<TOptions> {
-    /**
-     * Grid instance (from @highcharts/grid-lite or @highcharts/grid-pro)
-     */
+export interface BaseGridProps<TOptions> {
+    options?: TOptions;
     Grid: GridType<TOptions>;
+    callback?: (grid: GridInstance<TOptions>) => void;
 }
 
 export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
     props: BaseGridProps<TOptions>,
     ref: ForwardedRef<GridRefHandle<TOptions>>
 ) {
-    const { options, Grid, callback, children } = props;
+    const { options, Grid, callback } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
     const currGridRef = useGrid({
@@ -80,10 +79,5 @@ export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
         []
     );
 
-    return (
-        <div>
-            {children}
-            <div ref={containerRef} />
-        </div>
-    );
+    return <div ref={containerRef} />;
 });

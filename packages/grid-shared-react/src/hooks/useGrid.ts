@@ -8,7 +8,6 @@
  */
 
 import { useEffect, RefObject, useRef } from 'react';
-import { BaseGridProps } from '../components/BaseGrid';
 
 /**
  * Interface describing the shape of a Grid instance returned by Grid.grid()
@@ -28,8 +27,11 @@ export interface GridType<TOptions> {
     grid(container: HTMLDivElement, options?: TOptions, async?: boolean): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
 }
 
-export interface UseGridOptions<TOptions> extends BaseGridProps<TOptions> {
+export interface UseGridOptions<TOptions> {
     containerRef: RefObject<HTMLDivElement | null>;
+    options?: TOptions;
+    Grid: GridType<TOptions>;
+    callback?: (grid: GridInstance<TOptions>) => void;
 }
 
 export function useGrid<TOptions>({

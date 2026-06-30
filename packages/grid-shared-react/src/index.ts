@@ -12,4 +12,7 @@ import { GridType, GridInstance } from './hooks/useGrid';
 import type { GridProps, GridRefHandle } from './components/BaseGrid';
 
 export { BaseGrid };
+export { Caption } from './components/options';
+export { getChildProps } from './utils/getChildProps';
+export type { CaptionProps } from './components/options';
 export type { GridType, GridInstance, GridProps, GridRefHandle };

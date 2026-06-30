@@ -7,15 +7,23 @@
  *
  */
 
+import { useMemo } from 'react';
 import {
     BaseGrid,
-    GridProps
+    GridProps,
+    getChildProps
 } from '@highcharts/grid-shared-react';
+import { merge } from '@highcharts/grid-pro/es-modules/Shared/Utilities.js';
 import Grid from '@highcharts/grid-pro/es-modules/masters/grid-pro.src';
 import '@highcharts/grid-pro/css/grid-pro.css';
 import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
 
 export default function GridPro(props: GridProps<Options>) {
-    const { gridRef, ...gridProps } = props;
-    return <BaseGrid {...gridProps} Grid={Grid} ref={gridRef} />;
+    const { gridRef, children, options, ...gridProps } = props;
+    const gridOptions = useMemo(
+        () => merge(getChildProps(children), options ?? {}) as Options,
+        [children, options]
+    );
+
+    return <BaseGrid {...gridProps} options={gridOptions} Grid={Grid} ref={gridRef} />;
 }

@@ -1,9 +1,10 @@
 import { useState, useRef } from 'react';
 import {
-  // type GridInstance,
+  type GridInstance,
   // type GridRefHandle,
   type GridOptions,
-  Grid
+  Grid,
+  Caption
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -11,10 +12,11 @@ function App() {
 
   const onButtonClick = () => {
     console.info('(ref) grid:', grid.current?.grid);
-  };
+  }; */
+
   const onGridCallback = (grid: GridInstance<GridOptions>) => {
     console.info('(callback) grid:', grid);
-  };*/
+  };
 
   const [options] = useState<GridOptions>({
     dataTable: {
@@ -32,10 +34,9 @@ function App() {
       <Grid
         options={options}
         // gridRef={grid}
-        // callback={onGridCallback} 
+        callback={onGridCallback} 
       >
-        <div>Whatever</div>
-        {/* <Caption>Grid Caption</Caption> */}
+        <Caption>Grid Caption</Caption>
         {/* <Description>Grid Description</Description>
         <DataTable>
           <Column>
