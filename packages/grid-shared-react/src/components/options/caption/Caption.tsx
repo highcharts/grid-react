@@ -21,8 +21,7 @@ export interface CaptionProps {
     children?: ReactNode;
 }
 
-export function Caption(_props: CaptionProps): null;
-export function Caption(): null {
+export function Caption(_props: CaptionProps) {
     return null;
 }
 

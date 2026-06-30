@@ -17,6 +17,9 @@ export default defineConfig(
         },
         rules: {
             'curly': ['error', 'all'],
+            '@typescript-eslint/no-unused-vars': ['error', {
+                argsIgnorePattern: '^_'
+            }],
             '@stylistic/semi': ['error', 'always'],
             '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
             '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
