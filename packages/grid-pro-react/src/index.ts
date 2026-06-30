@@ -11,6 +11,15 @@ import GridPro from '@highcharts/grid-pro';
 
 export { default as Grid } from './Grid';
 export { default as GridPro } from './Grid';
-export { Caption } from '@highcharts/grid-shared-react';
-export type { GridInstance, GridRefHandle, CaptionProps } from '@highcharts/grid-shared-react';
+export { Caption, Data } from '@highcharts/grid-shared-react';
+export { DataTable, DataConnector } from '@highcharts/grid-pro';
+export { merge } from '@highcharts/grid-pro/es-modules/Shared/Utilities.js';
+export type {
+    GridInstance,
+    GridRefHandle,
+    CaptionProps,
+    DataProps,
+    DataColumns,
+    DataColumnValue
+} from '@highcharts/grid-shared-react';
 export type GridOptions = GridPro.Options;

@@ -9,3 +9,5 @@
 
 export { Caption } from './caption';
 export type { CaptionProps } from './caption';
+export { Data } from './data/Data';
+export type { DataProps, DataColumns, DataColumnValue } from './data/Data';
