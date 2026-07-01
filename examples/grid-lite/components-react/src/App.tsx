@@ -8,7 +8,8 @@ import {
   Data,
   DataTable,
   Columns,
-  Column
+  Column,
+  Description
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -132,7 +133,7 @@ function App() {
             />
           </Columns>
         </Data>
-        {/* <Description>Grid Description</Description> */}
+        <Description>Grid Description</Description>
         {/* <Pagination>Grid Pagination</Pagination> */}
       </Grid>
       <button onClick={onButtonClick}>Click me</button>

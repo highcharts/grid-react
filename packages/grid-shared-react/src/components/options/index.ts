@@ -21,3 +21,5 @@ export type {
     ColumnSortingOrder,
     CellValueGetterContext
 } from './columns/columnProps';
+export { Description } from './description';
+export type { DescriptionProps } from './description';

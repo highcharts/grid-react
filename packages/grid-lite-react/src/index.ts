@@ -11,13 +11,14 @@ import GridLite from '@highcharts/grid-lite';
 
 export { default as Grid } from './Grid';
 export { default as GridLite } from './Grid';
-export { Caption, Data, Columns, Column } from '@highcharts/grid-shared-react';
+export { Caption, Data, Columns, Column, Description } from '@highcharts/grid-shared-react';
 export { DataTable, DataConnector } from '@highcharts/grid-lite';
 export { merge } from '@highcharts/grid-lite/es-modules/Shared/Utilities.js';
 export type {
     GridInstance,
     GridRefHandle,
     CaptionProps,
+    DescriptionProps,
     DataProps,
     DataColumns,
     DataColumnValue,
