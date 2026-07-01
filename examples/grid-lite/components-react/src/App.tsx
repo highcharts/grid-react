@@ -1,21 +1,19 @@
 import { useState, useRef } from 'react';
 import {
   type GridInstance,
-  // type GridRefHandle,
+  type GridRefHandle,
   type GridOptions,
   Grid,
-  Caption
+  Caption,
+  Description
 } from '@highcharts/grid-lite-react';
 
 function App() {
-  /* const grid = useRef<GridRefHandle<GridOptions> | null>(null);
-
-  const onButtonClick = () => {
-    console.info('(ref) grid:', grid.current?.grid);
-  }; */
-
-  const onGridCallback = (grid: GridInstance<GridOptions>) => {
-    console.info('(callback) grid:', grid);
+  // const grid = useRef<GridRefHandle<GridOptions> | null>(null);
+  const [description, setDescription] = useState<string>('Grid Description');
+  const onSetDescriptionClick = () => {
+    setDescription('This is a new description');
+    // console.info('(ref) grid:', grid.current?.grid);
   };
 
   const [options] = useState<GridOptions>({
@@ -34,11 +32,11 @@ function App() {
       <Grid
         options={options}
         // gridRef={grid}
-        callback={onGridCallback} 
+        // callback={(grid) => console.info('(callback) grid:', grid)} 
       >
         <Caption>Grid Caption</Caption>
-        {/* <Description>Grid Description</Description>
-        <DataTable>
+        <Description>{description}</Description>
+        { /* <DataTable>
           <Column>
             <Header>Grid Header</Header>
             <Cell>Grid Cell</Cell>
@@ -46,7 +44,7 @@ function App() {
         </DataTable> */}
         {/* <Pagination>Grid Pagination</Pagination> */}
       </Grid>
-      {/* <button onClick={onButtonClick}>Click me</button> */}
+      <button onClick={onSetDescriptionClick}>Set new description</button>
     </>
   );
 }
