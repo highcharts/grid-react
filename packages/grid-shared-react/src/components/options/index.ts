@@ -11,3 +11,13 @@ export { Caption } from './caption';
 export type { CaptionProps } from './caption';
 export { Data } from './data/Data';
 export type { DataProps, DataColumns, DataColumnValue } from './data/Data';
+export { Columns } from './columns/Columns';
+export { Column } from './columns/Column';
+export type {
+    ColumnsProps,
+    ColumnProps,
+    ColumnOptionsProps,
+    ColumnDataType,
+    ColumnSortingOrder,
+    CellValueGetterContext
+} from './columns/columnProps';

@@ -10,6 +10,14 @@ export default defineConfig({
   resolve: {
     alias: [
       {
+        find: '@highcharts/grid-lite-react',
+        replacement: resolve(__dirname, '../../../packages/grid-lite-react/src/index.ts')
+      },
+      {
+        find: '@highcharts/grid-shared-react',
+        replacement: resolve(__dirname, '../../../packages/grid-shared-react/src/index.ts')
+      },
+      {
         find: /^@highcharts\/grid-lite(\/.*)?$/,
         replacement: resolve(__dirname, 'node_modules/@highcharts/grid-lite$1')
       }

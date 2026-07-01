@@ -22,6 +22,10 @@ export interface BaseGridOptions {
     childOption?: string;
     defaultOptions?: Record<string, unknown>;
     isArrayType?: boolean;
+    /**
+     * Special parsing role for column-related components.
+     */
+    role?: 'columnsContainer' | 'column';
 }
 
 /**

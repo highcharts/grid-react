@@ -7,8 +7,9 @@
  *
  */
 
-import { isValidElement, ReactElement, ReactNode } from 'react';
+import { Fragment, isValidElement, ReactElement, ReactNode } from 'react';
 import type { BaseGridOptionsComponent, BaseGridOptions } from '../components/BaseGridOptions';
+import { normalizeColumnOptions } from './mappers/columnOptions';
 
 function objInsert(
     obj: Record<string, unknown>,
@@ -75,6 +76,22 @@ function renderChildren(children: ReactNode): string {
     return '';
 }
 
+function flattenChildren(childNodes: ReactNode): ReactNode[] {
+    if (childNodes == null || childNodes === false) {
+        return [];
+    }
+
+    if (Array.isArray(childNodes)) {
+        return childNodes.flatMap((child) => flattenChildren(child));
+    }
+
+    if (isReactElement(childNodes) && childNodes.type === Fragment) {
+        return flattenChildren((childNodes.props as { children?: ReactNode }).children);
+    }
+
+    return [childNodes];
+}
+
 function getEffectiveMeta(
     component: BaseGridOptionsComponent,
     parentMeta?: BaseGridOptions
@@ -96,11 +113,48 @@ function getEffectiveMeta(
     };
 }
 
+function parseColumnElement(child: ReactElement): Record<string, unknown> {
+    const { children: _ignored, columnId, id: _cssId, ...props } = getChildPropsFromElement(child);
+    const options = normalizeColumnOptions(props);
+
+    // columnId selects the column; Core expects the same value as `id`.
+    if (columnId !== void 0) {
+        options.id = columnId;
+    }
+
+    return options;
+}
+
+function pushColumn(
+    optionsFromChildren: Record<string, unknown>,
+    child: ReactElement
+): void {
+    const columns = (optionsFromChildren.columns ?? (
+        optionsFromChildren.columns = []
+    )) as Record<string, unknown>[];
+
+    columns.push(parseColumnElement(child));
+}
+
 export function getChildProps(children: ReactNode): Record<string, unknown> {
     const optionsFromChildren: Record<string, unknown> = {};
-    const resolvedChildren = (Array.isArray(children) ? children.flat() : [children])
+    const resolvedChildren = flattenChildren(children)
         .map((child) => resolveOptionChild(child))
         .filter((child): child is ReactElement => child !== null);
+
+    function handleDataChildren(childNodes: ReactNode): void {
+        for (const node of flattenChildren(childNodes)) {
+            if (!isReactElement(node)) {
+                continue;
+            }
+
+            const role = getOptionComponent(node.type)?._GridReact.role;
+
+            if (role === 'columnsContainer' || role === 'column') {
+                handleChild(node);
+            }
+        }
+    }
 
     function handleChildren(
         childNodes: ReactNode,
@@ -146,7 +200,36 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
 
         const meta = getEffectiveMeta(component, parentMeta);
 
-        if (!meta.gridOption) {
+        if (!meta.gridOption && meta.role !== 'columnsContainer') {
+            return;
+        }
+
+        const childProps = getChildPropsFromElement(child);
+        const { children: childChildren, ...props } = childProps;
+
+        if (meta.role === 'columnsContainer') {
+            optionsFromChildren.columnDefaults = normalizeColumnOptions(props);
+
+            for (const node of flattenChildren(childChildren as ReactNode)) {
+                if (isReactElement(node) && getOptionComponent(node.type)?._GridReact.role === 'column') {
+                    pushColumn(optionsFromChildren, node);
+                }
+            }
+            return;
+        }
+
+        if (meta.role === 'column') {
+            pushColumn(optionsFromChildren, child);
+            return;
+        }
+
+        if (meta.gridOption === 'data') {
+            const dataOptions = (optionsFromChildren.data ?? (
+                optionsFromChildren.data = {}
+            )) as Record<string, unknown>;
+
+            Object.assign(dataOptions, props);
+            handleDataChildren(childChildren as ReactNode);
             return;
         }
 
@@ -155,8 +238,6 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         );
         const parentIsArray = Array.isArray(optionParent);
         const insertInto = parentIsArray ? {} : optionParent as Record<string, unknown>;
-        const childProps = getChildPropsFromElement(child);
-        const { children: childChildren, ...props } = childProps;
 
         if (meta.defaultOptions) {
             Object.assign(insertInto, meta.defaultOptions);
@@ -181,7 +262,32 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         handleChild(child);
     }
 
+    applyDeclarativeColumnDefaults(optionsFromChildren);
+
     return optionsFromChildren;
+}
+
+/**
+ * When declarative `<Column>` components are present, only those columns
+ * should render unless `data.autogenerateColumns` is set explicitly on `<Data>`.
+ */
+function applyDeclarativeColumnDefaults(
+    optionsFromChildren: Record<string, unknown>
+): void {
+    const columns = optionsFromChildren.columns;
+
+    if (!Array.isArray(columns) || columns.length === 0) {
+        return;
+    }
+
+    const data = isObject(optionsFromChildren.data) ?
+        { ...optionsFromChildren.data } :
+        {};
+
+    if (!('autogenerateColumns' in data)) {
+        data.autogenerateColumns = false;
+        optionsFromChildren.data = data;
+    }
 }
 
 function isOptionElement(child: ReactElement): boolean {

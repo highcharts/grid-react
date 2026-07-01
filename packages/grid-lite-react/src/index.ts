@@ -11,7 +11,7 @@ import GridLite from '@highcharts/grid-lite';
 
 export { default as Grid } from './Grid';
 export { default as GridLite } from './Grid';
-export { Caption, Data } from '@highcharts/grid-shared-react';
+export { Caption, Data, Columns, Column } from '@highcharts/grid-shared-react';
 export { DataTable, DataConnector } from '@highcharts/grid-lite';
 export { merge } from '@highcharts/grid-lite/es-modules/Shared/Utilities.js';
 export type {
@@ -20,6 +20,12 @@ export type {
     CaptionProps,
     DataProps,
     DataColumns,
-    DataColumnValue
+    DataColumnValue,
+    ColumnsProps,
+    ColumnProps,
+    ColumnOptionsProps,
+    ColumnDataType,
+    ColumnSortingOrder,
+    CellValueGetterContext
 } from '@highcharts/grid-shared-react';
 export type GridOptions = GridLite.Options;
