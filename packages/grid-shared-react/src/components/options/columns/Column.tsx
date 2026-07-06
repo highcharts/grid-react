@@ -16,6 +16,5 @@ export function Column(_props: ColumnProps) {
 Column._GridReact = {
     type: 'Grid_Option',
     gridOption: 'columns',
-    role: 'column',
     isArrayType: true
 };

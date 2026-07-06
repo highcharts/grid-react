@@ -7,9 +7,9 @@
  *
  */
 
-import type { ColumnDefaultsProps } from './columnProps';
+import type { ColumnOptionsProps } from './columnProps';
 
-export function ColumnDefaults(_props: ColumnDefaultsProps) {
+export function ColumnDefaults(_props: ColumnOptionsProps) {
     return null;
 }
 

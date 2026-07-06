@@ -142,20 +142,6 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         .map((child) => resolveOptionChild(child))
         .filter((child): child is ReactElement => child !== null);
 
-    function handleDataChildren(childNodes: ReactNode): void {
-        for (const node of flattenChildren(childNodes)) {
-            if (!isReactElement(node)) {
-                continue;
-            }
-
-            const role = getOptionComponent(node.type)?._GridReact.role;
-
-            if (role === 'columnsContainer' || role === 'column') {
-                handleChild(node);
-            }
-        }
-    }
-
     function handleChildren(
         childNodes: ReactNode,
         obj: Record<string, unknown>,
@@ -200,36 +186,20 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
 
         const meta = getEffectiveMeta(component, parentMeta);
 
-        if (!meta.gridOption && meta.role !== 'columnsContainer') {
+        if (!meta.gridOption) {
             return;
         }
 
         const childProps = getChildPropsFromElement(child);
         const { children: childChildren, ...props } = childProps;
 
-        if (meta.role === 'columnsContainer') {
+        if (meta.gridOption === 'columnDefaults') {
             optionsFromChildren.columnDefaults = normalizeColumnOptions(props);
-
-            for (const node of flattenChildren(childChildren as ReactNode)) {
-                if (isReactElement(node) && getOptionComponent(node.type)?._GridReact.role === 'column') {
-                    pushColumn(optionsFromChildren, node);
-                }
-            }
             return;
         }
 
-        if (meta.role === 'column') {
+        if (meta.gridOption === 'columns') {
             pushColumn(optionsFromChildren, child);
-            return;
-        }
-
-        if (meta.gridOption === 'data') {
-            const dataOptions = (optionsFromChildren.data ?? (
-                optionsFromChildren.data = {}
-            )) as Record<string, unknown>;
-
-            Object.assign(dataOptions, props);
-            handleDataChildren(childChildren as ReactNode);
             return;
         }
 

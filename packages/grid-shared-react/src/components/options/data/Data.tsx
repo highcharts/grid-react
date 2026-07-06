@@ -7,8 +7,6 @@
  *
  */
 
-import type { ReactNode } from 'react';
-
 export type DataColumnValue = boolean | null | number | string | undefined;
 
 export type DataColumns = Record<string, Array<DataColumnValue>>;
@@ -24,9 +22,9 @@ export interface DataProps {
      * Whether columns should be generated automatically from data source
      * column ids.
      *
-     * Defaults to `true`. When declarative `<Column>` children are used
-     * inside nested `<Columns>`, the React wrapper sets this to `false`
-     * unless you pass this prop explicitly.
+     * Defaults to `true`. When declarative `<Column>` components are used,
+     * the React wrapper sets this to `false` unless you pass this prop
+     * explicitly.
      *
      * @default true
      */
@@ -53,11 +51,6 @@ export interface DataProps {
      * The column ID that contains the stable, unique row IDs.
      */
     idColumn?: string;
-    /**
-     * Column configuration. Use `<Columns>` with `<Column>` children to
-     * define which data fields are shown and how they are rendered.
-     */
-    children?: ReactNode;
 }
 
 export function Data(_props: DataProps) {

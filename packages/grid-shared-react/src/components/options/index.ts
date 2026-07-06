@@ -11,10 +11,9 @@ export { Caption } from './caption';
 export type { CaptionProps } from './caption';
 export { Data } from './data/Data';
 export type { DataProps, DataColumns, DataColumnValue } from './data/Data';
-export { Columns } from './columns/Columns';
+export { ColumnDefaults } from './columns/ColumnDefaults';
 export { Column } from './columns/Column';
 export type {
-    ColumnsProps,
     ColumnProps,
     ColumnOptionsProps,
     ColumnDataType,

@@ -7,8 +7,6 @@
  *
  */
 
-import type { ReactNode } from 'react';
-
 export type ColumnDataType = 'string' | 'number' | 'boolean' | 'datetime';
 
 export type ColumnSortingOrder = 'asc' | 'desc' | null;
@@ -59,18 +57,14 @@ export interface ColumnOptionsProps {
     exportable?: boolean;
 }
 
-export type ColumnsProps = ColumnOptionsProps & {
-    children?: ReactNode;
-};
-
 export interface ColumnProps extends ColumnOptionsProps {
     /**
      * HTML `id` attribute for styling hooks. Not passed to Grid options.
      */
     id?: string;
     /**
-     * References the column to configure (data field id) and applies the
-     * nested options from this element — header, cells, sorting, filtering, etc.
+     * References the column to configure (data field id). Maps header, cells,
+     * sorting, filtering, etc. to Grid Core column options.
      *
      * Becomes `options.columns[].id` in Grid Core (same identifier).
      */
