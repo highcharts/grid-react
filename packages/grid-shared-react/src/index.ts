@@ -12,7 +12,7 @@ import { GridType, GridInstance } from './hooks/useGrid';
 import type { GridProps, GridRefHandle } from './components/BaseGrid';
 
 export { BaseGrid };
-export { Caption, Data, ColumnDefaults, Column, Description } from './components/options';
+export { Caption, Data, ColumnDefaults, Column, Description, Pagination } from './components/options';
 export { getChildProps } from './utils/getChildProps';
 export type {
     CaptionProps,
@@ -24,6 +24,7 @@ export type {
     ColumnOptionsProps,
     ColumnDataType,
     ColumnSortingOrder,
-    CellValueGetterContext
+    CellValueGetterContext,
+    PaginationProps
 } from './components/options';
 export type { GridType, GridInstance, GridProps, GridRefHandle };

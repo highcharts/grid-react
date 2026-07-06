@@ -22,3 +22,5 @@ export type {
 } from './columns/columnProps';
 export { Description } from './description';
 export type { DescriptionProps } from './description';
+export { Pagination } from './pagination';
+export type { PaginationProps } from './pagination';

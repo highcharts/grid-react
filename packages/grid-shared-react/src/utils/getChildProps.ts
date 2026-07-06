@@ -9,7 +9,8 @@
 
 import { Fragment, isValidElement, ReactElement, ReactNode } from 'react';
 import type { BaseGridOptionsComponent, BaseGridOptions } from '../components/BaseGridOptions';
-import { normalizeColumnOptions } from './mappers/columnOptions';
+import { normalizeColumnOptions } from './mappers/column';
+import { normalizePaginationOptions } from './mappers/pagination';
 
 function objInsert(
     obj: Record<string, unknown>,
@@ -200,6 +201,11 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
 
         if (meta.gridOption === 'columns') {
             pushColumn(optionsFromChildren, child);
+            return;
+        }
+
+        if (meta.gridOption === 'pagination') {
+            optionsFromChildren.pagination = normalizePaginationOptions(props);
             return;
         }
 

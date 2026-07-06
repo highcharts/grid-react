@@ -7,7 +7,7 @@
  *
  */
 
-import { mapPrefixedProps } from './mapPrefixedProps';
+import { mapPrefixedProps } from '../mapPrefixedProps';
 
 /** Flat prop prefix → nested Grid option key for columns. */
 const COLUMN_PROP_PREFIXES = {

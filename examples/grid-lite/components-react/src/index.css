@@ -18,9 +18,16 @@ body {
   padding: 20px;
 }
 
+#controls {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+}
+
 @media (prefers-color-scheme: dark) {
   body {
     background-color: #121212;
     color: #ffffff;
   }
 }
+
