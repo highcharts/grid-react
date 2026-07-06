@@ -9,8 +9,6 @@
 
 import type { PaginationProps } from './paginationProps';
 
-export type { PaginationProps } from './paginationProps';
-
 export function Pagination(_props: PaginationProps) {
     return null;
 }
