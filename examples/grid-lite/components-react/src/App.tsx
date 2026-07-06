@@ -7,11 +7,7 @@ import {
   Caption,
   Data,
   DataTable,
-<<<<<<< HEAD
-  Columns,
-=======
   ColumnDefaults,
->>>>>>> 868635b (Refactored Columsn and Data options.)
   Column,
   Description
 } from '@highcharts/grid-lite-react';
