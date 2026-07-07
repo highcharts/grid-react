@@ -10,7 +10,8 @@ import {
   ColumnDefaults,
   Column,
   Description,
-  Pagination
+  Pagination,
+  Header
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -98,6 +99,13 @@ function App() {
           cellRowHeader={false}
         />
         <Caption>Grid Caption v2.1</Caption>
+        <Header header={[
+          'name',
+          {
+            format: 'Details',
+            columns: ['age', 'city', 'salary']
+          }
+        ]} />
         <Column
           headerFormat="#"
           width={40}

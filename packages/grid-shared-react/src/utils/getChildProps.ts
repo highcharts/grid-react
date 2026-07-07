@@ -209,6 +209,15 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
             return;
         }
 
+        if (meta.gridOption === 'header') {
+            const { header, children: _ignored } = props;
+
+            if (header !== void 0) {
+                optionsFromChildren.header = header;
+            }
+            return;
+        }
+
         const optionParent = optionsFromChildren[meta.gridOption] ?? (
             optionsFromChildren[meta.gridOption] = meta.isArrayType ? [] : {}
         );
