@@ -33,6 +33,14 @@ export interface GridProps<TOptions> {
      */
     options?: TOptions;
     /**
+     * Optional CSS class name applied to the root grid container.
+     */
+    className?: string;
+    /**
+     * Optional theme name passed to Grid Core.
+     */
+    theme?: string;
+    /**
      * Declarative option components (e.g. Caption) passed as children.
      */
     children?: ReactNode;
@@ -53,13 +61,14 @@ export interface BaseGridProps<TOptions> {
     options?: TOptions;
     Grid: GridType<TOptions>;
     callback?: (grid: GridInstance<TOptions>) => void;
+    className?: string;
 }
 
 export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
     props: BaseGridProps<TOptions>,
     ref: ForwardedRef<GridRefHandle<TOptions>>
 ) {
-    const { options, Grid, callback } = props;
+    const { options, Grid, callback, className } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
     const currGridRef = useGrid({
@@ -79,5 +88,5 @@ export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
         []
     );
 
-    return <div ref={containerRef} />;
+    return <div ref={containerRef} className={className} />;
 });

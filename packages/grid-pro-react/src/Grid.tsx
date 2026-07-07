@@ -19,7 +19,7 @@ import '@highcharts/grid-pro/css/grid-pro.css';
 import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
 
 export default function GridPro(props: GridProps<Options>) {
-    const { gridRef, children, options, ...gridProps } = props;
+    const { gridRef, children, options, theme, ...gridProps } = props;
     const childOptions = useMemo(() => getChildProps(children), [children]);
     const columnKey = useMemo(() => {
         const columns = childOptions.columns as Array<{ id?: string }> | undefined;
@@ -27,8 +27,12 @@ export default function GridPro(props: GridProps<Options>) {
         return columns?.map((column) => column.id).join('\0') ?? '';
     }, [childOptions]);
     const gridOptions = useMemo(
-        () => merge(childOptions, options ?? {}) as Options,
-        [childOptions, options]
+        () => merge(
+            childOptions,
+            options ?? {},
+            theme ? { rendering: { theme } } : {}
+        ) as Options,
+        [childOptions, options, theme]
     );
 
     return (
