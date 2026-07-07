@@ -20,10 +20,24 @@ import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options'
 
 export default function GridPro(props: GridProps<Options>) {
     const { gridRef, children, options, ...gridProps } = props;
+    const childOptions = useMemo(() => getChildProps(children), [children]);
+    const columnKey = useMemo(() => {
+        const columns = childOptions.columns as Array<{ id?: string }> | undefined;
+
+        return columns?.map((column) => column.id).join('\0') ?? '';
+    }, [childOptions]);
     const gridOptions = useMemo(
-        () => merge(getChildProps(children), options ?? {}) as Options,
-        [children, options]
+        () => merge(childOptions, options ?? {}) as Options,
+        [childOptions, options]
     );
 
-    return <BaseGrid {...gridProps} options={gridOptions} Grid={Grid} ref={gridRef} />;
+    return (
+        <BaseGrid
+            key={columnKey}
+            {...gridProps}
+            options={gridOptions}
+            Grid={Grid}
+            ref={gridRef}
+        />
+    );
 }

@@ -14,7 +14,7 @@ import { useEffect, RefObject, useRef } from 'react';
  */
 export interface GridInstance<TOptions> {
     destroy(): void;
-    update(options: TOptions, redraw?: boolean): void;
+    update(options: TOptions, redraw?: boolean, oneToOne?: boolean): void;
 }
 
 /**
@@ -89,7 +89,7 @@ export function useGrid<TOptions>({
 
                 // Apply any pending options that came in while we were initializing
                 if (pendingOptionsRef.current !== void 0) {
-                    grid.update(pendingOptionsRef.current, true);
+                    grid.update(pendingOptionsRef.current, true, true);
                     pendingOptionsRef.current = void 0;
                 }
 
@@ -122,8 +122,8 @@ export function useGrid<TOptions>({
         }
 
         if (currGridRef.current) {
-            // Grid exists, update it directly
-            currGridRef.current.update(options, true);
+            // Declarative React options replace the previous snapshot (oneToOne).
+            currGridRef.current.update(options, true, true);
         } else {
             // Grid still initializing, queue the update
             pendingOptionsRef.current = options;
