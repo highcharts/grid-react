@@ -33,7 +33,8 @@ export interface GridProps<TOptions> {
      */
     options?: TOptions;
     /**
-     * Optional CSS class name applied to the root grid container.
+     * Optional CSS class names applied on the Grid container (`hcg-container`),
+     * merged with `theme` into `rendering.theme`.
      */
     className?: string;
     /**

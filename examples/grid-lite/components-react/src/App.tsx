@@ -75,7 +75,7 @@ function App() {
         <Grid
           // options={options}
           // gridRef={grid}
-          theme="myTheme m-8"
+          theme="myTheme"
           callback={onGridCallback}
           className="border border-slate-300 rounded-md bg-slate-100"
         >
@@ -90,10 +90,10 @@ function App() {
             style={{ fontWeight: '400' }}
             sortingEnabled
             sortingOrderSequence={['asc', 'desc', null]}
-            filteringEnabled
-            filteringInline={true}
-            filteringCondition="contains"
-            filteringValue=""
+            // filteringEnabled
+            // filteringInline={true}
+            // filteringCondition="contains"
+            // filteringValue=""
             // headerClassName="demo-header-cell"
             headerFormat="{id}"
             // cellClassName="demo-body-cell"
@@ -101,8 +101,8 @@ function App() {
             cellRowHeader={false}
           />
           <Caption
-            className="text-lg font-bold"
-          >Grid Caption v2.1</Caption>
+            className="p-4 bg-blue-500 text-white text-lg font-bold"
+          >Grid styled by Tailwind CSS</Caption>
           <Header header={[
             'name',
             {
@@ -164,7 +164,7 @@ function App() {
             cellFormat="${value}"
           />
           <Description
-            // className="demo-description"
+            className="p-4 bg-red-500 text-white text-sm"
           >Grid Description</Description>
           <Pagination
             // enabled={paginationEnabled}

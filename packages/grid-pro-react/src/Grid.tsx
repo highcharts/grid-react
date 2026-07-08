@@ -19,20 +19,24 @@ import '@highcharts/grid-pro/css/grid-pro.css';
 import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
 
 export default function GridPro(props: GridProps<Options>) {
-    const { gridRef, children, options, theme, ...gridProps } = props;
+    const { gridRef, children, options, theme, className, ...gridProps } = props;
     const childOptions = useMemo(() => getChildProps(children), [children]);
     const columnKey = useMemo(() => {
         const columns = childOptions.columns as Array<{ id?: string }> | undefined;
 
         return columns?.map((column) => column.id).join('\0') ?? '';
     }, [childOptions]);
+    const containerTheme = useMemo(
+        () => [theme, className].filter(Boolean).join(' ') || void 0,
+        [theme, className]
+    );
     const gridOptions = useMemo(
         () => merge(
             childOptions,
             options ?? {},
-            theme ? { rendering: { theme } } : {}
+            containerTheme ? { rendering: { theme: containerTheme } } : {}
         ) as Options,
-        [childOptions, options, theme]
+        [childOptions, options, containerTheme]
     );
 
     return (
