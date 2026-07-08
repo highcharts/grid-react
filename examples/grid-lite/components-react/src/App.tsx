@@ -9,7 +9,9 @@ import {
   DataTable,
   ColumnDefaults,
   Column,
-  Description
+  Description,
+  Pagination,
+  Header
 } from '@highcharts/grid-lite-react';
 
 function App() {
@@ -61,6 +63,13 @@ function App() {
     console.info('(callback) grid:', grid);
   };
 
+  // Pagination
+  // const [paginationEnabled, setPaginationEnabled] = useState(false);
+
+  // const onPaginationClick = () => {
+  //   setPaginationEnabled(true);
+  // };
+
   return (
     <>
       <Grid
@@ -90,6 +99,13 @@ function App() {
           cellRowHeader={false}
         />
         <Caption>Grid Caption v2.1</Caption>
+        <Header header={[
+          'name',
+          {
+            format: 'Details',
+            columns: ['age', 'city', 'salary']
+          }
+        ]} />
         <Column
           headerFormat="#"
           width={40}
@@ -132,9 +148,24 @@ function App() {
           cellFormat="${value}"
         />
         <Description>Grid Description</Description>
-        {/* <Pagination>Grid Pagination</Pagination> */}
+        <Pagination
+          // enabled={paginationEnabled}
+          page={1}
+          pageSize={3}
+          align="right"
+          // pageInfo
+          // pageSizeSelector
+          pageSizeOptions={[3, 5, 10, 25]}
+          // pageButtons
+          pageButtonsCount={5}
+          // firstLast
+          // previousNext
+        />
       </Grid>
-      <button onClick={onButtonClick}>Click me</button>
+      <div id="controls">
+        <button onClick={onButtonClick}>Data state</button>
+        {/* <button onClick={onPaginationClick}>Pagination</button> */}
+      </div>
     </>
   );
 }
