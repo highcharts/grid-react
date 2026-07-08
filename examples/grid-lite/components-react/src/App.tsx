@@ -77,6 +77,19 @@ function App() {
         // gridRef={grid}
         callback={onGridCallback}
       >
+        {/* <Pagination
+          // enabled={paginationEnabled}
+          page={1}
+          pageSize={3}
+          align="right"
+          // pageInfo
+          // pageSizeSelector
+          pageSizeOptions={[3, 5, 10, 25]}
+          // pageButtons
+          pageButtonsCount={5}
+          // firstLast
+          // previousNext
+        /> */}
         <Data
           // dataTable={dataTable}
           columns={dataSource}
