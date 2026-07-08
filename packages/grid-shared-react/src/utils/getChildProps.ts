@@ -142,6 +142,7 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
     const resolvedChildren = flattenChildren(children)
         .map((child) => resolveOptionChild(child))
         .filter((child): child is ReactElement => child !== null);
+    const firstNonPaginationIndex = getFirstNonPaginationIndex(resolvedChildren);
 
     function handleChildren(
         childNodes: ReactNode,
@@ -205,7 +206,13 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         }
 
         if (meta.gridOption === 'pagination') {
-            optionsFromChildren.pagination = normalizePaginationOptions(props);
+            const pagination = normalizePaginationOptions(props);
+            pagination.position = isTopPaginationChild(
+                child,
+                resolvedChildren,
+                firstNonPaginationIndex
+            ) ? 'top' : 'bottom';
+            optionsFromChildren.pagination = pagination;
             return;
         }
 
@@ -273,6 +280,32 @@ function applyDeclarativeColumnDefaults(
         data.autogenerateColumns = false;
         optionsFromChildren.data = data;
     }
+}
+
+function getFirstNonPaginationIndex(children: ReactElement[]): number {
+    return children.findIndex((child) => {
+        const component = getOptionComponent(child.type);
+
+        return component?._GridReact.gridOption !== 'pagination';
+    });
+}
+
+function isTopPaginationChild(
+    child: ReactElement,
+    children: ReactElement[],
+    firstNonPaginationIndex: number
+): boolean {
+    const childIndex = children.indexOf(child);
+
+    if (childIndex === -1) {
+        return false;
+    }
+
+    if (firstNonPaginationIndex === -1) {
+        return true;
+    }
+
+    return childIndex < firstNonPaginationIndex;
 }
 
 function isOptionElement(child: ReactElement): boolean {
