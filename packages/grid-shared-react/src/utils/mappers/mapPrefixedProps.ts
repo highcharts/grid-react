@@ -27,11 +27,15 @@ export function mapPrefixedProps(
 ): Record<string, unknown> {
     const result = { ...props };
     const groups: Record<string, Record<string, unknown>> = {};
-    const prefixes = Object.keys(prefixToGroup).sort((a, b) => b.length - a.length);
+    const prefixes = Object.keys(prefixToGroup)
+        .sort((a, b) => b.length - a.length);
 
     for (const flatKey of Object.keys(result)) {
         const prefix = prefixes.find(
-            (candidate) => flatKey.startsWith(candidate) && flatKey.length > candidate.length
+            (candidate) => (
+                flatKey.startsWith(candidate)
+                && flatKey.length > candidate.length
+            )
         );
 
         if (!prefix) {

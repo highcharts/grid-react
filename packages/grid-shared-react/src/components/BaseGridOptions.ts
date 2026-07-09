@@ -8,7 +8,8 @@
  */
 
 /**
- * Metadata attached to declarative option components rendered as BaseGrid children.
+ * Metadata attached to declarative option components
+ * rendered as BaseGrid children.
  */
 export interface BaseGridOptions {
     type: 'Grid_Option';
@@ -25,7 +26,8 @@ export interface BaseGridOptions {
 }
 
 /**
- * A React component that maps JSX props to a Grid options path via `_GridReact`.
+ * A React component that maps JSX props to a Grid options path
+ * via `_GridReact`.
  */
 export interface BaseGridOptionsComponent {
     _GridReact: BaseGridOptions;

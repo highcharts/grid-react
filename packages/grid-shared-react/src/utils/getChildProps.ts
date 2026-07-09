@@ -59,7 +59,9 @@ function getOptionComponent(type: unknown): BaseGridOptionsComponent | null {
     return component._GridReact ? type as BaseGridOptionsComponent : null;
 }
 
-function getChildPropsFromElement(child: ReactElement): Record<string, unknown> {
+function getChildPropsFromElement(
+    child: ReactElement
+): Record<string, unknown> {
     return (child.props ?? {}) as Record<string, unknown>;
 }
 
@@ -87,7 +89,8 @@ function flattenChildren(childNodes: ReactNode): ReactNode[] {
     }
 
     if (isReactElement(childNodes) && childNodes.type === Fragment) {
-        return flattenChildren((childNodes.props as { children?: ReactNode }).children);
+        const fragmentProps = childNodes.props as { children?: ReactNode };
+        return flattenChildren(fragmentProps.children);
     }
 
     return [childNodes];
@@ -115,7 +118,15 @@ function getEffectiveMeta(
 }
 
 function parseColumnElement(child: ReactElement): Record<string, unknown> {
-    const { children: _ignored, columnId, id: _cssId, ...props } = getChildPropsFromElement(child);
+    const {
+        children,
+        id,
+        columnId,
+        ...props
+    } = getChildPropsFromElement(child);
+    void children;
+    void id;
+
     const options = normalizeColumnOptions(props);
 
     // columnId selects the column; Core expects the same value as `id`.
@@ -178,7 +189,10 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         }
     }
 
-    function handleChild(child: ReactElement, parentMeta?: BaseGridOptions): void {
+    function handleChild(
+        child: ReactElement,
+        parentMeta?: BaseGridOptions
+    ): void {
         const component = getOptionComponent(child.type);
 
         if (!component) {
@@ -206,18 +220,17 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
 
         if (meta.gridOption === 'pagination') {
             const pagination = normalizePaginationOptions(props);
-            pagination.position = isTopPaginationChild(child, resolvedChildren) ?
-                'top' :
-                'bottom';
+            pagination.position = isTopPaginationChild(
+                child,
+                resolvedChildren
+            ) ? 'top' : 'bottom';
             optionsFromChildren.pagination = pagination;
             return;
         }
 
         if (meta.gridOption === 'header') {
-            const { header, children: _ignored } = props;
-
-            if (header !== void 0) {
-                optionsFromChildren.header = header;
+            if (props.header !== void 0) {
+                optionsFromChildren.header = props.header;
             }
             return;
         }
@@ -226,7 +239,9 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
             optionsFromChildren[meta.gridOption] = meta.isArrayType ? [] : {}
         );
         const parentIsArray = Array.isArray(optionParent);
-        const insertInto = parentIsArray ? {} : optionParent as Record<string, unknown>;
+        const insertInto = parentIsArray
+            ? {}
+            : optionParent as Record<string, unknown>;
 
         if (meta.defaultOptions) {
             Object.assign(insertInto, meta.defaultOptions);
@@ -243,7 +258,10 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         }
 
         if (parentIsArray) {
-            (optionsFromChildren[meta.gridOption] as unknown[]).push(insertInto);
+            const optionItems = optionsFromChildren[
+                meta.gridOption
+            ] as unknown[];
+            optionItems.push(insertInto);
         }
     }
 
@@ -258,7 +276,8 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
 
 /**
  * When declarative `<Column>` components are present, only those columns
- * should render unless `data.autogenerateColumns` is set explicitly on `<Data>`.
+ * should render unless `data.autogenerateColumns` is set
+ * explicitly on `<Data>`.
  */
 function applyDeclarativeColumnDefaults(
     optionsFromChildren: Record<string, unknown>
@@ -291,7 +310,11 @@ function isTopPaginationChild(
 
     return children
         .slice(0, childIndex)
-        .every((candidate) => getOptionComponent(candidate.type)?._GridReact.gridOption === 'pagination');
+        .every((candidate) => {
+            const gridOption = getOptionComponent(candidate.type)
+                ?._GridReact.gridOption;
+            return gridOption === 'pagination';
+        });
 }
 
 function isOptionElement(child: ReactElement): boolean {
@@ -313,9 +336,10 @@ function resolveOptionChild(child: ReactNode): ReactElement | null {
         return null;
     }
 
-    const rendered = (child.type as (props: Record<string, unknown>) => ReactNode)(
-        getChildPropsFromElement(child)
-    );
+    const renderChild = child.type as (
+        props: Record<string, unknown>
+    ) => ReactNode;
+    const rendered = renderChild(getChildPropsFromElement(child));
 
     if (isReactElement(rendered) && getOptionComponent(rendered.type)) {
         return rendered;
