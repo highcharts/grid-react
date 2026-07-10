@@ -22,7 +22,8 @@ export default function GridLite(props: GridProps<Options>) {
     const { gridRef, children, options, ...gridProps } = props;
     const childOptions = useMemo(() => getChildProps(children), [children]);
     const columnKey = useMemo(() => {
-        const columns = childOptions.columns as Array<{ id?: string }> | undefined;
+        const columns = childOptions.columns as
+            Array<{ id?: string }> | undefined;
 
         return columns?.map((column) => column.id).join('\0') ?? '';
     }, [childOptions]);

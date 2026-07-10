@@ -5,12 +5,13 @@ import {
     type ComponentType
 } from 'react';
 import { describe, it, expect, vi } from 'vitest';
-import { GridProps, GridRefHandle } from '../components/BaseGrid';
-import { GridInstance } from '../hooks/useGrid';
+import { GridProps, GridRefHandle } from '../src/components/BaseGrid';
+import { GridInstance } from '../src/hooks/useGrid';
 
 /**
  * Creates a standard test suite for a Grid component.
- * Use this to avoid duplicating tests between grid-lite-react and grid-pro-react.
+ * Use this to avoid duplicating tests between
+ * grid-lite-react and grid-pro-react.
  */
 export function createGridTests<TOptions>(
     name: string,

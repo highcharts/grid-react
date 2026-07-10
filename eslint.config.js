@@ -24,7 +24,13 @@ export default defineConfig(
             '@stylistic/quotes': ['error', 'single', { avoidEscape: true }],
             '@stylistic/brace-style': ['error', '1tbs', { allowSingleLine: true }],
             '@stylistic/eol-last': ['error', 'always'],
-            '@stylistic/no-trailing-spaces': ['error']
+            '@stylistic/no-trailing-spaces': ['error'],
+            '@stylistic/max-len': ['error', {
+                code: 80,
+                ignoreUrls: true,
+                ignoreStrings: true,
+                ignoreTemplateLiterals: true
+            }]
         },
     },
     {
