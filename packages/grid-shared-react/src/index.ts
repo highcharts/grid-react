@@ -22,6 +22,13 @@ export {
     Header
 } from './components/options';
 export { getChildProps } from './utils/getChildProps';
+/**
+ * Monorepo-internal utilities. Not part of the public consumer API for
+ * grid-lite-react / grid-pro-react packages.
+ */
+export { isObject } from './utils/isObject';
+export { normalizeChildOptions } from './utils/normalizeChildOptions';
+export { useDeclarativeGridOptions } from './hooks/useDeclarativeGridOptions';
 export type {
     CaptionProps,
     DescriptionProps,

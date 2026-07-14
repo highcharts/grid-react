@@ -7,8 +7,6 @@
  *
  */
 
-import type { PaginationProps } from '../../../components/options/pagination/paginationProps';
-
 export function normalizePaginationOptions(
     props: Record<string, unknown>
 ): Record<string, unknown> {
@@ -23,8 +21,9 @@ export function normalizePaginationOptions(
         enabled,
         page,
         pageSize,
-        align
-    } = props as PaginationProps;
+        align,
+        ...rest
+    } = props;
 
     const result: Record<string, unknown> = {
         enabled: enabled ?? true
@@ -80,5 +79,5 @@ export function normalizePaginationOptions(
         result.controls = controls;
     }
 
-    return result;
+    return { ...result, ...rest };
 }
