@@ -7,19 +7,25 @@
  *
  */
 
-import GridPro from '@highcharts/grid-pro';
+import type { ComponentType } from 'react';
+import {
+    Column as SharedColumn,
+    Data as SharedData,
+    Pagination as SharedPagination,
+    Caption,
+    ColumnDefaults,
+    Description,
+    Header
+} from '@highcharts/grid-shared-react';
+import type { ProColumnProps } from './utils/mappers/column';
+import type { ProPaginationProps } from './utils/mappers/pagination';
 
 export { default as Grid } from './Grid';
 export { default as GridPro } from './Grid';
-export {
-    Caption,
-    Data,
-    ColumnDefaults,
-    Column,
-    Description,
-    Pagination,
-    Header
-} from '@highcharts/grid-shared-react';
+export { Caption, ColumnDefaults, Description, Header };
+export const Column = SharedColumn as ComponentType<ProColumnProps>;
+export const Data = SharedData;
+export const Pagination = SharedPagination as ComponentType<ProPaginationProps>;
 export { DataTable, DataConnector } from '@highcharts/grid-pro';
 export { merge } from '@highcharts/grid-pro/es-modules/Shared/Utilities.js';
 export type {
@@ -30,14 +36,30 @@ export type {
     DataProps,
     DataColumns,
     DataColumnValue,
-    ColumnProps,
     ColumnOptionsProps,
     ColumnDataType,
     ColumnSortingOrder,
     CellValueGetterContext,
-    PaginationProps,
     HeaderProps,
     GroupedHeaderOptions,
     HeaderCellAccessibilityProps
 } from '@highcharts/grid-shared-react';
-export type GridOptions = GridPro.Options;
+export type {
+    GridProProps,
+    GridProOptions,
+    GridOptions,
+    GridEventProps,
+    GridLevelEventProps,
+    RowPinningEventProps
+} from './utils/mappers/grid';
+export type {
+    ProColumnProps,
+    ProColumnEventProps,
+    ColumnLevelEventProps,
+    CellLevelEventProps,
+    HeaderLevelEventProps
+} from './utils/mappers/column';
+export type {
+    ProPaginationProps,
+    PaginationEventProps
+} from './utils/mappers/pagination';
