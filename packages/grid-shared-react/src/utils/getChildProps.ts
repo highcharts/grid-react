@@ -9,8 +9,24 @@
 
 import { Fragment, isValidElement, ReactElement, ReactNode } from 'react';
 import type { BaseGridOptionsComponent, BaseGridOptions } from '../components/BaseGridOptions';
-import { normalizeColumnOptions } from './mappers/column';
-import { normalizePaginationOptions } from './mappers/pagination';
+import { isObject } from './isObject';
+
+function flattenChildren(childNodes: ReactNode): ReactNode[] {
+    if (childNodes == null || childNodes === false) {
+        return [];
+    }
+
+    if (Array.isArray(childNodes)) {
+        return childNodes.flatMap((child) => flattenChildren(child));
+    }
+
+    if (isValidElement(childNodes) && childNodes.type === Fragment) {
+        const fragmentProps = childNodes.props as { children?: ReactNode };
+        return flattenChildren(fragmentProps.children);
+    }
+
+    return [childNodes];
+}
 
 function objInsert(
     obj: Record<string, unknown>,
@@ -39,10 +55,6 @@ function objInsert(
         current[lastKey] = value;
     }
     return obj;
-}
-
-function isObject(value: unknown): value is Record<string, unknown> {
-    return typeof value === 'object' && value !== null && !Array.isArray(value);
 }
 
 function isReactElement(value: unknown): value is ReactElement {
@@ -79,23 +91,6 @@ function renderChildren(children: ReactNode): string {
     return '';
 }
 
-function flattenChildren(childNodes: ReactNode): ReactNode[] {
-    if (childNodes == null || childNodes === false) {
-        return [];
-    }
-
-    if (Array.isArray(childNodes)) {
-        return childNodes.flatMap((child) => flattenChildren(child));
-    }
-
-    if (isReactElement(childNodes) && childNodes.type === Fragment) {
-        const fragmentProps = childNodes.props as { children?: ReactNode };
-        return flattenChildren(fragmentProps.children);
-    }
-
-    return [childNodes];
-}
-
 function getEffectiveMeta(
     component: BaseGridOptionsComponent,
     parentMeta?: BaseGridOptions
@@ -127,14 +122,12 @@ function parseColumnElement(child: ReactElement): Record<string, unknown> {
     void children;
     void id;
 
-    const options = normalizeColumnOptions(props);
-
     // columnId selects the column; Core expects the same value as `id`.
     if (columnId !== void 0) {
-        options.id = columnId;
+        props.id = columnId;
     }
 
-    return options;
+    return props;
 }
 
 function pushColumn(
@@ -209,7 +202,7 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         const { children: childChildren, ...props } = childProps;
 
         if (meta.gridOption === 'columnDefaults') {
-            optionsFromChildren.columnDefaults = normalizeColumnOptions(props);
+            optionsFromChildren.columnDefaults = props;
             return;
         }
 
@@ -219,12 +212,13 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         }
 
         if (meta.gridOption === 'pagination') {
-            const pagination = normalizePaginationOptions(props);
-            pagination.position = isTopPaginationChild(
-                child,
-                resolvedChildren
-            ) ? 'top' : 'bottom';
-            optionsFromChildren.pagination = pagination;
+            optionsFromChildren.pagination = {
+                ...props,
+                position: isTopPaginationChild(
+                    child,
+                    resolvedChildren
+                ) ? 'top' : 'bottom'
+            };
             return;
         }
 

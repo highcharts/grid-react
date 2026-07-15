@@ -55,7 +55,12 @@ function App() {
 
   return (
     <>
-      <Grid options={options} gridRef={grid} callback={onGridCallback} />
+      <Grid
+        gridKey="AAAA-BBBB-CCCC-DDDD-EEEE-FFFF"
+        options={options}
+        gridRef={grid}
+        callback={onGridCallback}
+      />
       <button onClick={onButtonClick}>Click me</button>
     </>
   );

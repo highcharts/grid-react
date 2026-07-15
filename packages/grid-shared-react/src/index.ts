@@ -22,6 +22,9 @@ export {
     Header
 } from './components/options';
 export { getChildProps } from './utils/getChildProps';
+export { isObject } from './utils/isObject';
+export { normalizeChildOptions } from './utils/normalizeChildOptions';
+export { useDeclarativeGridOptions } from './hooks/useDeclarativeGridOptions';
 export type {
     CaptionProps,
     DescriptionProps,

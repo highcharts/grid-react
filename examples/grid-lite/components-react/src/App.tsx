@@ -1,12 +1,15 @@
-import { useState, useRef } from 'react';
+import {
+  useState,
+  // useRef
+} from 'react';
 import {
   type GridInstance,
-  type GridRefHandle,
+  // type GridRefHandle,
   type GridOptions,
   Grid,
   Caption,
   Data,
-  DataTable,
+  // DataTable,
   ColumnDefaults,
   Column,
   Description,
@@ -15,7 +18,7 @@ import {
 } from '@highcharts/grid-lite-react';
 
 function App() {
-  const grid = useRef<GridRefHandle<GridOptions> | null>(null);
+  // const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
   // ==== OPTIONS ====
   // const [options] = useState<GridOptions>({

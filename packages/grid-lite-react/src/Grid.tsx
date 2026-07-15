@@ -7,45 +7,43 @@
  *
  */
 
-import { useMemo } from 'react';
 import {
     BaseGrid,
-    GridProps,
-    getChildProps
+    useDeclarativeGridOptions
 } from '@highcharts/grid-shared-react';
-import { merge } from '@highcharts/grid-lite/es-modules/Shared/Utilities.js';
 import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
 import './styles/grid-core.css';
 import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
+import type { GridProps } from '@highcharts/grid-shared-react';
+import { buildGridOptions } from './utils/buildGridOptions';
 
 export default function GridLite(props: GridProps<Options>) {
-    const { gridRef, children, options, theme, className, ...gridProps } = props;
-    const childOptions = useMemo(() => getChildProps(children), [children]);
-    const columnKey = useMemo(() => {
-        const columns = childOptions.columns as
-            Array<{ id?: string }> | undefined;
-
-        return columns?.map((column) => column.id).join('\0') ?? '';
-    }, [childOptions]);
-    const containerTheme = useMemo(
-        () => [theme, className].filter(Boolean).join(' ') || void 0,
-        [theme, className]
-    );
-    const gridOptions = useMemo(
-        () => merge(
+    const {
+        gridRef,
+        children,
+        options,
+        callback,
+        theme,
+        className
+    } = props;
+    const { gridOptions, columnKey } = useDeclarativeGridOptions(
+        children,
+        options,
+        (childOptions, opts) => buildGridOptions(
             childOptions,
-            options ?? {},
-            containerTheme ? { rendering: { theme: containerTheme } } : {}
-        ) as Options,
-        [childOptions, options, containerTheme]
+            opts,
+            theme,
+            className
+        ),
+        [theme, className]
     );
 
     return (
         <BaseGrid
             key={columnKey}
-            {...gridProps}
             options={gridOptions}
             Grid={Grid}
+            callback={callback}
             ref={gridRef}
         />
     );
