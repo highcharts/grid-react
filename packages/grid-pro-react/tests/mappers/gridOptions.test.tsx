@@ -68,7 +68,7 @@ describe('buildGridOptions', () => {
         const options = buildGridOptions(
             'GRID-KEY',
             getChildProps(<Column columnId="name" />),
-            undefined,
+            void 0,
             { gridKey: 'GRID-KEY' } as GridProProps
         );
 
@@ -88,6 +88,8 @@ describe('getGridEventPropDeps', () => {
         expect(GRID_EVENT_PROP_KEYS).toContain('onAfterLoad');
         expect(getGridEventPropDeps(props)).toEqual([
             'KEY',
+            void 0,
+            void 0,
             ...GRID_EVENT_PROP_KEYS.map(
                 (key: keyof GridProProps) => props[key]
             )
