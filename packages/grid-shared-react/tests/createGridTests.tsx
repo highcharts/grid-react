@@ -13,11 +13,15 @@ import { GridInstance } from '../src/hooks/useGrid';
  * Use this to avoid duplicating tests between
  * grid-lite-react and grid-pro-react.
  */
-export function createGridTests<TOptions>(
+export function createGridTests<
+    TOptions,
+    TComponentProps extends Record<string, unknown> = Record<string, never>
+>(
     name: string,
-    GridComponent: ComponentType<GridProps<TOptions>>,
+    GridComponent: ComponentType<GridProps<TOptions> & TComponentProps>,
     testOptions: TOptions,
-    updatedOptions: TOptions
+    updatedOptions: TOptions,
+    componentProps?: TComponentProps
 ) {
 
     describe(name, () => {
@@ -29,7 +33,11 @@ export function createGridTests<TOptions>(
             };
 
             const { container } = render(
-                <GridComponent options={testOptions} callback={onGridReady} />
+                <GridComponent
+                    {...(componentProps as TComponentProps)}
+                    options={testOptions}
+                    callback={onGridReady}
+                />
             );
 
             expect(container.firstChild).toBeInstanceOf(HTMLDivElement);
@@ -47,6 +55,7 @@ export function createGridTests<TOptions>(
                 gridRef = useRef<GridRefHandle<TOptions>>(null);
                 return (
                     <GridComponent
+                        {...(componentProps as TComponentProps)}
                         options={testOptions}
                         gridRef={gridRef}
                         callback={() => { initialized = true; }}
@@ -64,7 +73,13 @@ export function createGridTests<TOptions>(
 
         it('calls callback when grid is initialized', async () => {
             const callback = vi.fn();
-            render(<GridComponent options={testOptions} callback={callback} />);
+            render(
+                <GridComponent
+                    {...(componentProps as TComponentProps)}
+                    options={testOptions}
+                    callback={callback}
+                />
+            );
 
             await waitFor(() => {
                 expect(callback).toHaveBeenCalled();
@@ -83,7 +98,11 @@ export function createGridTests<TOptions>(
 
                 return (
                     <>
-                        <GridComponent options={opts} callback={onGridReady} />
+                        <GridComponent
+                            {...(componentProps as TComponentProps)}
+                            options={opts}
+                            callback={onGridReady}
+                        />
                         <button
                             data-testid="update-options"
                             onClick={() => setOpts(updatedOptions)}
@@ -120,7 +139,11 @@ export function createGridTests<TOptions>(
             };
 
             const { unmount } = render(
-                <GridComponent options={testOptions} callback={onGridReady} />
+                <GridComponent
+                    {...(componentProps as TComponentProps)}
+                    options={testOptions}
+                    callback={onGridReady}
+                />
             );
 
             // Wait for grid to initialize
