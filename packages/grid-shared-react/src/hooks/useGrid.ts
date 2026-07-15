@@ -24,7 +24,11 @@ export interface GridInstance<TOptions> {
  * directly depending on their types.
  */
 export interface GridType<TOptions> {
-    grid(container: HTMLDivElement, options?: TOptions, async?: boolean): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
+    grid(
+        container: HTMLDivElement,
+        options?: TOptions,
+        async?: boolean
+    ): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
 }
 
 export interface UseGridOptions<TOptions> {
@@ -62,7 +66,8 @@ export function useGrid<TOptions>({
             return;
         }
 
-        // StrictMode cleanup runs before re-mount; allow init to complete if re-mounted.
+        // StrictMode cleanup runs before re-mount;
+        // allow init to complete if re-mounted.
         destroyOnInitRef.current = false;
 
         // Prevent double initialization
@@ -73,21 +78,24 @@ export function useGrid<TOptions>({
 
         const initGrid = async () => {
             try {
-                // Use pending options if available (from rapid updates during init)
+                // Use pending options if available
+                // (from rapid updates during init)
                 const initOptions = pendingOptionsRef.current ?? options;
                 pendingOptionsRef.current = void 0;
 
                 const grid = await Grid.grid(container, initOptions, true);
 
                 if (destroyOnInitRef.current) {
-                    // Component unmounted while we were initializing - destroy immediately
+                    // Component unmounted while initializing -
+                    // destroy immediately
                     grid.destroy();
                     return;
                 }
 
                 currGridRef.current = grid;
 
-                // Apply any pending options that came in while we were initializing
+                // Apply pending options that came in
+                // while we were initializing
                 if (pendingOptionsRef.current !== void 0) {
                     grid.update(pendingOptionsRef.current, true, true);
                     pendingOptionsRef.current = void 0;
@@ -122,7 +130,8 @@ export function useGrid<TOptions>({
         }
 
         if (currGridRef.current) {
-            // Declarative React options replace the previous snapshot (oneToOne).
+            // Declarative React options replace the previous
+            // snapshot (oneToOne).
             currGridRef.current.update(options, true, true);
         } else {
             // Grid still initializing, queue the update
