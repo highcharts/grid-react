@@ -7,37 +7,38 @@
  *
  */
 
-import { useMemo } from 'react';
 import {
     BaseGrid,
-    GridProps,
-    getChildProps
+    useDeclarativeGridOptions
 } from '@highcharts/grid-shared-react';
-import { merge } from '@highcharts/grid-pro/es-modules/Shared/Utilities.js';
 import Grid from '@highcharts/grid-pro/es-modules/masters/grid-pro.src';
 import '@highcharts/grid-pro/css/grid-pro.css';
-import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
+import type { GridProProps } from './utils/mappers/grid';
+import {
+    getGridEventPropDeps
+} from './utils/mappers/grid';
+import { buildGridOptions } from './utils/buildGridOptions';
 
-export default function GridPro(props: GridProps<Options>) {
-    const { gridRef, children, options, ...gridProps } = props;
-    const childOptions = useMemo(() => getChildProps(children), [children]);
-    const columnKey = useMemo(() => {
-        const columns = childOptions.columns as
-            Array<{ id?: string }> | undefined;
-
-        return columns?.map((column) => column.id).join('\0') ?? '';
-    }, [childOptions]);
-    const gridOptions = useMemo(
-        () => merge(childOptions, options ?? {}) as Options,
-        [childOptions, options]
+export default function GridPro(props: GridProProps) {
+    const { gridKey, gridRef, children, options, callback } = props;
+    const { gridOptions, columnKey } = useDeclarativeGridOptions(
+        children,
+        options,
+        (childOptions, opts) => buildGridOptions(
+            gridKey,
+            childOptions,
+            opts,
+            props
+        ),
+        getGridEventPropDeps(props)
     );
 
     return (
         <BaseGrid
             key={columnKey}
-            {...gridProps}
             options={gridOptions}
             Grid={Grid}
+            callback={callback}
             ref={gridRef}
         />
     );
