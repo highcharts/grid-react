@@ -1,7 +1,9 @@
 import { createGridTests } from '@highcharts/grid-shared-react/tests/createGridTests';
 import { Grid, GridOptions } from '../src/index';
 
-createGridTests<GridOptions>(
+const GRID_KEY = 'AAAA-BBBB-CCCC-DDDD-EEEE-FFFF';
+
+createGridTests<GridOptions, { gridKey: string }>(
     'Grid Pro',
     Grid,
     {
@@ -19,5 +21,8 @@ createGridTests<GridOptions>(
                 age: [40, 35]
             }
         }
+    },
+    {
+        gridKey: GRID_KEY
     }
 );

@@ -6,7 +6,12 @@ import globals from 'globals';
 
 export default defineConfig(
     {
-        ignores: ['**/dist/**', '**/build/**'],
+        ignores: [
+            '**/dist/**',
+            '**/build/**',
+            '**/.next/**',
+            '**/node_modules/**'
+        ],
     },
     eslint.configs.recommended,
     tseslint.configs.recommended,
@@ -34,7 +39,7 @@ export default defineConfig(
         },
     },
     {
-        files: ['scripts/**/*.js'],
+        files: ['scripts/**/*.js', '**/next.config.js'],
         languageOptions: {
             globals: {
                 ...globals.node,

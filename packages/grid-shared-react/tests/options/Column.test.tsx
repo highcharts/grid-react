@@ -1,9 +1,10 @@
 import { describe, it, expect } from 'vitest';
 import { Column } from '../../src/components/options/columns/Column';
 import { getChildProps } from '../../src/utils/getChildProps';
+import { normalizeChildOptions } from '../../src/utils/normalizeChildOptions';
 
-describe('Column', () => {
-    it('maps column props into options.columns', () => {
+describe('Column parser', () => {
+    it('collects raw column props into options.columns', () => {
         expect(
             getChildProps(
                 <Column
@@ -18,13 +19,9 @@ describe('Column', () => {
         ).toEqual({
             columns: [{
                 width: 120,
-                sorting: {
-                    enabled: true,
-                    order: 'asc'
-                },
-                header: {
-                    format: '{value} USD'
-                },
+                sortingEnabled: true,
+                sortingOrder: 'asc',
+                headerFormat: '{value} USD',
                 id: 'price'
             }],
             data: {
@@ -33,7 +30,7 @@ describe('Column', () => {
         });
     });
 
-    it('maps multiple columns into options.columns array', () => {
+    it('collects multiple raw columns into options.columns array', () => {
         expect(
             getChildProps(
                 <>
@@ -46,6 +43,39 @@ describe('Column', () => {
                 { width: 200, id: 'product' },
                 { width: 120, id: 'price' }
             ],
+            data: {
+                autogenerateColumns: false
+            }
+        });
+    });
+});
+
+describe('Column normalization', () => {
+    it('maps prefixed column props onto nested Grid option paths', () => {
+        expect(
+            normalizeChildOptions(
+                getChildProps(
+                    <Column
+                        columnId="price"
+                        width={120}
+                        sortingEnabled
+                        sortingOrder="asc"
+                        headerFormat="{value} USD"
+                    />
+                )
+            )
+        ).toEqual({
+            columns: [{
+                width: 120,
+                sorting: {
+                    enabled: true,
+                    order: 'asc'
+                },
+                header: {
+                    format: '{value} USD'
+                },
+                id: 'price'
+            }],
             data: {
                 autogenerateColumns: false
             }

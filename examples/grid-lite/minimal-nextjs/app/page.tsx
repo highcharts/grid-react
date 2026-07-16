@@ -48,8 +48,12 @@ export default function Home() {
   };
 
   return (
-    <>
-        <Grid options={liteOptions} gridRef={gridRef} callback={onGridCallback} />
+      <>
+        <Grid
+          options={liteOptions}
+          gridRef={gridRef}
+          callback={onGridCallback}
+        />
         <button onClick={onButtonClick}>Click me</button>
     </>
   );

@@ -12,7 +12,7 @@
     "test:all": "pnpm test && pnpm test:e2e",
     "check": "pnpm lint && pnpm test",
     "build": "pnpm -r --filter './packages/*' run build",
-    "lint": "pnpm -r --filter './packages/*' run lint",
+    "lint": "eslint packages examples scripts --ext .ts,.tsx,.js",
     "clean": "pnpm -r --filter './{packages,examples}/*' run clean && rimraf node_modules",
     "release:preflight": "pnpm check && pnpm build",
     "release:prepare": "node scripts/release.js",
