@@ -74,11 +74,13 @@ function App() {
   // };
 
   return (
-    <>
+    <div className="container p-4">
       <Grid
         // options={options}
         // gridRef={grid}
+        theme="myTheme"
         callback={onGridCallback}
+        className="border border-slate-300 rounded-md bg-slate-100"
       >
         <Data
           // dataTable={dataTable}
@@ -101,7 +103,7 @@ function App() {
           cellFormat="{value}"
           cellRowHeader={false}
         />
-        <Caption>Grid Caption v2.1</Caption>
+        <Caption className="p-4 bg-blue-100 text-blue-500 text-lg font-bold">Grid Caption v2.1</Caption>
         <Header header={[
           'name',
           {
@@ -150,7 +152,9 @@ function App() {
           headerFormat="Salary (USD)"
           cellFormat="${value}"
         />
-        <Description>Grid Description</Description>
+        <Description
+          className="p-4 bg-red-50 text-red-500 text-sm"
+        >Grid Description</Description>
         <Pagination
           // enabled={paginationEnabled}
           page={1}
@@ -165,11 +169,11 @@ function App() {
           // previousNext
         />
       </Grid>
-      <div id="controls">
+      <div id="controls" className="mt-4">
         <button onClick={onButtonClick}>Data state</button>
         {/* <button onClick={onPaginationClick}>Pagination</button> */}
       </div>
-    </>
+    </div>
   );
 }
 
