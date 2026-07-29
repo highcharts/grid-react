@@ -1,8 +1,19 @@
 @import "tailwindcss";
 
-/* Optional: load default Grid theme tokens + themed caption styles */
-/* @import "@highcharts/grid-lite-react/src/styles/grid-theme-default.css"; */
+/* Sample viewer theme toggle + system preference */
+@custom-variant dark {
+  &:where(.highcharts-dark, .highcharts-dark *) {
+    @slot;
+  }
 
+  @media (prefers-color-scheme: dark) {
+    &:where(:not(.highcharts-light):not(.highcharts-light *)) {
+      @slot;
+    }
+  }
+}
+
+/* Load grid-theme-default.css only when using Core theme tokens (non-empty `theme`). */
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,7 +22,77 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-#root {
+.hcg-container {
   width: 100%;
-  min-height: 100vh;
+  height: 600px;
+}
+
+/*
+ * Pagination buttons / select — Core internals, styled via cascade.
+ */
+.hcg-pagination-controls {
+  @apply border-l border-r border-slate-200 dark:border-slate-700;
+}
+
+.hcg-pagination-controls .hcg-pagination-pages {
+  @apply gap-2;
+}
+
+.hcg-pagination-controls .hcg-button {
+  @apply size-7 rounded border border-transparent text-sm leading-none
+    text-slate-700 dark:text-slate-200;
+}
+
+.hcg-pagination-controls .hcg-button:hover:not(:disabled) {
+  @apply bg-slate-200 dark:bg-slate-700;
+}
+
+.hcg-pagination-controls .hcg-button-selected,
+.hcg-pagination-controls .hcg-button-selected:hover:not(:disabled) {
+  @apply bg-teal-700 text-white dark:bg-teal-600;
+}
+
+.demo-pag-size select.hcg-input {
+  @apply rounded border border-slate-300 bg-white py-1 pl-2 pr-5 text-sm
+    text-slate-700 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200;
+}
+
+/*
+ * Filter popup — Core internals, styled via cascade.
+ */
+.demo-grid .hcg-container .hcg-popup {
+  @apply rounded-lg border border-slate-200 bg-white text-sm text-slate-700
+    shadow-lg dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200
+    dark:shadow-black/40;
+}
+
+.demo-grid .hcg-container .hcg-menu-header {
+  @apply mb-2 px-1 text-xs font-semibold text-slate-500 dark:text-slate-400;
+}
+
+.demo-grid .hcg-container .hcg-column-filter-wrapper {
+  @apply gap-2;
+}
+
+.demo-grid .hcg-container .hcg-column-filter-wrapper .hcg-input {
+  @apply w-full rounded border border-slate-300 bg-white px-2 py-1.5 text-sm
+    text-slate-700 dark:border-slate-600 dark:bg-slate-900 dark:text-slate-200;
+}
+
+.demo-grid .hcg-container .hcg-column-filter-wrapper select.hcg-input {
+  @apply pr-5;
+}
+
+.demo-grid .hcg-container .hcg-clear-filter-button {
+  @apply text-xs font-medium text-slate-600 no-underline dark:text-slate-300;
+}
+
+.demo-grid .hcg-container .hcg-clear-filter-button:hover:not(:disabled) {
+  @apply text-slate-900 underline dark:text-slate-50;
+}
+
+@container hcg (max-width: 800px) {
+  .hcg-pagination-controls {
+    @apply justify-center border-r-0 border-l-0 mt-2 mb-2;
+  }
 }
