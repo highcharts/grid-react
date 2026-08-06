@@ -1,5 +1,11 @@
 # Changelog
 
+## [3.1.0] - 2026-08-06
+
+### Other
+- Bumped Grid dependency version to v3.1.0. (#22) - 2026-08-06
+
+
 ## [3.0.0] - 2026-05-06
 
 ### Other
