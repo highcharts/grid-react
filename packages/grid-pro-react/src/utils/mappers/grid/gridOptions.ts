@@ -107,6 +107,7 @@ export function getGridEventPropDeps(props: GridProProps): unknown[] {
         props.gridKey,
         props.theme,
         props.className,
+        props.tableClassName,
         ...GRID_EVENT_PROP_KEYS.map((key) => props[key])
     ];
 }

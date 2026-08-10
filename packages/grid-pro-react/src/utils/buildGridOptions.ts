@@ -19,6 +19,12 @@ import {
 
 /**
  * Builds final Grid Pro options from raw declarative child options.
+ *
+ * `theme` → `rendering.theme`
+ * `tableClassName` → `rendering.table.className` (`.hcg-table`)
+ *
+ * `className` is React-only on the mount container
+ * (parent of `.hcg-container`).
  */
 export function buildGridOptions(
     gridKey: string,
@@ -29,14 +35,22 @@ export function buildGridOptions(
     const declarativeOptions = mergePaginationEventProps(
         mergeColumnEventProps(normalizeChildOptions(childOptions))
     );
-    const containerTheme = [props.theme, props.className]
-        .filter(Boolean)
-        .join(' ') || void 0;
+    const rendering: Record<string, unknown> = {};
+
+    if (props.theme !== void 0) {
+        rendering.theme = props.theme;
+    }
+    if (props.tableClassName !== void 0) {
+        rendering.table = { className: props.tableClassName };
+    }
+
     const result = merge(
         true,
         {},
         merge(declarativeOptions, options ?? {}),
-        containerTheme ? { rendering: { theme: containerTheme } } : {},
+        // Skip empty `{ rendering: {} }` so merge does not inject a blank
+        // rendering block when theme / tableClassName were omitted.
+        Object.keys(rendering).length ? { rendering } : {},
         normalizeGridEventProps(props)
     ) as GridProOptions;
 

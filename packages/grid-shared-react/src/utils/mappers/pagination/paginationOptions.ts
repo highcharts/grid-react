@@ -7,6 +7,29 @@
  *
  */
 
+function withClassName(
+    value: unknown,
+    className: string | undefined
+): unknown {
+    if (className === void 0) {
+        return value;
+    }
+
+    // Disabled control is not rendered — keep boolean, drop className.
+    if (value === false) {
+        return false;
+    }
+
+    if (value !== null && typeof value === 'object') {
+        return { ...value as Record<string, unknown>, className };
+    }
+
+    return {
+        enabled: value === void 0 ? true : Boolean(value),
+        className
+    };
+}
+
 export function normalizePaginationOptions(
     props: Record<string, unknown>
 ): Record<string, unknown> {
@@ -22,6 +45,10 @@ export function normalizePaginationOptions(
         page,
         pageSize,
         align,
+        className,
+        infoClassName,
+        controlsClassName,
+        sizeClassName,
         ...rest
     } = props;
 
@@ -38,22 +65,41 @@ export function normalizePaginationOptions(
     if (align !== void 0) {
         result.align = align;
     }
+    if (typeof className === 'string') {
+        result.className = className;
+    }
 
     const controls: Record<string, unknown> = {};
 
-    if (pageInfo !== void 0) {
-        controls.pageInfo = pageInfo;
+    if (typeof controlsClassName === 'string') {
+        controls.className = controlsClassName;
     }
 
+    const pageInfoValue = withClassName(pageInfo, asString(infoClassName));
+    if (pageInfoValue !== void 0) {
+        controls.pageInfo = pageInfoValue;
+    }
+
+    let pageSizeSelectorValue: unknown = pageSizeSelector;
+
     if (pageSizeSelector === false) {
-        controls.pageSizeSelector = false;
+        pageSizeSelectorValue = false;
     } else if (pageSizeOptions !== void 0) {
-        controls.pageSizeSelector = {
+        pageSizeSelectorValue = {
             enabled: true,
             options: pageSizeOptions
         };
     } else if (pageSizeSelector !== void 0) {
-        controls.pageSizeSelector = pageSizeSelector;
+        pageSizeSelectorValue = pageSizeSelector;
+    }
+
+    pageSizeSelectorValue = withClassName(
+        pageSizeSelectorValue,
+        asString(sizeClassName)
+    );
+
+    if (pageSizeSelectorValue !== void 0) {
+        controls.pageSizeSelector = pageSizeSelectorValue;
     }
 
     if (pageButtons === false) {
@@ -80,4 +126,8 @@ export function normalizePaginationOptions(
     }
 
     return { ...result, ...rest };
+}
+
+function asString(value: unknown): string | undefined {
+    return typeof value === 'string' ? value : void 0;
 }
