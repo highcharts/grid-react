@@ -11,11 +11,12 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@highcharts/grid-lite-react',
+        // Exact match — string aliases are prefix-based and break subpath ids.
+        find: /^@highcharts\/grid-lite-react$/,
         replacement: resolve(__dirname, '../../../packages/grid-lite-react/src/index.ts')
       },
       {
-        find: '@highcharts/grid-shared-react',
+        find: /^@highcharts\/grid-shared-react$/,
         replacement: resolve(__dirname, '../../../packages/grid-shared-react/src/index.ts')
       },
       {
@@ -29,4 +30,3 @@ export default defineConfig({
     port: 3000
   }
 });
-
