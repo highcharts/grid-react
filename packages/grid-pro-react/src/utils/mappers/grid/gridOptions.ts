@@ -16,7 +16,7 @@ import type {
 import type {
     AfterTreeRowToggleEvent,
     BeforeTreeRowToggleEvent
-} from '@highcharts/grid-pro/es-modules/Grid/Pro/TreeView/TreeProjectionController.js';
+} from '@highcharts/grid-pro/es-modules/Grid/Pro/TreeView/Projection/TreeProjectionController.js';
 import { mapEventsProps } from '../../mapEventsProps';
 
 /**

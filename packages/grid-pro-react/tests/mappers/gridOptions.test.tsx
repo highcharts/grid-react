@@ -75,6 +75,78 @@ describe('buildGridOptions', () => {
         expect(options.gridKey).toBe('GRID-KEY');
         expect(options.columns).toEqual([{ id: 'name' }]);
     });
+
+    it('omits rendering.theme when theme prop is undefined', () => {
+        const options = buildGridOptions(
+            'GRID-KEY',
+            {},
+            void 0,
+            {
+                gridKey: 'GRID-KEY',
+                className: 'rounded-md border'
+            } as GridProProps
+        );
+
+        expect(options.rendering?.theme).toBeUndefined();
+        expect(
+            (options.rendering as { className?: string } | undefined)?.className
+        ).toBeUndefined();
+    });
+
+    it('passes empty theme to disable Core default', () => {
+        const options = buildGridOptions(
+            'GRID-KEY',
+            {},
+            void 0,
+            {
+                gridKey: 'GRID-KEY',
+                theme: '',
+                className: 'rounded-md border'
+            } as GridProProps
+        );
+
+        expect(options.rendering?.theme).toBe('');
+        expect(
+            (options.rendering as { className?: string } | undefined)?.className
+        ).toBeUndefined();
+    });
+
+    it('passes custom theme without putting className into Core options', () => {
+        const options = buildGridOptions(
+            'GRID-KEY',
+            {},
+            void 0,
+            {
+                gridKey: 'GRID-KEY',
+                theme: 'myTheme',
+                className: 'rounded-md border'
+            } as GridProProps
+        );
+
+        expect(options.rendering?.theme).toBe('myTheme');
+        expect(
+            (options.rendering as { className?: string } | undefined)?.className
+        ).toBeUndefined();
+    });
+
+    it('maps tableClassName to rendering.table.className', () => {
+        const options = buildGridOptions(
+            'GRID-KEY',
+            {},
+            void 0,
+            {
+                gridKey: 'GRID-KEY',
+                theme: '',
+                className: 'p-8',
+                tableClassName: 'border border-slate-300'
+            } as GridProProps
+        );
+
+        expect(options.rendering?.theme).toBe('');
+        expect(options.rendering?.table?.className).toBe(
+            'border border-slate-300'
+        );
+    });
 });
 
 describe('getGridEventPropDeps', () => {
@@ -88,6 +160,7 @@ describe('getGridEventPropDeps', () => {
         expect(GRID_EVENT_PROP_KEYS).toContain('onAfterLoad');
         expect(getGridEventPropDeps(props)).toEqual([
             'KEY',
+            void 0,
             void 0,
             void 0,
             ...GRID_EVENT_PROP_KEYS.map(
