@@ -30,7 +30,7 @@
         "url": "https://github.com/highcharts/grid-react/issues"
     },
     "scripts": {
-        "build": "pnpm clean:dist && rollup -c && cp -R src/styles dist/styles",
+        "build": "pnpm clean:dist && rollup -c",
         "lint": "eslint src --ext .ts,.tsx",
         "clean:dist": "rimraf dist",
         "clean": "rimraf node_modules dist",
