@@ -10,11 +10,12 @@ export default defineConfig({
   resolve: {
     alias: [
       {
-        find: '@highcharts/grid-pro-react',
+        // Exact match — string aliases are prefix-based and break subpath ids.
+        find: /^@highcharts\/grid-pro-react$/,
         replacement: resolve(__dirname, '../../../packages/grid-pro-react/src/index.ts')
       },
       {
-        find: '@highcharts/grid-shared-react',
+        find: /^@highcharts\/grid-shared-react$/,
         replacement: resolve(__dirname, '../../../packages/grid-shared-react/src/index.ts')
       },
       {
