@@ -20,12 +20,12 @@ import {
 import { buildGridOptions } from './utils/buildGridOptions';
 
 export default function GridPro(props: GridProProps) {
-    const { gridKey, gridRef, children, options, callback } = props;
+    const { gridRef, children, options, callback, className } = props;
     const { gridOptions, columnKey } = useDeclarativeGridOptions(
         children,
         options,
         (childOptions, opts) => buildGridOptions(
-            gridKey,
+            props.gridKey,
             childOptions,
             opts,
             props
@@ -40,6 +40,7 @@ export default function GridPro(props: GridProProps) {
             Grid={Grid}
             callback={callback}
             ref={gridRef}
+            className={className}
         />
     );
 }

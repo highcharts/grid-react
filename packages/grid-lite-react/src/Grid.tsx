@@ -12,7 +12,7 @@ import {
     useDeclarativeGridOptions
 } from '@highcharts/grid-shared-react';
 import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
-import './styles/grid-core.css';
+import '@highcharts/grid-lite/css/grid-lite.css';
 import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
 import type { GridProps } from '@highcharts/grid-shared-react';
 import { buildGridOptions } from './utils/buildGridOptions';
@@ -24,7 +24,8 @@ export default function GridLite(props: GridProps<Options>) {
         options,
         callback,
         theme,
-        className
+        className,
+        tableClassName
     } = props;
     const { gridOptions, columnKey } = useDeclarativeGridOptions(
         children,
@@ -33,9 +34,9 @@ export default function GridLite(props: GridProps<Options>) {
             childOptions,
             opts,
             theme,
-            className
+            tableClassName
         ),
-        [theme, className]
+        [theme, tableClassName]
     );
 
     return (
@@ -45,6 +46,7 @@ export default function GridLite(props: GridProps<Options>) {
             Grid={Grid}
             callback={callback}
             ref={gridRef}
+            className={className}
         />
     );
 }

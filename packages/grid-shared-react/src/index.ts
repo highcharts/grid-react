@@ -23,6 +23,7 @@ export {
 } from './components/options';
 export { getChildProps } from './utils/getChildProps';
 export { isObject } from './utils/isObject';
+export { mergeClassNames } from './utils/mergeClassNames';
 export { normalizeChildOptions } from './utils/normalizeChildOptions';
 export { useDeclarativeGridOptions } from './hooks/useDeclarativeGridOptions';
 export type {
@@ -33,6 +34,7 @@ export type {
     DataColumnValue,
     ColumnProps,
     ColumnOptionsProps,
+    ColumnDefaultsProps,
     ColumnDataType,
     ColumnSortingOrder,
     CellValueGetterContext,

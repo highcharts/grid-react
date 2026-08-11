@@ -33,12 +33,19 @@ export interface GridProps<TOptions> {
      */
     options?: TOptions;
     /**
-     * Optional CSS class names applied on the Grid container (`hcg-container`),
-     * merged with `theme` into `rendering.theme`.
+     * Optional CSS class names on the React mount container (parent of
+     * `.hcg-container`). Independent of `theme`.
      */
     className?: string;
     /**
-     * Optional theme name passed to Grid Core.
+     * Optional CSS class names mapped to Core `rendering.table.className` on
+     * `.hcg-table`. Independent of `className` / `theme`.
+     */
+    tableClassName?: string;
+    /**
+     * Optional theme name passed to Grid Core as `rendering.theme`.
+     * Omitted → Core default (`hcg-theme-default`).
+     * Defined (including `''`) → that value only.
      */
     theme?: string;
     /**
