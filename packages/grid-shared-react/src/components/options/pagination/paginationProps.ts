@@ -15,6 +15,26 @@ export interface PaginationProps {
      */
     enabled?: boolean;
     /**
+     * Additional CSS class name(s) for the pagination container
+     * (`.hcg-pagination`).
+     */
+    className?: string;
+    /**
+     * Additional CSS class name(s) for the page info element
+     * (`.hcg-pagination-info`).
+     */
+    infoClassName?: string;
+    /**
+     * Additional CSS class name(s) for the controls container
+     * (`.hcg-pagination-controls`).
+     */
+    controlsClassName?: string;
+    /**
+     * Additional CSS class name(s) for the page size container
+     * (`.hcg-pagination-page-size`).
+     */
+    sizeClassName?: string;
+    /**
      * The current page number.
      */
     page?: number;
