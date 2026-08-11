@@ -96,4 +96,38 @@ describe('Pagination normalization', () => {
             }
         });
     });
+
+    it('maps className props onto pagination and controls', () => {
+        expect(
+            normalizeChildOptions(
+                getChildProps(
+                    <Pagination
+                        className="mt-4"
+                        infoClassName="text-sm text-slate-500"
+                        controlsClassName="gap-2"
+                        sizeClassName="text-sm"
+                        pageSizeOptions={[3, 5, 10]}
+                    />
+                )
+            )
+        ).toEqual({
+            pagination: {
+                enabled: true,
+                className: 'mt-4',
+                position: 'top',
+                controls: {
+                    className: 'gap-2',
+                    pageInfo: {
+                        enabled: true,
+                        className: 'text-sm text-slate-500'
+                    },
+                    pageSizeSelector: {
+                        enabled: true,
+                        options: [3, 5, 10],
+                        className: 'text-sm'
+                    }
+                }
+            }
+        });
+    });
 });
