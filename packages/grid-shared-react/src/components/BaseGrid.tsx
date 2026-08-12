@@ -33,6 +33,22 @@ export interface GridProps<TOptions> {
      */
     options?: TOptions;
     /**
+     * Optional CSS class names on the React mount container (parent of
+     * `.hcg-container`). Independent of `theme`.
+     */
+    className?: string;
+    /**
+     * Optional CSS class names mapped to Core `rendering.table.className` on
+     * `.hcg-table`. Independent of `className` / `theme`.
+     */
+    tableClassName?: string;
+    /**
+     * Optional theme name passed to Grid Core as `rendering.theme`.
+     * Omitted → Core default (`hcg-theme-default`).
+     * Defined (including `''`) → that value only.
+     */
+    theme?: string;
+    /**
      * Declarative option components (e.g. Caption) passed as children.
      */
     children?: ReactNode;
@@ -53,13 +69,14 @@ export interface BaseGridProps<TOptions> {
     options?: TOptions;
     Grid: GridType<TOptions>;
     callback?: (grid: GridInstance<TOptions>) => void;
+    className?: string;
 }
 
 export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
     props: BaseGridProps<TOptions>,
     ref: ForwardedRef<GridRefHandle<TOptions>>
 ) {
-    const { options, Grid, callback } = props;
+    const { options, Grid, callback, className } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
     const currGridRef = useGrid({
@@ -79,5 +96,5 @@ export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
         []
     );
 
-    return <div ref={containerRef} />;
+    return <div ref={containerRef} className={className} />;
 });

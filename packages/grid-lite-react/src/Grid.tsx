@@ -18,11 +18,25 @@ import type { GridProps } from '@highcharts/grid-shared-react';
 import { buildGridOptions } from './utils/buildGridOptions';
 
 export default function GridLite(props: GridProps<Options>) {
-    const { gridRef, children, options, callback } = props;
+    const {
+        gridRef,
+        children,
+        options,
+        callback,
+        theme,
+        className,
+        tableClassName
+    } = props;
     const { gridOptions, columnKey } = useDeclarativeGridOptions(
         children,
         options,
-        (childOptions, opts) => buildGridOptions(childOptions, opts)
+        (childOptions, opts) => buildGridOptions(
+            childOptions,
+            opts,
+            theme,
+            tableClassName
+        ),
+        [theme, tableClassName]
     );
 
     return (
@@ -32,6 +46,7 @@ export default function GridLite(props: GridProps<Options>) {
             Grid={Grid}
             callback={callback}
             ref={gridRef}
+            className={className}
         />
     );
 }

@@ -16,7 +16,7 @@ import type {
 import type {
     AfterTreeRowToggleEvent,
     BeforeTreeRowToggleEvent
-} from '@highcharts/grid-pro/es-modules/Grid/Pro/TreeView/TreeProjectionController.js';
+} from '@highcharts/grid-pro/es-modules/Grid/Pro/TreeView/Projection/TreeProjectionController.js';
 import { mapEventsProps } from '../../mapEventsProps';
 
 /**
@@ -105,6 +105,9 @@ export function normalizeGridEventProps(
 export function getGridEventPropDeps(props: GridProProps): unknown[] {
     return [
         props.gridKey,
+        props.theme,
+        props.className,
+        props.tableClassName,
         ...GRID_EVENT_PROP_KEYS.map((key) => props[key])
     ];
 }

@@ -63,7 +63,7 @@ export function mapEventsProps(
     source?: Record<string, unknown>
 ): void {
     const props = source ?? target;
-    const removeFlatProps = source === undefined;
+    const removeFlatProps = source === void 0;
 
     for (const [propName, path] of Object.entries(aliases)) {
         const handler = props[propName];

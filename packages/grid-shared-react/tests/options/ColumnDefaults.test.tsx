@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { Column } from '../../src/components/options/columns/Column';
 import { ColumnDefaults } from '../../src/components/options/columns/ColumnDefaults';
 import { getChildProps } from '../../src/utils/getChildProps';
 import { normalizeChildOptions } from '../../src/utils/normalizeChildOptions';
@@ -44,6 +45,57 @@ describe('ColumnDefaults normalization', () => {
                 cells: {
                     format: '{value}'
                 }
+            }
+        });
+    });
+
+    it('merges columnDefaults classNames into column overrides', () => {
+        const options = normalizeChildOptions(
+            getChildProps(
+                <>
+                    <ColumnDefaults
+                        headerClassName="p-4 text-left border-b"
+                        cellClassName="p-4 text-left border-b"
+                    />
+                    <Column
+                        columnId="name"
+                        className="hcg-name-column"
+                        headerClassName="hcg-name-header"
+                        cellClassName="hcg-name-cell"
+                    />
+                </>
+            )
+        );
+
+        expect(options.columns).toEqual([
+            {
+                id: 'name',
+                className: 'hcg-name-column',
+                header: {
+                    className: 'p-4 text-left border-b hcg-name-header'
+                },
+                cells: {
+                    className: 'p-4 text-left border-b hcg-name-cell'
+                }
+            }
+        ]);
+    });
+
+    it('lifts rowClassName and evenRowClassName to rendering.rows', () => {
+        const options = normalizeChildOptions(
+            getChildProps(
+                <ColumnDefaults
+                    rowClassName="hover:bg-slate-50"
+                    evenRowClassName="bg-slate-50"
+                />
+            )
+        );
+
+        expect(options.columnDefaults).toEqual({});
+        expect(options.rendering).toEqual({
+            rows: {
+                className: 'hover:bg-slate-50',
+                evenClassName: 'bg-slate-50'
             }
         });
     });
