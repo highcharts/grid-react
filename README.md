@@ -1,10 +1,31 @@
 # Highcharts Grid React
 
-Monorepo containing React packages for [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/getting-started/grid-lite) and [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro).
+<div align='center'>
+
+<i>Official Highcharts Grid for React</i>
+
+<img src="https://assets.highcharts.com/images/highcharts-logo.svg" />
+
+<p>Official React packages for Highcharts Grid Lite and Highcharts Grid Pro. Built for React patterns, with a JSX-native API, TypeScript types, and the Grid CSS included.</p>
+
+<img src="https://img.shields.io/npm/v/%40highcharts%2Fgrid-lite-react?style=flat&logoColor=white&label=grid-lite-react&labelColor=2a2a2a&color=e53e3e" alt="Grid Lite React NPM Version" />
+<img src="https://img.shields.io/npm/v/%40highcharts%2Fgrid-pro-react?style=flat&logoColor=white&label=grid-pro-react&labelColor=2a2a2a&color=e53e3e" alt="Grid Pro React NPM Version" />
+<img src="https://img.shields.io/discord/1318933807059042305?style=flat&logoColor=white&label=discord&labelColor=2a2a2a&color=5865F2" alt="Discord" />
+
+</div>
+
+This is the working repository for the Grid React packages. If you want to use Grid in a React app, install a distribution package from npm rather than this repo.
+
+## Why Highcharts Grid React?
+
+- **JSX-Native API** - Compose grids with React components such as `Data`, `Column`, `Caption`, and `Pagination`
+- **Lite and Pro** - Start with free Grid Lite, or use Grid Pro for editing, validation, sparklines, and events
+- **Self-Contained Packages** - Grid setup, cleanup, and CSS are handled for you
+- **Built for Large Tables** - Row virtualization keeps scrolling smooth with thousands of records
+- **Accessibility First** - Semantic HTML tables with keyboard navigation and screen reader support
+- **TypeScript Ready** - First-class types for options, refs, events, and component props
 
 ## Packages
-
-This monorepo contains the following packages:
 
 ### Published Packages
 
@@ -15,9 +36,7 @@ This monorepo contains the following packages:
 
 - **[@highcharts/grid-shared-react](./packages/grid-shared-react/)** - Shared core functionality used by both Grid Lite and Grid Pro React packages
 
-## Quick Start
-
-### Installation
+## Installation
 
 ```bash
 # For Grid Lite
@@ -27,47 +46,58 @@ npm install @highcharts/grid-lite-react
 npm install @highcharts/grid-pro-react
 ```
 
-### Usage
+> **Note:** The matching Grid Core package is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
 
-#### Grid Lite
+## Quick Start
 
-```tsx
-import React, { useState } from 'react';
-import { Grid, type GridOptions } from '@highcharts/grid-lite-react';
+### Grid Lite
 
-function App() {
-  const [options] = useState<GridOptions>({
-    dataTable: {
-      columns: {
-        name: ['Alice', 'Bob', 'Charlie'],
-        age: [23, 34, 45]
-      }
-    }
-  });
+```jsx
+import { Grid, Caption, Data, Column } from '@highcharts/grid-lite-react';
 
-  return <Grid options={options} />;
+export function App() {
+  return (
+    <Grid>
+      <Caption>Team directory</Caption>
+      <Data
+        columns={{
+          name: ['Alice', 'Bob', 'Charlie'],
+          age: [23, 34, 45]
+        }}
+      />
+      <Column columnId="name" headerFormat="Name" />
+      <Column columnId="age" dataType="number" headerFormat="Age" />
+    </Grid>
+  );
 }
 ```
 
-#### Grid Pro
+### Grid Pro
 
-```tsx
-import React, { useState } from 'react';
-import { Grid, type GridOptions } from '@highcharts/grid-pro-react';
+```jsx
+import { Grid, Caption, Data, Column } from '@highcharts/grid-pro-react';
 
-function App() {
-  const [options] = useState<GridOptions>({
-    dataTable: {
-      columns: {
-        name: ['Alice', 'Bob', 'Charlie'],
-        age: [23, 34, 45]
-      }
-    }
-  });
-
-  return <Grid options={options} />;
+export function App() {
+  return (
+    <Grid gridKey="YOUR-GRID-KEY">
+      <Caption>Team directory</Caption>
+      <Data
+        columns={{
+          name: ['Alice', 'Bob', 'Charlie'],
+          age: [23, 34, 45]
+        }}
+      />
+      <Column columnId="name" headerFormat="Name" />
+      <Column columnId="age" dataType="number" headerFormat="Age" />
+    </Grid>
+  );
 }
 ```
+
+See the package READMEs for TypeScript, refs, Next.js, and more:
+
+- [Grid Lite React](./packages/grid-lite-react/README.md)
+- [Grid Pro React](./packages/grid-pro-react/README.md)
 
 ## Repository Structure
 
@@ -76,29 +106,18 @@ highcharts-grid-react/
 ├── packages/                    # Source packages
 │   ├── grid-lite-react/        # Grid Lite React package
 │   ├── grid-pro-react/          # Grid Pro React package
-│   └── grid-shared-react/         # Shared core functionality
+│   └── grid-shared-react/       # Shared core functionality
 ├── examples/                    # Example applications
 │   ├── grid-lite/               # Grid Lite examples
 │   │   ├── minimal-react/      # Minimal React example (Vite)
+│   │   ├── components-react/    # JSX component API example (Vite)
 │   │   └── minimal-nextjs/      # Minimal Next.js example
 │   └── grid-pro/                # Grid Pro examples
 │       ├── minimal-react/       # Minimal React example (Vite)
-│       └── minimal-nextjs/     # Minimal Next.js example
+│       ├── components-react/    # JSX component API example (Vite)
+│       └── minimal-nextjs/      # Minimal Next.js example
 └── README.md                    # This file
 ```
-
-### Packages
-
-- **`packages/grid-lite-react/`** - React component package for Highcharts Grid Lite. See [README](./packages/grid-lite-react/README.md) for details.
-- **`packages/grid-pro-react/`** - React component package for Highcharts Grid Pro. See [README](./packages/grid-pro-react/README.md) for details.
-- **`packages/grid-shared-react/`** - Internal package containing shared React components and hooks used by both packages.
-
-### Examples
-
-- **`examples/grid-lite/minimal-react/`** - Minimal React application (Vite) demonstrating how to use `@highcharts/grid-lite-react`
-- **`examples/grid-lite/minimal-nextjs/`** - Minimal Next.js application demonstrating how to use `@highcharts/grid-lite-react`
-- **`examples/grid-pro/minimal-react/`** - Minimal React application (Vite) demonstrating how to use `@highcharts/grid-pro-react`
-- **`examples/grid-pro/minimal-nextjs/`** - Minimal Next.js application demonstrating how to use `@highcharts/grid-pro-react`
 
 ## Development
 
@@ -131,12 +150,20 @@ To run the example applications:
 cd examples/grid-lite/minimal-react
 pnpm dev
 
+# Run Grid Lite JSX components example
+cd examples/grid-lite/components-react
+pnpm dev
+
 # Run Grid Lite Next.js example
 cd examples/grid-lite/minimal-nextjs
 pnpm dev
 
 # Run Grid Pro React example (Vite)
 cd examples/grid-pro/minimal-react
+pnpm dev
+
+# Run Grid Pro JSX components example
+cd examples/grid-pro/components-react
 pnpm dev
 
 # Run Grid Pro Next.js example
@@ -148,64 +175,25 @@ Note: Since all examples are part of the pnpm workspace, dependencies are instal
 
 ## Next.js Integration
 
-Highcharts Grid React components can be used in Next.js applications. Since the Grid components require browser APIs, they need to be rendered on the client side only (without Server-Side Rendering).
-
-### Setup
-
-1. Install the required packages:
-
-```bash
-npm install @highcharts/grid-lite-react @highcharts/grid-lite
-# or
-npm install @highcharts/grid-pro-react @highcharts/grid-pro
-```
-
-2. Import the Grid component dynamically with SSR disabled:
-
-```tsx
-'use client';
-
-import { useState } from 'react';
-import dynamic from 'next/dynamic';
-import { type GridOptions } from '@highcharts/grid-lite-react';
-import '@highcharts/grid-lite/css/grid-lite.css';
-
-// Disable SSR for the Grid component
-const Grid = dynamic(
-  () => import('@highcharts/grid-lite-react').then((mod) => mod.Grid),
-  { ssr: false }
-);
-
-export default function Page() {
-  const [options] = useState<GridOptions>({
-    dataTable: {
-      columns: {
-        name: ['Alice', 'Bob', 'Charlie'],
-        age: [23, 34, 45]
-      }
-    }
-  });
-
-  return <Grid options={options} />;
-}
-```
-
-### Important Notes
-
-- **SSR is disabled**: The Grid components require browser APIs and cannot be rendered on the server. They are dynamically imported with `ssr: false` to ensure client-side only rendering.
-- **Client Component**: The page or component using the Grid must be marked with `'use client'` directive.
-- **CSS Import**: Don't forget to import the required CSS file for the Grid component.
-
-See the [Next.js examples](./examples/) for complete working implementations.
+Highcharts Grid React components can be used in Next.js applications. Grid uses browser APIs, so it must render on the client. See the [Next.js guide](https://www.highcharts.com/docs/grid/frameworks/nextjs) and the package READMEs for a complete example.
 
 ## Documentation
 
-- [Grid Lite React Documentation](./packages/grid-lite-react/README.md)
-- [Grid Pro React Documentation](./packages/grid-pro-react/README.md)
-- [Highcharts Grid Lite Documentation](https://www.highcharts.com/docs/grid/getting-started/grid-lite)
-- [Highcharts Grid Pro Documentation](https://www.highcharts.com/docs/grid/getting-started/grid-pro)
+- [Grid Lite React](./packages/grid-lite-react/README.md)
+- [Grid Pro React](./packages/grid-pro-react/README.md)
+- [Highcharts Grid with React](https://www.highcharts.com/docs/grid/frameworks/react)
+- [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/getting-started/grid-lite)
+- [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro)
 - [Changelog](./CHANGELOG.md)
 - [Releasing](./RELEASING.md)
+
+## Support and feedback
+
+We love to learn how you are using Highcharts, and what you would like to see from us in the future.
+
+Join our vibrant community on [GitHub](https://github.com/highcharts/grid-react), [Stack Overflow](https://stackoverflow.com/tags/highcharts/), [Discord](https://discord.com/invite/xHxxcyyy6K), and the [Highcharts Forums](https://www.highcharts.com/forum/).
+
+Commercial support packages are available, see [Highcharts Advantage](https://www.highcharts.com/highcharts-advantage/).
 
 ## License
 
