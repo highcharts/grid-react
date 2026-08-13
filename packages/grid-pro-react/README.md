@@ -16,7 +16,7 @@
 
 ## Why Highcharts Grid Pro React?
 
-- **JSX-Native API** - Compose grids with React components such as `Data`, `Column`, `Caption`, and `Pagination`
+- **Options or JSX** - Pass a Grid `options` object, compose with React components such as `Data`, `Column`, `Caption`, and `Pagination`, or mix both
 - **Everything in Grid Lite** - Sorting, filtering, pagination, virtualization, theming, and accessibility
 - **Interactive Data Editing** - Built-in editors for text, numbers, dates, and more
 - **Validation** - Keep data clean with configurable rules and custom business logic
@@ -52,7 +52,31 @@ yarn add @highcharts/grid-pro-react
 
 ## Quick Start
 
-Pass your Grid Pro license key with `gridKey`.
+Pass your Grid Pro license key with `gridKey`. Components are optional. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
+
+### Using options
+
+```jsx
+import { useState } from 'react';
+import { Grid, type GridOptions } from '@highcharts/grid-pro-react';
+
+export function App() {
+  const [options] = useState<GridOptions>({
+    caption: { text: 'Team directory' },
+    data: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie'],
+        age: [23, 34, 45],
+        city: ['New York', 'Oslo', 'Paris']
+      }
+    }
+  });
+
+  return <Grid gridKey="YOUR-GRID-KEY" options={options} />;
+}
+```
+
+### Using components
 
 ```jsx
 import {
@@ -107,8 +131,6 @@ The grid is rendered inside a container. You can pass layout, theme, and Pro eve
 - `tableClassName` applies to the rendered table
 - `theme` sets the Grid theme (`rendering.theme`)
 - `onAfterLoad` and other `on*` props map to Grid Pro events
-
-You can also pass a Grid options object via the `options` prop when you prefer a configuration object over JSX children.
 
 ## TypeScript
 

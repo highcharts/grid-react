@@ -16,7 +16,7 @@
 
 ## Why Highcharts Grid Lite React?
 
-- **JSX-Native API** - Compose grids with React components such as `Data`, `Column`, `Caption`, and `Pagination`
+- **Options or JSX** - Pass a Grid `options` object, compose with React components such as `Data`, `Column`, `Caption`, and `Pagination`, or mix both
 - **Self-Contained Package** - Grid setup, cleanup, and CSS are handled for you
 - **Built for Large Tables** - Row virtualization keeps scrolling smooth with thousands of records
 - **Interactive by Default** - Sorting, filtering, and pagination without extra libraries
@@ -50,6 +50,32 @@ yarn add @highcharts/grid-lite-react
 > **Note:** `@highcharts/grid-lite` is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
 
 ## Quick Start
+
+Components are optional. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
+
+### Using options
+
+```jsx
+import { useState } from 'react';
+import { Grid, type GridOptions } from '@highcharts/grid-lite-react';
+
+export function App() {
+  const [options] = useState<GridOptions>({
+    caption: { text: 'Team directory' },
+    data: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie'],
+        age: [23, 34, 45],
+        city: ['New York', 'Oslo', 'Paris']
+      }
+    }
+  });
+
+  return <Grid options={options} />;
+}
+```
+
+### Using components
 
 ```jsx
 import { Grid, Caption, Data, Column, Pagination } from '@highcharts/grid-lite-react';
@@ -92,8 +118,6 @@ The grid is rendered inside a container. You can pass layout and theme props dir
 - `className` applies to the React mount container
 - `tableClassName` applies to the rendered table
 - `theme` sets the Grid theme (`rendering.theme`)
-
-You can also pass a Grid options object via the `options` prop when you prefer a configuration object over JSX children.
 
 ## TypeScript
 

@@ -18,7 +18,7 @@ This is the working repository for the Grid React packages. If you want to use G
 
 ## Why Highcharts Grid React?
 
-- **JSX-Native API** - Compose grids with React components such as `Data`, `Column`, `Caption`, and `Pagination`
+- **Options or JSX** - Pass a Grid `options` object, compose with React components such as `Data`, `Column`, `Caption`, and `Pagination`, or mix both
 - **Lite and Pro** - Start with free Grid Lite, or use Grid Pro for editing, validation, sparklines, and events
 - **Self-Contained Packages** - Grid setup, cleanup, and CSS are handled for you
 - **Built for Large Tables** - Row virtualization keeps scrolling smooth with thousands of records
@@ -50,7 +50,32 @@ npm install @highcharts/grid-pro-react
 
 ## Quick Start
 
+Components are optional. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
+
 ### Grid Lite
+
+Using options:
+
+```jsx
+import { useState } from 'react';
+import { Grid, type GridOptions } from '@highcharts/grid-lite-react';
+
+export function App() {
+  const [options] = useState<GridOptions>({
+    caption: { text: 'Team directory' },
+    data: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie'],
+        age: [23, 34, 45]
+      }
+    }
+  });
+
+  return <Grid options={options} />;
+}
+```
+
+Using components:
 
 ```jsx
 import { Grid, Caption, Data, Column } from '@highcharts/grid-lite-react';
@@ -73,6 +98,29 @@ export function App() {
 ```
 
 ### Grid Pro
+
+Using options:
+
+```jsx
+import { useState } from 'react';
+import { Grid, type GridOptions } from '@highcharts/grid-pro-react';
+
+export function App() {
+  const [options] = useState<GridOptions>({
+    caption: { text: 'Team directory' },
+    data: {
+      columns: {
+        name: ['Alice', 'Bob', 'Charlie'],
+        age: [23, 34, 45]
+      }
+    }
+  });
+
+  return <Grid gridKey="YOUR-GRID-KEY" options={options} />;
+}
+```
+
+Using components:
 
 ```jsx
 import { Grid, Caption, Data, Column } from '@highcharts/grid-pro-react';
