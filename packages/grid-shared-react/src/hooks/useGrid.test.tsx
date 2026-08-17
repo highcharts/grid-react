@@ -60,9 +60,10 @@ describe('useGrid', () => {
             expect(initQueue).toHaveLength(1);
         });
 
-        const [firstInit] = initQueue;
+        const firstInit = initQueue[0];
 
-        await firstInit.resolve();
+        expect(firstInit).toBeDefined();
+        await firstInit!.resolve();
 
         await waitFor(() => {
             expect(container.querySelector('[data-grid-id="1"]')).not.toBeNull();

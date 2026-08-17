@@ -8,14 +8,13 @@
  */
 
 import { useEffect, RefObject, useRef } from 'react';
-import { BaseGridProps } from '../components/BaseGrid';
 
 /**
  * Interface describing the shape of a Grid instance returned by Grid.grid()
  */
 export interface GridInstance<TOptions> {
     destroy(): void;
-    update(options: TOptions, redraw?: boolean): void;
+    update(options: TOptions, redraw?: boolean, oneToOne?: boolean): void;
 }
 
 /**
@@ -25,11 +24,18 @@ export interface GridInstance<TOptions> {
  * directly depending on their types.
  */
 export interface GridType<TOptions> {
-    grid(container: HTMLDivElement, options: TOptions, async?: boolean): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
+    grid(
+        container: HTMLDivElement,
+        options?: TOptions,
+        async?: boolean
+    ): GridInstance<TOptions> | Promise<GridInstance<TOptions>>;
 }
 
-export interface UseGridOptions<TOptions> extends BaseGridProps<TOptions> {
+export interface UseGridOptions<TOptions> {
     containerRef: RefObject<HTMLDivElement | null>;
+    options?: TOptions;
+    Grid: GridType<TOptions>;
+    callback?: (grid: GridInstance<TOptions>) => void;
 }
 
 export function useGrid<TOptions>({
@@ -40,7 +46,7 @@ export function useGrid<TOptions>({
 }: UseGridOptions<TOptions>) {
     const currGridRef = useRef<GridInstance<TOptions> | null>(null);
     const callbackRef = useRef(callback);
-    const pendingOptionsRef = useRef<TOptions | null>(null);
+    const pendingOptionsRef = useRef<TOptions | undefined>(void 0);
     const initStartedRef = useRef(false);
 
     // StrictMode runs effects twice: mount → cleanup → mount.
@@ -60,7 +66,8 @@ export function useGrid<TOptions>({
             return;
         }
 
-        // StrictMode cleanup runs before re-mount; allow init to complete if re-mounted.
+        // StrictMode cleanup runs before re-mount;
+        // allow init to complete if re-mounted.
         destroyOnInitRef.current = false;
 
         // Prevent double initialization
@@ -71,24 +78,27 @@ export function useGrid<TOptions>({
 
         const initGrid = async () => {
             try {
-                // Use pending options if available (from rapid updates during init)
+                // Use pending options if available
+                // (from rapid updates during init)
                 const initOptions = pendingOptionsRef.current ?? options;
-                pendingOptionsRef.current = null;
+                pendingOptionsRef.current = void 0;
 
                 const grid = await Grid.grid(container, initOptions, true);
 
                 if (destroyOnInitRef.current) {
-                    // Component unmounted while we were initializing - destroy immediately
+                    // Component unmounted while initializing -
+                    // destroy immediately
                     grid.destroy();
                     return;
                 }
 
                 currGridRef.current = grid;
 
-                // Apply any pending options that came in while we were initializing
-                if (pendingOptionsRef.current) {
-                    grid.update(pendingOptionsRef.current, true);
-                    pendingOptionsRef.current = null;
+                // Apply pending options that came in
+                // while we were initializing
+                if (pendingOptionsRef.current !== void 0) {
+                    grid.update(pendingOptionsRef.current, true, true);
+                    pendingOptionsRef.current = void 0;
                 }
 
                 callbackRef.current?.(grid);
@@ -115,9 +125,14 @@ export function useGrid<TOptions>({
 
     // Effect for options updates - separate from init
     useEffect(() => {
+        if (options === void 0) {
+            return;
+        }
+
         if (currGridRef.current) {
-            // Grid exists, update it directly
-            currGridRef.current.update(options, true);
+            // Declarative React options replace the previous
+            // snapshot (oneToOne).
+            currGridRef.current.update(options, true, true);
         } else {
             // Grid still initializing, queue the update
             pendingOptionsRef.current = options;

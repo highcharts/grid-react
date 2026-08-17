@@ -9,12 +9,38 @@
 
 import {
     BaseGrid,
-    GridProps
+    useDeclarativeGridOptions
 } from '@highcharts/grid-shared-react';
 import Grid from '@highcharts/grid-pro/es-modules/masters/grid-pro.src';
 import '@highcharts/grid-pro/css/grid-pro.css';
-import type { Options } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
+import type { GridProProps } from './utils/mappers/grid';
+import {
+    getGridEventPropDeps
+} from './utils/mappers/grid';
+import { buildGridOptions } from './utils/buildGridOptions';
 
-export default function GridPro({ options, gridRef, callback }: GridProps<Options>) {
-    return <BaseGrid options={options} Grid={Grid} ref={gridRef} callback={callback} />;
+export default function GridPro(props: GridProProps) {
+    const { gridRef, children, options, callback, className } = props;
+    const { gridOptions, columnKey } = useDeclarativeGridOptions(
+        children,
+        options,
+        (childOptions, opts) => buildGridOptions(
+            props.gridKey,
+            childOptions,
+            opts,
+            props
+        ),
+        getGridEventPropDeps(props)
+    );
+
+    return (
+        <BaseGrid
+            key={columnKey}
+            options={gridOptions}
+            Grid={Grid}
+            callback={callback}
+            ref={gridRef}
+            className={className}
+        />
+    );
 }

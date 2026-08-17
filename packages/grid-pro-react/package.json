@@ -37,9 +37,6 @@
         "clean": "rimraf node_modules dist",
         "prepublishOnly": "pnpm build"
     },
-    "dependencies": {
-        "@highcharts/grid-pro": "3.1.0"
-    },
     "devDependencies": {
         "@highcharts/grid-shared-react": "workspace:*",
         "@rollup/plugin-commonjs": "^29.0.0",
@@ -53,6 +50,7 @@
         "rollup-plugin-dts": "^6.3.0"
     },
     "peerDependencies": {
+        "@highcharts/grid-pro": ">=3.1.0",
         "@types/react": ">=18",
         "@types/react-dom": ">=18",
         "react": ">=18",
