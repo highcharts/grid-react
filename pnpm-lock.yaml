@@ -57,7 +57,7 @@ importers:
   examples/grid-lite/components-react:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: 3.1.0
+        specifier: ^3.1.0
         version: 3.1.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
@@ -94,7 +94,7 @@ importers:
   examples/grid-lite/minimal-nextjs:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: 3.1.0
+        specifier: ^3.1.0
         version: 3.1.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
@@ -125,7 +125,7 @@ importers:
   examples/grid-lite/minimal-react:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: 3.1.0
+        specifier: ^3.1.0
         version: 3.1.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
@@ -156,7 +156,7 @@ importers:
   examples/grid-pro/components-react:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: 3.1.0
+        specifier: ^3.1.0
         version: 3.1.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
@@ -187,7 +187,7 @@ importers:
   examples/grid-pro/minimal-nextjs:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: 3.1.0
+        specifier: ^3.1.0
         version: 3.1.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
@@ -218,7 +218,7 @@ importers:
   examples/grid-pro/minimal-react:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: 3.1.0
+        specifier: ^3.1.0
         version: 3.1.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
