@@ -10,6 +10,7 @@
     "clean": "rimraf dist node_modules"
   },
   "dependencies": {
+    "@highcharts/grid-lite": ">=3.1.0",
     "@highcharts/grid-lite-react": "workspace:*",
     "react": ">=18",
     "react-dom": ">=18"
@@ -22,8 +23,5 @@
     "tailwindcss": "^4.3.2",
     "typescript": "^5.0.0",
     "vite": "^5.0.0"
-  },
-  "peerDependencies": {
-    "@highcharts/grid-lite": ">=3.1.0"
   }
 }
