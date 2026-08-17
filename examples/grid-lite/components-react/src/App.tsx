@@ -20,7 +20,7 @@ import {
 function App() {
   // const grid = useRef<GridRefHandle<GridOptions> | null>(null);
 
-  // ==== OPTIONS ====
+  // ===== OPTIONS =====
   // const [options] = useState<GridOptions>({
   //   dataTable: {
   //     columns: {
