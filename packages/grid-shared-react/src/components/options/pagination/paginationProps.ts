@@ -9,69 +9,66 @@
 
 export interface PaginationProps {
     /**
-     * Whether pagination should be rendered.
-     * Defaults to `true` when the `<Pagination>` component is used.
-     * Pass `false` to disable pagination while keeping other options.
+     * Defaults to `true` when the `<Pagination>` component is used. Pass
+     * `false` to disable pagination while keeping other options.
+     *
+     * Links to Grid.Options.pagination.enabled
      */
     enabled?: boolean;
     /**
-     * Additional CSS class name(s) for the pagination container
-     * (`.hcg-pagination`).
+     * Links to Grid.Options.pagination.className
      */
     className?: string;
     /**
-     * Additional CSS class name(s) for the page info element
-     * (`.hcg-pagination-info`).
+     * Links to Grid.Options.pagination.controls.pageInfo.className
      */
     infoClassName?: string;
     /**
-     * Additional CSS class name(s) for the controls container
-     * (`.hcg-pagination-controls`).
+     * Links to Grid.Options.pagination.controls.className
      */
     controlsClassName?: string;
     /**
-     * Additional CSS class name(s) for the page size container
-     * (`.hcg-pagination-page-size`).
+     * Links to Grid.Options.pagination.controls.pageSizeSelector.className
      */
     sizeClassName?: string;
     /**
-     * The current page number.
+     * Links to Grid.Options.pagination.page
      */
     page?: number;
     /**
-     * Number of rows per page.
+     * Links to Grid.Options.pagination.pageSize
      */
     pageSize?: number;
     /**
-     * Alignment of pagination elements within the wrapper.
+     * Links to Grid.Options.pagination.align
      */
     align?: 'left' | 'center' | 'right' | 'distributed';
     /**
-     * Whether to show the page information text.
+     * Links to Grid.Options.pagination.controls.pageInfo
      */
     pageInfo?: boolean;
     /**
-     * Whether to show the page size selector.
+     * Links to Grid.Options.pagination.controls.pageSizeSelector
      */
     pageSizeSelector?: boolean;
     /**
-     * Available options for the page size selector dropdown.
+     * Links to Grid.Options.pagination.controls.pageSizeSelector.options
      */
     pageSizeOptions?: number[];
     /**
-     * Whether to show numbered page buttons.
+     * Links to Grid.Options.pagination.controls.pageButtons
      */
     pageButtons?: boolean;
     /**
-     * Maximum number of page number buttons to show before using ellipsis.
+     * Links to Grid.Options.pagination.controls.pageButtons.count
      */
     pageButtonsCount?: number;
     /**
-     * Whether to show the first and last page navigation buttons.
+     * Links to Grid.Options.pagination.controls.firstLastButtons
      */
     firstLast?: boolean;
     /**
-     * Whether to show the previous and next page navigation buttons.
+     * Links to Grid.Options.pagination.controls.previousNextButtons
      */
     previousNext?: boolean;
 }

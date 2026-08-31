@@ -13,46 +13,43 @@ export type DataColumns = Record<string, Array<DataColumnValue>>;
 
 export interface DataProps {
     /**
-     * The type of the data provider.
-     *
-     * @default 'local'
+     * Links to Grid.Options.data.providerType
      */
     providerType?: 'local' | string;
     /**
-     * Whether columns should be generated automatically from data source
-     * column ids.
+     * When declarative `<Column>` components are used, the React wrapper sets
+     * this to `false` unless the prop is passed explicitly.
      *
-     * Defaults to `true`. When declarative `<Column>` components are used,
-     * the React wrapper sets this to `false` unless you pass this prop
-     * explicitly.
-     *
-     * @default true
+     * Links to Grid.Options.data.autogenerateColumns
      */
     autogenerateColumns?: boolean;
     /**
-     * Columns data to initialize the Grid with.
+     * Links to Grid.Options.data.columns
      */
     columns?: DataColumns;
     /**
-     * Data table as a source of data for the grid.
+     * Links to Grid.Options.data.dataTable
      */
     dataTable?: unknown;
     /**
-     * Connector instance or options used to populate the data table.
+     * Links to Grid.Options.data.connector
      */
     connector?: unknown;
     /**
-     * Automatically update the grid when the data table changes.
-     *
-     * @default false
+     * Links to Grid.Options.data.updateOnChange
      */
     updateOnChange?: boolean;
     /**
-     * The column ID that contains the stable, unique row IDs.
+     * Links to Grid.Options.data.idColumn
      */
     idColumn?: string;
 }
 
+/**
+ * Data source for the grid.
+ *
+ * Links to Grid.Options.data
+ */
 export function Data(_props: DataProps) {
     return null;
 }
