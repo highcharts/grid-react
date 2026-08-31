@@ -15,21 +15,24 @@ import {
 } from '../hooks/useGrid';
 
 /**
- * Ref handle exposed by Grid components
+ * Ref handle exposed by Grid components.
  */
 export interface GridRefHandle<TOptions> {
     /**
-     * Access to the underlying grid instance
+     * Access to the underlying grid instance.
      */
     readonly grid: GridInstance<TOptions> | null;
 }
 
 /**
- * Props for Grid component
+ * Props for the Grid component.
  */
 export interface GridProps<TOptions> {
     /**
-     * Grid configuration options
+     * Grid options object. Merged with options from child
+     * components.
+     *
+     * Links to Grid.Options
      */
     options?: TOptions;
     /**
@@ -40,12 +43,15 @@ export interface GridProps<TOptions> {
     /**
      * Optional CSS class names mapped to Core `rendering.table.className` on
      * `.hcg-table`. Independent of `className` / `theme`.
+     *
+     * Links to Grid.Options.rendering.table.className
      */
     tableClassName?: string;
     /**
-     * Optional theme name passed to Grid Core as `rendering.theme`.
-     * Omitted → Core default (`hcg-theme-default`).
-     * Defined (including `''`) → that value only.
+     * Omitted uses the Core default (`hcg-theme-default`). An empty string
+     * disables the theme.
+     *
+     * Links to Grid.Options.rendering.theme
      */
     theme?: string;
     /**
@@ -53,11 +59,11 @@ export interface GridProps<TOptions> {
      */
     children?: ReactNode;
     /**
-     * Optional ref to access the grid instance
+     * Ref to access the grid instance.
      */
     gridRef?: ForwardedRef<GridRefHandle<TOptions>>;
     /**
-     * Optional callback to be called when the grid is initialized
+     * Callback to be called when the grid is initialized.
      */
     callback?: (grid: GridInstance<TOptions>) => void;
 }

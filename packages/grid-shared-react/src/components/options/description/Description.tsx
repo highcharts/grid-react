@@ -11,12 +11,22 @@ import { ReactNode } from 'react';
 
 export interface DescriptionProps {
     /**
-     * The custom CSS class name for the description.
+     * Links to Grid.Options.description.className
      */
     className?: string;
+    /**
+     * Description text, passed as the component children.
+     *
+     * Links to Grid.Options.description.text
+     */
     children?: ReactNode;
 }
 
+/**
+ * Table description. Pass the description text as children.
+ *
+ * Links to Grid.Options.description
+ */
 export function Description(_props: DescriptionProps) {
     return null;
 }

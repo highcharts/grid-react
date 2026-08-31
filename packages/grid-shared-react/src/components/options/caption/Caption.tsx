@@ -11,16 +11,26 @@ import { ReactNode } from 'react';
 
 export interface CaptionProps {
     /**
-     * The custom CSS class name for the table caption.
+     * Links to Grid.Options.caption.className
      */
     className?: string;
     /**
-     * The HTML tag to use for the caption.
+     * Links to Grid.Options.caption.htmlTag
      */
     htmlTag?: string;
+    /**
+     * Caption text, passed as the component children.
+     *
+     * Links to Grid.Options.caption.text
+     */
     children?: ReactNode;
 }
 
+/**
+ * Table caption. Pass the caption text as children.
+ *
+ * Links to Grid.Options.caption
+ */
 export function Caption(_props: CaptionProps) {
     return null;
 }

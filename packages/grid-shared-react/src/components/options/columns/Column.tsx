@@ -9,6 +9,11 @@
 
 import type { ColumnProps } from './columnProps';
 
+/**
+ * Per-column configuration. Flattened React props map onto `columns[]`.
+ *
+ * Links to Grid.Options.columns
+ */
 export function Column(_props: ColumnProps) {
     return null;
 }

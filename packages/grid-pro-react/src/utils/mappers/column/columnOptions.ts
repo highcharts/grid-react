@@ -16,33 +16,72 @@ import type {
 } from '@highcharts/grid-pro/es-modules/Grid/Pro/GridEvents.js';
 
 /**
- * Column-level event props mapped to `columns[].events`.
+ * Column-level event props mapped to `columns[].events`. Grid Pro.
  */
 export interface ColumnLevelEventProps {
+    /**
+     * Links to Grid.Options.columns.events.afterResize
+     */
     onAfterResize?: ColumnEventCallback;
+    /**
+     * Links to Grid.Options.columns.events.beforeSort
+     */
     onBeforeSort?: ColumnEventCallback;
+    /**
+     * Links to Grid.Options.columns.events.afterSort
+     */
     onAfterSort?: ColumnEventCallback;
+    /**
+     * Links to Grid.Options.columns.events.beforeFilter
+     */
     onBeforeFilter?: ColumnEventCallback;
+    /**
+     * Links to Grid.Options.columns.events.afterFilter
+     */
     onAfterFilter?: ColumnEventCallback;
 }
 
 /**
- * Cell-level event props mapped to `columns[].cells.events`.
+ * Cell-level event props mapped to `columns[].cells.events`. Grid Pro.
  */
 export interface CellLevelEventProps {
+    /**
+     * Links to Grid.Options.columns.cells.events.click
+     */
     onCellClick?: CellEventCallback;
+    /**
+     * Links to Grid.Options.columns.cells.events.dblClick
+     */
     onCellDblClick?: CellEventCallback;
+    /**
+     * Links to Grid.Options.columns.cells.events.mouseOver
+     */
     onCellMouseOver?: CellEventCallback;
+    /**
+     * Links to Grid.Options.columns.cells.events.mouseOut
+     */
     onCellMouseOut?: CellEventCallback;
+    /**
+     * Links to Grid.Options.columns.cells.events.afterRender
+     */
     onCellAfterRender?: CellEventCallback;
+    /**
+     * Links to Grid.Options.columns.cells.events.afterEdit
+     */
     onCellAfterEdit?: CellEventCallback;
 }
 
 /**
- * Header-level event props mapped to `columns[].header.events`.
+ * Header-level event props mapped to `columns[].header.events`. Grid Pro.
  */
 export interface HeaderLevelEventProps {
+    /**
+     * Links to Grid.Options.columns.header.events.click
+     */
     onHeaderClick?: ColumnEventCallback;
+    /**
+     * Links to Grid.Options.columns.header.events.afterRender
+     */
     onHeaderAfterRender?: ColumnEventCallback;
 }
 

@@ -9,6 +9,11 @@
 
 import type { HeaderProps } from './headerProps';
 
+/**
+ * Header tree: column order, inclusion, and grouping.
+ *
+ * Links to Grid.Options.header
+ */
 export function Header(_props: HeaderProps) {
     return null;
 }

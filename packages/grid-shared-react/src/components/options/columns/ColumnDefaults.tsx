@@ -15,17 +15,20 @@ import type { ColumnOptionsProps } from './columnProps';
  */
 export interface ColumnDefaultsProps extends ColumnOptionsProps {
     /**
-     * CSS class names on every body `<tr>`.
-     * Maps to Core `rendering.rows.className`.
+     * Links to Grid.Options.rendering.rows.className
      */
     rowClassName?: string;
     /**
-     * CSS class names on even body `<tr>` (Core `.hcg-row-even` parity).
-     * Maps to Core `rendering.rows.evenClassName`.
+     * Links to Grid.Options.rendering.rows.evenClassName
      */
     evenRowClassName?: string;
 }
 
+/**
+ * Default options applied to every column.
+ *
+ * Links to Grid.Options.columnDefaults
+ */
 export function ColumnDefaults(_props: ColumnDefaultsProps) {
     return null;
 }
