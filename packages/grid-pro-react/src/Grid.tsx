@@ -19,6 +19,11 @@ import {
 } from './utils/mappers/grid';
 import { buildGridOptions } from './utils/buildGridOptions';
 
+/**
+ * Grid Pro React component.
+ *
+ * Links to Grid.Options
+ */
 export default function GridPro(props: GridProProps) {
     const { gridRef, children, options, callback, className } = props;
     const { gridOptions, columnKey } = useDeclarativeGridOptions(

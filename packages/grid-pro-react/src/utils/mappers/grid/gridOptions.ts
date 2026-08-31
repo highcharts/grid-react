@@ -29,25 +29,54 @@ export type GridProOptions = GridPro.Options & {
 export type GridOptions = GridProOptions;
 
 /**
- * Grid-level event props mapped to `options.events`.
+ * Grid-level event props mapped to `options.events`. Grid Pro.
  */
 export interface GridLevelEventProps {
+    /**
+     * Links to Grid.Options.events.beforeLoad
+     */
     onBeforeLoad?: GridEventCallback;
+    /**
+     * Links to Grid.Options.events.afterLoad
+     */
     onAfterLoad?: GridEventCallback;
+    /**
+     * Links to Grid.Options.events.beforeUpdate
+     */
     onBeforeUpdate?: GridEventCallback;
+    /**
+     * Links to Grid.Options.events.afterUpdate
+     */
     onAfterUpdate?: GridEventCallback;
+    /**
+     * Links to Grid.Options.events.beforeRedraw
+     */
     onBeforeRedraw?: GridEventCallback;
+    /**
+     * Links to Grid.Options.events.afterRedraw
+     */
     onAfterRedraw?: GridEventCallback;
+    /**
+     * Links to Grid.Options.events.beforeTreeRowToggle
+     */
     onBeforeTreeRowToggle?: (e: BeforeTreeRowToggleEvent) => void;
+    /**
+     * Links to Grid.Options.events.afterTreeRowToggle
+     */
     onAfterTreeRowToggle?: (e: AfterTreeRowToggleEvent) => void;
 }
 
 /**
- * Row pinning event props mapped to
- * `options.rendering.rows.pinning.events`.
+ * Row pinning event props. Grid Pro.
  */
 export interface RowPinningEventProps {
+    /**
+     * Links to Grid.Options.rendering.rows.pinning.events.beforeRowPin
+     */
     onBeforeRowPin?: RowPinningChangeEventCallback;
+    /**
+     * Links to Grid.Options.rendering.rows.pinning.events.afterRowPin
+     */
     onAfterRowPin?: RowPinningChangeEventCallback;
 }
 
@@ -60,6 +89,8 @@ export interface GridProProps
     extends BaseGridProps<GridProOptions>, GridEventProps {
     /**
      * Grid Pro license key.
+     *
+     * Links to Grid.Options.gridKey
      */
     gridKey: string;
 }

@@ -18,12 +18,24 @@ import type {
 } from '@highcharts/grid-pro/es-modules/Grid/Pro/Pagination/PaginationComposition.js';
 
 /**
- * Pagination event props mapped to `pagination.events`.
+ * Pagination event props mapped to `pagination.events`. Grid Pro.
  */
 export interface PaginationEventProps {
+    /**
+     * Links to Grid.Options.pagination.events.beforePageChange
+     */
     onBeforePageChange?: (e: BeforePageChangeEvent) => void;
+    /**
+     * Links to Grid.Options.pagination.events.afterPageChange
+     */
     onAfterPageChange?: (e: AfterPageChangeEvent) => void;
+    /**
+     * Links to Grid.Options.pagination.events.beforePageSizeChange
+     */
     onBeforePageSizeChange?: (e: BeforePageSizeChangeEvent) => void;
+    /**
+     * Links to Grid.Options.pagination.events.afterPageSizeChange
+     */
     onAfterPageSizeChange?: (e: AfterPageSizeChangeEvent) => void;
 }
 
