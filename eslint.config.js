@@ -38,7 +38,7 @@ export default defineConfig(
                 ignoreStrings: true,
                 ignoreTemplateLiterals: true
             }],
-            // Core hooks rules (skip React Compiler suite from flat.recommended).
+            // Core hooks rules.
             'react-hooks/rules-of-hooks': 'error',
             'react-hooks/exhaustive-deps': 'warn',
         },
