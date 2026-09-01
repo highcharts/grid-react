@@ -44,7 +44,7 @@ export default defineConfig(
         },
     },
     {
-        files: ['scripts/**/*.js', '**/next.config.js'],
+        files: ['scripts/**/*.{js,ts}', '**/next.config.js'],
         languageOptions: {
             globals: {
                 ...globals.node,
