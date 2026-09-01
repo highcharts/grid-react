@@ -9,6 +9,7 @@
     "test:watch": "vitest",
     "pretest:e2e": "pnpm build",
     "test:e2e": "vitest run --config vitest.e2e.config.ts",
+    "test:all": "pnpm test && pnpm test:e2e && pnpm test:api-docs",
     "test:api-docs": "vitest run --config vitest.api-docs.config.ts",
     "api-docs": "node scripts/api-docs/api-grid-react.ts",
     "check": "pnpm lint && pnpm test && pnpm test:api-docs",
