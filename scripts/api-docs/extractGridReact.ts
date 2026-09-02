@@ -13,6 +13,8 @@ import Path from 'node:path';
 import ts from 'typescript';
 
 const PRODUCT = 'grid';
+const LITE_PKG = '@highcharts/grid-lite-react';
+const PRO_PKG = '@highcharts/grid-pro-react';
 const COMPONENTS = new Set([
     'Grid', 'Caption', 'Description', 'Data', 'Header',
     'Pagination', 'Column', 'ColumnDefaults'
@@ -29,6 +31,8 @@ export interface PropEntry {
     type: string;
     description: string;
     hrefPath?: string;
+    defaultValue?: string;
+    proOnly?: boolean;
 }
 
 export interface ComponentDoc {
@@ -73,18 +77,25 @@ function jsDoc(node: ts.Node, src: ts.SourceFile): string {
         .trim();
 }
 
+const DEFAULT_RE = /@default\s+(\S.*)$/m;
+
 function parseDoc(raw: string): {
     description: string;
     hrefPath?: string;
+    defaultValue?: string;
 } {
     const match = raw.match(LINKS_RE);
+    const defaultMatch = raw.match(DEFAULT_RE);
     const description = raw
         .replace(LINKS_RE, '')
+        .replace(DEFAULT_RE, '')
         .replace(/\n{2,}/g, '\n')
         .trim();
-    return match ?
-        { description, hrefPath: match[1] ?? '' } :
-        { description };
+    return {
+        description,
+        ...(match ? { hrefPath: match[1] ?? '' } : {}),
+        ...(defaultMatch ? { defaultValue: defaultMatch[1].trim() } : {})
+    };
 }
 
 function refName(type: ts.TypeNode): string | undefined {
@@ -119,6 +130,9 @@ function collectProps(
             return;
         }
         const name = member.name.getText(src);
+        if (name === 'children') {
+            return;
+        }
         const parsed = parseDoc(jsDoc(member, src));
         out.set(name, {
             name,
@@ -126,7 +140,8 @@ function collectProps(
                 member.type.getText(src).replace(/\s+/g, ' ').trim() :
                 'any',
             description: parsed.description,
-            hrefPath: parsed.hrefPath
+            hrefPath: parsed.hrefPath,
+            defaultValue: parsed.defaultValue
         });
     };
 
@@ -278,19 +293,29 @@ export function mergeComponents(
 ): ComponentDoc[] {
     const byName = new Map<string, ComponentDoc>();
 
-    for (const component of [...lite, ...pro]) {
+    for (const component of lite) {
+        byName.set(component.name, {
+            ...component,
+            props: component.props.map((prop) => ({ ...prop }))
+        });
+    }
+
+    for (const component of pro) {
         const current = byName.get(component.name);
         if (!current) {
             byName.set(component.name, {
                 ...component,
-                props: [...component.props]
+                props: component.props.map((prop) => ({
+                    ...prop,
+                    proOnly: true
+                }))
             });
             continue;
         }
         const props = new Map(current.props.map((p) => [p.name, p]));
         for (const prop of component.props) {
             if (!props.has(prop.name)) {
-                props.set(prop.name, prop);
+                props.set(prop.name, { ...prop, proOnly: true });
             }
         }
         current.props = [...props.values()];
@@ -337,12 +362,20 @@ function escapeHtml(text: string): string {
         .replace(/>/g, '&gt;');
 }
 
+function importLine(name: string, pkg: string): string {
+    return `import { ${name} } from '${pkg}';`;
+}
+
 function componentBody(component: ComponentDoc): string {
     const snippet =
-        `<pre><code>import { ${component.name} } from ` +
-        `'${component.importPath}';</code></pre>`;
-    return component.description ?
-        `${snippet}<p>${escapeHtml(component.description)}</p>` :
+        `<pre><code>${escapeHtml(
+            `${importLine(component.name, LITE_PKG)} // or '${PRO_PKG}'`
+        )}</code></pre>`;
+    const description = component.name === 'Grid' ?
+        CATEGORY_COPY.Grid :
+        component.description;
+    return description ?
+        `${snippet}<p>${escapeHtml(description)}</p>` :
         snippet;
 }
 
@@ -367,7 +400,9 @@ export function buildTree(
                     c.sourceFile,
                     {
                         description: p.description,
-                        type: { names: [p.type] }
+                        type: { names: [p.type] },
+                        ...(p.defaultValue ? { default: p.defaultValue } : {}),
+                        ...(p.proOnly ? { product: 'gridpro' } : {})
                     },
                     p.hrefPath
                 );
@@ -418,12 +453,12 @@ export function extractGridReactTree(options: {
         mergeComponents(
             extractFromDts(
                 options.liteDts,
-                '@highcharts/grid-lite-react',
+                LITE_PKG,
                 'grid-lite-react/index.d.ts'
             ),
             extractFromDts(
                 options.proDts,
-                '@highcharts/grid-pro-react',
+                PRO_PKG,
                 'grid-pro-react/index.d.ts'
             )
         ),

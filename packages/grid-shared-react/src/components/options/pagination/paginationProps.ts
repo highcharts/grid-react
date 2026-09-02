@@ -12,6 +12,8 @@ export interface PaginationProps {
      * Defaults to `true` when the `<Pagination>` component is used. Pass
      * `false` to disable pagination while keeping other options.
      *
+     * @default true
+     *
      * Links to Grid.Options.pagination.enabled
      */
     enabled?: boolean;
