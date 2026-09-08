@@ -8,8 +8,7 @@ describe('Column parser', () => {
         expect(
             getChildProps(
                 <Column
-                    columnId="price"
-                    id="price-column"
+                    id="price"
                     width={120}
                     sortingEnabled
                     sortingOrder="asc"
@@ -34,8 +33,8 @@ describe('Column parser', () => {
         expect(
             getChildProps(
                 <>
-                    <Column columnId="product" width={200} />
-                    <Column columnId="price" width={120} />
+                    <Column id="product" width={200} />
+                    <Column id="price" width={120} />
                 </>
             )
         ).toEqual({
@@ -43,6 +42,23 @@ describe('Column parser', () => {
                 { width: 200, id: 'product' },
                 { width: 120, id: 'price' }
             ],
+            data: {
+                autogenerateColumns: false
+            }
+        });
+    });
+
+    it('keeps dataId for unbound columns', () => {
+        expect(
+            getChildProps(
+                <Column id="index" dataId={null} width={40} />
+            )
+        ).toEqual({
+            columns: [{
+                id: 'index',
+                dataId: null,
+                width: 40
+            }],
             data: {
                 autogenerateColumns: false
             }
@@ -56,7 +72,7 @@ describe('Column normalization', () => {
             normalizeChildOptions(
                 getChildProps(
                     <Column
-                        columnId="price"
+                        id="price"
                         width={120}
                         sortingEnabled
                         sortingOrder="asc"
@@ -75,6 +91,38 @@ describe('Column normalization', () => {
                     format: '{value} USD'
                 },
                 id: 'price'
+            }],
+            data: {
+                autogenerateColumns: false
+            }
+        });
+    });
+
+    it('merges Core-shaped options under flattened props', () => {
+        expect(
+            normalizeChildOptions(
+                getChildProps(
+                    <Column
+                        id="price"
+                        options={{
+                            sorting: { enabled: true, order: 'desc' },
+                            header: { className: 'price-header' }
+                        }}
+                        headerFormat="{value} USD"
+                    />
+                )
+            )
+        ).toEqual({
+            columns: [{
+                id: 'price',
+                sorting: {
+                    enabled: true,
+                    order: 'desc'
+                },
+                header: {
+                    className: 'price-header',
+                    format: '{value} USD'
+                }
             }],
             data: {
                 autogenerateColumns: false

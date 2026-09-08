@@ -9,7 +9,7 @@
 
 import type { HeaderProps } from './headerProps';
 
-export function Header(_props: HeaderProps) {
+export function Header<TOptions = unknown>(_props: HeaderProps<TOptions>) {
     return null;
 }
 

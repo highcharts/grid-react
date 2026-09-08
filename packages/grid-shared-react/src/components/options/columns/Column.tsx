@@ -9,7 +9,7 @@
 
 import type { ColumnProps } from './columnProps';
 
-export function Column(_props: ColumnProps) {
+export function Column<TOptions = unknown>(_props: ColumnProps<TOptions>) {
     return null;
 }
 

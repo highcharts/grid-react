@@ -9,7 +9,9 @@
 
 import type { PaginationProps } from './paginationProps';
 
-export function Pagination(_props: PaginationProps) {
+export function Pagination<TOptions = unknown>(
+    _props: PaginationProps<TOptions>
+) {
     return null;
 }
 

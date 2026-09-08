@@ -9,11 +9,8 @@
 
 import type { ColumnOptionsProps } from './columnProps';
 
-/**
- * ColumnDefaults props include shared column options plus grid-level row
- * class hooks (lifted to `rendering.rows` during normalize).
- */
-export interface ColumnDefaultsProps extends ColumnOptionsProps {
+export interface ColumnDefaultsProps<TOptions = unknown>
+    extends ColumnOptionsProps {
     /**
      * CSS class names on every body `<tr>`.
      * Maps to Core `rendering.rows.className`.
@@ -24,9 +21,15 @@ export interface ColumnDefaultsProps extends ColumnOptionsProps {
      * Maps to Core `rendering.rows.evenClassName`.
      */
     evenRowClassName?: string;
+    /**
+     * Options JSON, same as in the Grid JS API (`columnDefaults`).
+     */
+    options?: TOptions;
 }
 
-export function ColumnDefaults(_props: ColumnDefaultsProps) {
+export function ColumnDefaults<TOptions = unknown>(
+    _props: ColumnDefaultsProps<TOptions>
+) {
     return null;
 }
 

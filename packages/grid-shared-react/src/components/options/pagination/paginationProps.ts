@@ -7,7 +7,7 @@
  *
  */
 
-export interface PaginationProps {
+export interface PaginationProps<TOptions = unknown> {
     /**
      * Whether pagination should be rendered.
      * Defaults to `true` when the `<Pagination>` component is used.
@@ -74,4 +74,8 @@ export interface PaginationProps {
      * Whether to show the previous and next page navigation buttons.
      */
     previousNext?: boolean;
+    /**
+     * Options JSON, same as in the Grid JS API (`pagination`).
+     */
+    options?: TOptions;
 }

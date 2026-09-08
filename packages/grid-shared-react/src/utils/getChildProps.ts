@@ -10,6 +10,7 @@
 import { Fragment, isValidElement, ReactElement, ReactNode } from 'react';
 import type { BaseGridOptionsComponent, BaseGridOptions } from '../components/BaseGridOptions';
 import { isObject } from './isObject';
+import { mergeComponentOptions } from './mergeOptions';
 
 function flattenChildren(childNodes: ReactNode): ReactNode[] {
     if (childNodes == null || childNodes === false) {
@@ -115,17 +116,9 @@ function getEffectiveMeta(
 function parseColumnElement(child: ReactElement): Record<string, unknown> {
     const {
         children,
-        id,
-        columnId,
         ...props
     } = getChildPropsFromElement(child);
     void children;
-    void id;
-
-    // columnId selects the column; Core expects the same value as `id`.
-    if (columnId !== void 0) {
-        props.id = columnId;
-    }
 
     return props;
 }
@@ -223,8 +216,8 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
         }
 
         if (meta.gridOption === 'header') {
-            if (props.header !== void 0) {
-                optionsFromChildren.header = props.header;
+            if (props.options !== void 0) {
+                optionsFromChildren.header = props.options;
             }
             return;
         }
@@ -241,7 +234,7 @@ export function getChildProps(children: ReactNode): Record<string, unknown> {
             Object.assign(insertInto, meta.defaultOptions);
         }
 
-        Object.assign(insertInto, props);
+        Object.assign(insertInto, mergeComponentOptions(props));
 
         if (typeof childChildren === 'string' || typeof childChildren === 'number') {
             if (meta.childOption) {
