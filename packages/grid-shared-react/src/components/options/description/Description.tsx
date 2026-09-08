@@ -9,11 +9,17 @@
 
 import { ReactNode } from 'react';
 
-export interface DescriptionProps {
+export interface DescriptionProps<TOptions = unknown> {
     /**
      * Links to Grid.Options.description.className
      */
     className?: string;
+    /**
+     * Options JSON, same as in the Grid JS API (`description`).
+     *
+     * Links to Grid.Options.description
+     */
+    options?: TOptions;
     /**
      * Description text, passed as the component children.
      *
@@ -27,7 +33,9 @@ export interface DescriptionProps {
  *
  * Links to Grid.Options.description
  */
-export function Description(_props: DescriptionProps) {
+export function Description<TOptions = unknown>(
+    _props: DescriptionProps<TOptions>
+) {
     return null;
 }
 

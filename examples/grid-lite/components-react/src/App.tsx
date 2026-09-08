@@ -127,7 +127,7 @@ function App() {
           <Caption
             className="mb-2 pt-2 pb-1 text-2xl font-semibold tracking-tight text-slate-900 dark:text-slate-100"
           >Team directory</Caption>
-          <Header header={[
+          <Header options={[
             'name',
             {
               format: 'Details',
@@ -136,6 +136,8 @@ function App() {
             }
           ]} />
           <Column
+            id="index"
+            dataId={null}
             headerFormat="#"
             width={40}
             cellValueGetter={function (this: { row: { index: number } }) {
@@ -143,7 +145,7 @@ function App() {
             }}
           />
           <Column
-            columnId="name"
+            id="name"
             enabled
             sortingEnabled
             sortingOrder="asc"
@@ -156,20 +158,20 @@ function App() {
             cellFormat="{value}"
           />
           <Column
-            columnId="age"
+            id="age"
             dataType="number"
             headerFormat="Age ({id})"
             cellFormat="{value}"
           />
           <Column
-            columnId="city"
+            id="city"
             width="20%"
             headerFormatter={function () {
               return `City: ${(this as { id?: string }).id ?? ''}`;
             }}
           />
           <Column
-            columnId="salary"
+            id="salary"
             dataType="number"
             headerFormat="Salary (USD)"
             headerClassName="text-right tabular-nums"

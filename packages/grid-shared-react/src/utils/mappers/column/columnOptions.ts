@@ -8,6 +8,7 @@
  */
 
 import { mapPrefixedProps } from '../mapPrefixedProps';
+import { mergeComponentOptions } from '../../mergeOptions';
 
 /** Flat prop prefix → nested Grid option key for columns. */
 const COLUMN_PROP_PREFIXES = {
@@ -20,5 +21,7 @@ const COLUMN_PROP_PREFIXES = {
 export function normalizeColumnOptions(
     props: Record<string, unknown>
 ): Record<string, unknown> {
-    return mapPrefixedProps(props, COLUMN_PROP_PREFIXES);
+    return mergeComponentOptions(props, (flat) => (
+        mapPrefixedProps(flat, COLUMN_PROP_PREFIXES)
+    ));
 }

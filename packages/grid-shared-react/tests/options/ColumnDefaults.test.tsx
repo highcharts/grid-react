@@ -58,7 +58,7 @@ describe('ColumnDefaults normalization', () => {
                         cellClassName="p-4 text-left border-b"
                     />
                     <Column
-                        columnId="name"
+                        id="name"
                         className="hcg-name-column"
                         headerClassName="hcg-name-header"
                         cellClassName="hcg-name-cell"

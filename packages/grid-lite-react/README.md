@@ -78,7 +78,7 @@ export function App() {
 ### Using components
 
 ```jsx
-import { Grid, Caption, Data, Column, Pagination } from '@highcharts/grid-lite-react';
+import { Grid, Caption, Data, Column, Header, Pagination } from '@highcharts/grid-lite-react';
 
 export function App() {
   return (
@@ -91,14 +91,17 @@ export function App() {
           city: ['New York', 'Oslo', 'Paris']
         }}
       />
-      <Column columnId="name" headerFormat="Name" sortingEnabled />
-      <Column columnId="age" dataType="number" headerFormat="Age" />
-      <Column columnId="city" headerFormat="City" />
+      <Header options={['name', 'age', 'city']} />
+      <Column id="name" headerFormat="Name" sortingEnabled />
+      <Column id="age" dataType="number" headerFormat="Age" />
+      <Column id="city" headerFormat="City" />
       <Pagination pageSize={5} />
     </Grid>
   );
 }
 ```
+
+Each option component also accepts an `options` prop with the same JSON as the Grid JS API. Flattened props override that object.
 
 ## Grid props
 

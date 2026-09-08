@@ -14,7 +14,7 @@ import type { HeaderProps } from './headerProps';
  *
  * Links to Grid.Options.header
  */
-export function Header(_props: HeaderProps) {
+export function Header<TOptions = unknown>(_props: HeaderProps<TOptions>) {
     return null;
 }
 

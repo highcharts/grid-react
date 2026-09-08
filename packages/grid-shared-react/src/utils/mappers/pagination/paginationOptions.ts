@@ -7,6 +7,8 @@
  *
  */
 
+import { mergeComponentOptions } from '../../mergeOptions';
+
 function withClassName(
     value: unknown,
     className: string | undefined
@@ -30,7 +32,7 @@ function withClassName(
     };
 }
 
-export function normalizePaginationOptions(
+function mapPaginationFlat(
     props: Record<string, unknown>
 ): Record<string, unknown> {
     const {
@@ -52,10 +54,11 @@ export function normalizePaginationOptions(
         ...rest
     } = props;
 
-    const result: Record<string, unknown> = {
-        enabled: enabled ?? true
-    };
+    const result: Record<string, unknown> = {};
 
+    if (enabled !== void 0) {
+        result.enabled = enabled;
+    }
     if (page !== void 0) {
         result.page = page;
     }
@@ -126,6 +129,18 @@ export function normalizePaginationOptions(
     }
 
     return { ...result, ...rest };
+}
+
+export function normalizePaginationOptions(
+    props: Record<string, unknown>
+): Record<string, unknown> {
+    const merged = mergeComponentOptions(props, mapPaginationFlat);
+
+    if (!('enabled' in merged)) {
+        merged.enabled = true;
+    }
+
+    return merged;
 }
 
 function asString(value: unknown): string | undefined {

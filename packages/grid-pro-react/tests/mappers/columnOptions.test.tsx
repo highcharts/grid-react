@@ -12,11 +12,11 @@ describe('mapColumnEventProps', () => {
         const onCellClick = vi.fn();
 
         expect(mapColumnEventProps({
-            columnId: 'name',
+            id: 'name',
             onAfterSort,
             onCellClick
         })).toEqual({
-            columnId: 'name',
+            id: 'name',
             events: {
                 afterSort: onAfterSort
             },
@@ -33,11 +33,11 @@ describe('mapColumnEventProps', () => {
         const onHeaderAfterRender = vi.fn();
 
         expect(mapColumnEventProps({
-            columnId: 'name',
+            id: 'name',
             onHeaderClick,
             onHeaderAfterRender
         })).toEqual({
-            columnId: 'name',
+            id: 'name',
             header: {
                 events: {
                     click: onHeaderClick,
@@ -64,7 +64,7 @@ describe('mergeColumnEventProps', () => {
                             }}
                         />
                         <Column
-                            columnId="name"
+                            id="name"
                             onAfterSort={onAfterSort}
                             onCellClick={onCellClick}
                         />

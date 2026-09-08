@@ -15,7 +15,9 @@ import type { PaginationProps } from './paginationProps';
  *
  * Links to Grid.Options.pagination
  */
-export function Pagination(_props: PaginationProps) {
+export function Pagination<TOptions = unknown>(
+    _props: PaginationProps<TOptions>
+) {
     return null;
 }
 
