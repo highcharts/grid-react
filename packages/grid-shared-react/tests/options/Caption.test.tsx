@@ -6,7 +6,11 @@ describe('Caption', () => {
     it('maps caption props and children into options.caption', () => {
         expect(
             getChildProps(
-                <Caption className="grid-caption" htmlTag="h2">
+                <Caption
+                    options={{ htmlTag: 'h1', text: 'Fallback' }}
+                    className="grid-caption"
+                    htmlTag="h2"
+                >
                     Sales table
                 </Caption>
             )

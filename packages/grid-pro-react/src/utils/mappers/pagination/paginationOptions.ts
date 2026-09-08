@@ -10,6 +10,7 @@
 import { isObject } from '@highcharts/grid-shared-react';
 import { mapEventsProps } from '../../mapEventsProps';
 import type { PaginationProps } from '@highcharts/grid-shared-react';
+import type { GridProOptions } from '../grid/gridOptions';
 import type {
     AfterPageChangeEvent,
     AfterPageSizeChangeEvent,
@@ -30,7 +31,9 @@ export interface PaginationEventProps {
 /**
  * Pagination props for Grid Pro, including event handlers.
  */
-export type ProPaginationProps = PaginationProps & PaginationEventProps;
+export type ProPaginationProps = PaginationProps<
+    GridProOptions['pagination']
+> & PaginationEventProps;
 
 /** Flat event prop → nested Grid option path for pagination. */
 const PAGINATION_EVENT_ALIASES = {

@@ -29,7 +29,7 @@ export interface GridRefHandle<TOptions> {
  */
 export interface GridProps<TOptions> {
     /**
-     * Grid configuration options
+     * Options JSON, same as in the Grid JS API.
      */
     options?: TOptions;
     /**

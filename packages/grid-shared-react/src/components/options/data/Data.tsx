@@ -11,7 +11,7 @@ export type DataColumnValue = boolean | null | number | string | undefined;
 
 export type DataColumns = Record<string, Array<DataColumnValue>>;
 
-export interface DataProps {
+export interface DataProps<TOptions = unknown> {
     /**
      * The type of the data provider.
      *
@@ -51,9 +51,13 @@ export interface DataProps {
      * The column ID that contains the stable, unique row IDs.
      */
     idColumn?: string;
+    /**
+     * Options JSON, same as in the Grid JS API (`data`).
+     */
+    options?: TOptions;
 }
 
-export function Data(_props: DataProps) {
+export function Data<TOptions = unknown>(_props: DataProps<TOptions>) {
     return null;
 }
 

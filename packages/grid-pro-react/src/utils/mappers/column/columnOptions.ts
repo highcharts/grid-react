@@ -10,6 +10,7 @@
 import { isObject } from '@highcharts/grid-shared-react';
 import { mapEventsProps } from '../../mapEventsProps';
 import type { ColumnProps } from '@highcharts/grid-shared-react';
+import type { IndividualColumnOptions } from '@highcharts/grid-pro/es-modules/Grid/Core/Options';
 import type {
     CellEventCallback,
     ColumnEventCallback
@@ -55,7 +56,9 @@ export type ProColumnEventProps = (
 /**
  * Column props for Grid Pro, including event handlers.
  */
-export type ProColumnProps = ColumnProps & ProColumnEventProps;
+export type ProColumnProps = ColumnProps<
+    Omit<IndividualColumnOptions, 'id'>
+> & ProColumnEventProps;
 
 /** Flat event prop → nested Grid option path for columns. */
 const COLUMN_EVENT_ALIASES = {

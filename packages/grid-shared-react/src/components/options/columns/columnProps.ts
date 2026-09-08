@@ -57,18 +57,21 @@ export interface ColumnOptionsProps {
     exportable?: boolean;
 }
 
-export interface ColumnProps extends ColumnOptionsProps {
+export interface ColumnProps<TOptions = unknown> extends ColumnOptionsProps {
     /**
-     * HTML `id` attribute for styling hooks. Not passed to Grid options.
+     * Column identity in Grid. Maps to Core `columns[].id`.
+     * Not an HTML id — this component does not render a DOM node.
      */
-    id?: string;
+    id: string;
     /**
-     * References the column to configure (data field id). Maps header, cells,
-     * sorting, filtering, etc. to Grid Core column options.
-     *
-     * Becomes `options.columns[].id` in Grid Core (same identifier).
+     * Data-source column id. `undefined` defaults to `id`. `null` forces
+     * the column to be unbound (virtual / computed).
      */
-    columnId?: string;
+    dataId?: string | null;
     className?: string;
     enabled?: boolean;
+    /**
+     * Options JSON, same as in the Grid JS API (`columns[]`).
+     */
+    options?: TOptions;
 }

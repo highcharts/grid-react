@@ -9,15 +9,21 @@
 
 import { ReactNode } from 'react';
 
-export interface DescriptionProps {
+export interface DescriptionProps<TOptions = unknown> {
     /**
      * The custom CSS class name for the description.
      */
     className?: string;
+    /**
+     * Options JSON, same as in the Grid JS API (`description`).
+     */
+    options?: TOptions;
     children?: ReactNode;
 }
 
-export function Description(_props: DescriptionProps) {
+export function Description<TOptions = unknown>(
+    _props: DescriptionProps<TOptions>
+) {
     return null;
 }
 

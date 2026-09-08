@@ -67,7 +67,7 @@ describe('buildGridOptions', () => {
     it('maps declarative children and builds full grid options', () => {
         const options = buildGridOptions(
             'GRID-KEY',
-            getChildProps(<Column columnId="name" />),
+            getChildProps(<Column id="name" />),
             void 0,
             { gridKey: 'GRID-KEY' } as GridProProps
         );
