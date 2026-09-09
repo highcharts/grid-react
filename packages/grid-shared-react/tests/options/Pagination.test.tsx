@@ -130,4 +130,34 @@ describe('Pagination normalization', () => {
             }
         });
     });
+
+    it('merges Core-shaped options under flattened pagination props', () => {
+        expect(
+            normalizeChildOptions(
+                getChildProps(
+                    <Pagination
+                        options={{
+                            enabled: false,
+                            controls: {
+                                pageButtons: { enabled: true, count: 3 }
+                            }
+                        }}
+                        pageSize={25}
+                    />
+                )
+            )
+        ).toEqual({
+            pagination: {
+                enabled: false,
+                pageSize: 25,
+                position: 'top',
+                controls: {
+                    pageButtons: {
+                        enabled: true,
+                        count: 3
+                    }
+                }
+            }
+        });
+    });
 });

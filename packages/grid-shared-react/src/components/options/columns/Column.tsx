@@ -14,7 +14,7 @@ import type { ColumnProps } from './columnProps';
  *
  * Links to Grid.Options.columns
  */
-export function Column(_props: ColumnProps) {
+export function Column<TOptions = unknown>(_props: ColumnProps<TOptions>) {
     return null;
 }
 

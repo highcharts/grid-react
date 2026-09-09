@@ -52,7 +52,7 @@ function App() {
         <Caption>Grid Pro Components</Caption>
         <Description>Declarative API with gridKey and event props</Description>
         <Column
-          columnId="name"
+          id="name"
           headerFormat="Name"
           onAfterSort={function () {
             console.info('Sorted name column');
@@ -65,16 +65,16 @@ function App() {
           }}
         />
         <Column
-          columnId="age"
+          id="age"
           dataType="number"
           headerFormat="Age"
         />
         <Column
-          columnId="city"
+          id="city"
           headerFormat="City"
         />
         <Column
-          columnId="salary"
+          id="salary"
           dataType="number"
           headerFormat="Salary (USD)"
           cellFormat="${value}"

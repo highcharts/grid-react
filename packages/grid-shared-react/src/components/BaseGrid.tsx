@@ -29,8 +29,7 @@ export interface GridRefHandle<TOptions> {
  */
 export interface GridProps<TOptions> {
     /**
-     * Grid options object. Merged with options from child
-     * components.
+     * Options JSON, same as in the Grid JS API.
      *
      * Links to Grid.Options
      */

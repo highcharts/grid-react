@@ -46,12 +46,13 @@ export interface GroupedHeaderOptions {
     columns?: Array<GroupedHeaderOptions | string>;
 }
 
-export interface HeaderProps {
+export interface HeaderProps<TOptions = unknown> {
     /**
-     * Header tree: column order, inclusion, and grouping. Each entry is a
-     * column id (`string`) or a {@link GroupedHeaderOptions} object.
+     * Options JSON, same as in the Grid JS API (`header`). Header tree:
+     * column order, inclusion, and grouping. Each entry is a column id
+     * (`string`) or a {@link GroupedHeaderOptions} object.
      *
      * Links to Grid.Options.header
      */
-    header?: Array<GroupedHeaderOptions | string>;
+    options?: TOptions;
 }

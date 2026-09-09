@@ -9,7 +9,7 @@
 
 import { ReactNode } from 'react';
 
-export interface CaptionProps {
+export interface CaptionProps<TOptions = unknown> {
     /**
      * Links to Grid.Options.caption.className
      */
@@ -18,6 +18,12 @@ export interface CaptionProps {
      * Links to Grid.Options.caption.htmlTag
      */
     htmlTag?: string;
+    /**
+     * Options JSON, same as in the Grid JS API (`caption`).
+     *
+     * Links to Grid.Options.caption
+     */
+    options?: TOptions;
     /**
      * Caption text, passed as the component children.
      *
@@ -31,7 +37,7 @@ export interface CaptionProps {
  *
  * Links to Grid.Options.caption
  */
-export function Caption(_props: CaptionProps) {
+export function Caption<TOptions = unknown>(_props: CaptionProps<TOptions>) {
     return null;
 }
 

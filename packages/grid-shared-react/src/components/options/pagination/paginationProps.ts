@@ -7,7 +7,7 @@
  *
  */
 
-export interface PaginationProps {
+export interface PaginationProps<TOptions = unknown> {
     /**
      * Defaults to `true` when the `<Pagination>` component is used. Pass
      * `false` to disable pagination while keeping other options.
@@ -73,4 +73,10 @@ export interface PaginationProps {
      * Links to Grid.Options.pagination.controls.previousNextButtons
      */
     previousNext?: boolean;
+    /**
+     * Options JSON, same as in the Grid JS API (`pagination`).
+     *
+     * Links to Grid.Options.pagination
+     */
+    options?: TOptions;
 }
