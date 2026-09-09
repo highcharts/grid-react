@@ -207,4 +207,76 @@ export { Pagination };
             FS.rmSync(dir, { recursive: true, force: true });
         }
     });
+
+    it('reads props from declare const X: (props: T) => null', () => {
+        const dir = FS.mkdtempSync(Path.join(OS.tmpdir(), 'grid-react-api-docs-'));
+        const dtsPath = Path.join(dir, 'index.d.ts');
+
+        FS.writeFileSync(dtsPath, `
+export interface CaptionProps {
+    /**
+     * Links to Grid.Options.caption.className
+     */
+    className?: string;
+    /**
+     * Links to Grid.Options.caption
+     */
+    options?: unknown;
+    children?: string;
+}
+declare const Caption: (props: CaptionProps) => null;
+export { Caption };
+`);
+
+        try {
+            const caption = extractFromDts(
+                dtsPath,
+                '@highcharts/grid-lite-react',
+                'grid-lite-react/index.d.ts'
+            ).find((component) => component.name === 'Caption');
+            const names = caption?.props.map((prop) => prop.name);
+
+            expect(names).toEqual(['className', 'options']);
+            expect(
+                caption?.props.find((prop) => prop.name === 'className')?.hrefPath
+            ).toBe('caption.className');
+            expect(
+                caption?.props.find((prop) => prop.name === 'options')?.hrefPath
+            ).toBe('caption');
+        } finally {
+            FS.rmSync(dir, { recursive: true, force: true });
+        }
+    });
+
+    it('maps Column.id, Header.options, and the options bag from dist', () => {
+        requireDts();
+        const lite = extractFromDts(
+            liteDts,
+            '@highcharts/grid-lite-react',
+            'grid-lite-react/index.d.ts'
+        );
+        const column = lite.find((component) => component.name === 'Column');
+        const header = lite.find((component) => component.name === 'Header');
+        const caption = lite.find((component) => component.name === 'Caption');
+        const data = lite.find((component) => component.name === 'Data');
+
+        expect(column?.props.find((prop) => prop.name === 'id')?.hrefPath)
+            .toBe('columns.id');
+        expect(column?.props.some((prop) => prop.name === 'columnId'))
+            .toBe(false);
+        expect(column?.props.find((prop) => prop.name === 'dataId')?.hrefPath)
+            .toBe('columns.dataId');
+        expect(column?.props.find((prop) => prop.name === 'options')?.hrefPath)
+            .toBe('columns');
+
+        expect(header?.props.find((prop) => prop.name === 'options')?.hrefPath)
+            .toBe('header');
+        expect(header?.props.some((prop) => prop.name === 'header'))
+            .toBe(false);
+
+        expect(caption?.props.find((prop) => prop.name === 'options')?.hrefPath)
+            .toBe('caption');
+        expect(data?.props.find((prop) => prop.name === 'options')?.hrefPath)
+            .toBe('data');
+    });
 });

@@ -114,7 +114,31 @@ function refName(type: ts.TypeNode): string | undefined {
 function propsTypeName(typeText: string): string | undefined {
     return typeText.match(
         /(?:ComponentType|FC|FunctionComponent)\s*<\s*([A-Z]\w*)/
-    )?.[1] ?? typeText.match(/^([A-Z]\w*)/)?.[1];
+    )?.[1] ??
+        typeText.match(/\(\s*\w+\s*:\s*([A-Z]\w*)/)?.[1] ??
+        typeText.match(/^([A-Z]\w*)/)?.[1];
+}
+
+function firstParamTypeName(
+    type: ts.TypeNode | undefined,
+    src: ts.SourceFile
+): string | undefined {
+    if (!type) {
+        return undefined;
+    }
+    if (ts.isFunctionTypeNode(type)) {
+        return firstParamTypeName(type.parameters[0]?.type, src);
+    }
+    return refName(type) ?? propsTypeName(type.getText(src));
+}
+
+function isExported(node: ts.Node): boolean {
+    return Boolean(
+        ts.canHaveModifiers(node) &&
+        ts.getModifiers(node)?.some(
+            (modifier) => modifier.kind === ts.SyntaxKind.ExportKeyword
+        )
+    );
 }
 
 function collectProps(
@@ -122,8 +146,8 @@ function collectProps(
     src: ts.SourceFile,
     index: SourceIndex
 ): PropEntry[] {
-    const out = new Map<string, PropEntry>();
-    const seen = new Set<string>();
+    const propsByName = new Map<string, PropEntry>();
+    const visitedTypeNames = new Set<string>();
 
     const addProp = (member: ts.TypeElement): void => {
         if (!ts.isPropertySignature(member) || !member.name) {
@@ -134,7 +158,7 @@ function collectProps(
             return;
         }
         const parsed = parseDoc(jsDoc(member, src));
-        out.set(name, {
+        propsByName.set(name, {
             name,
             type: member.type ?
                 member.type.getText(src).replace(/\s+/g, ' ').trim() :
@@ -159,8 +183,8 @@ function collectProps(
             return;
         }
         const name = refName(type);
-        if (name && !seen.has(name)) {
-            seen.add(name);
+        if (name && !visitedTypeNames.has(name)) {
+            visitedTypeNames.add(name);
             walkNamed(name);
         }
     };
@@ -181,7 +205,7 @@ function collectProps(
     };
 
     walkNamed(typeName);
-    return [...out.values()];
+    return [...propsByName.values()];
 }
 
 function indexSource(src: ts.SourceFile): SourceIndex {
@@ -200,10 +224,16 @@ function indexSource(src: ts.SourceFile): SourceIndex {
             index.aliases.set(stmt.name.text, stmt);
         } else if (ts.isFunctionDeclaration(stmt) && stmt.name) {
             index.fns.set(stmt.name.text, stmt);
+            if (isExported(stmt)) {
+                index.exports.set(stmt.name.text, stmt.name.text);
+            }
         } else if (ts.isVariableStatement(stmt)) {
             for (const decl of stmt.declarationList.declarations) {
                 if (ts.isIdentifier(decl.name)) {
                     index.vars.set(decl.name.text, decl);
+                    if (isExported(stmt)) {
+                        index.exports.set(decl.name.text, decl.name.text);
+                    }
                 }
             }
         } else if (
@@ -268,9 +298,10 @@ export function extractFromDts(
             continue;
         }
 
-        const typeText = fn?.parameters[0]?.type?.getText(src) ??
-            variable?.type?.getText(src);
-        const typeName = typeText && propsTypeName(typeText);
+        const typeName = firstParamTypeName(
+            fn?.parameters[0]?.type ?? variable?.type,
+            src
+        );
         const parsed = parseDoc(declJsDoc(fn, variable, src));
 
         docs.push({
