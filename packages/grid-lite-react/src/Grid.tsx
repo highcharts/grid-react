@@ -7,7 +7,6 @@
  *
  */
 
-import { useCallback } from 'react';
 import {
     BaseGrid,
     useDeclarativeGridOptions
@@ -33,17 +32,16 @@ export default function GridLite(props: GridProps<Options>) {
         className,
         tableClassName
     } = props;
-    const build = useCallback(
-        (
-            childOptions: Record<string, unknown>,
-            opts?: Options
-        ) => buildGridOptions(childOptions, opts, theme, tableClassName),
-        [theme, tableClassName]
-    );
     const { gridOptions, columnKey } = useDeclarativeGridOptions(
         children,
         options,
-        build
+        (childOptions, opts) => buildGridOptions(
+            childOptions,
+            opts,
+            theme,
+            tableClassName
+        ),
+        [theme, tableClassName]
     );
 
     return (

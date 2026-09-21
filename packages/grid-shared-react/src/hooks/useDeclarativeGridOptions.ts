@@ -32,14 +32,16 @@ export interface UseDeclarativeGridOptionsFn {
     <T>(
         children: ReactNode | undefined,
         options: T | undefined,
-        build: OptionsBuildFn<T>
+        build: OptionsBuildFn<T>,
+        buildDeps?: unknown[]
     ): DeclarativeGridOptionsState<T>;
 }
 
 export const useDeclarativeGridOptions: UseDeclarativeGridOptionsFn = (
     children,
     options,
-    build
+    build,
+    buildDeps = []
 ) => {
     const childOptions = useMemo(
         () => (children != null ? getChildProps(children) : {}),
@@ -51,7 +53,8 @@ export const useDeclarativeGridOptions: UseDeclarativeGridOptionsFn = (
     );
     const gridOptions = useMemo(
         () => build(childOptions, options),
-        [childOptions, options, build]
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+        [childOptions, options, ...buildDeps]
     );
 
     return { gridOptions, columnKey };
