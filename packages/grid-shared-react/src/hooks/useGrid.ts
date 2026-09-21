@@ -70,9 +70,18 @@ export function useGrid<TOptions>({
         // allow init to complete if re-mounted.
         destroyOnInitRef.current = false;
 
-        // Prevent double initialization
+        const destroyGrid = () => {
+            destroyOnInitRef.current = true;
+            if (currGridRef.current) {
+                currGridRef.current.destroy();
+                currGridRef.current = null;
+            }
+        };
+
+        // Prevent double initialization. Still return destroyGrid so the
+        // StrictMode remount keeps a destroy handler.
         if (initStartedRef.current || currGridRef.current) {
-            return;
+            return destroyGrid;
         }
         initStartedRef.current = true;
 
@@ -114,14 +123,8 @@ export function useGrid<TOptions>({
 
         initGrid();
 
-        return () => {
-            destroyOnInitRef.current = true;
-            if (currGridRef.current) {
-                currGridRef.current.destroy();
-                currGridRef.current = null;
-            }
-        };
-    }, [containerRef, Grid]);
+        return destroyGrid;
+    }, [containerRef, Grid, options]);
 
     // Effect for options updates - separate from init
     useEffect(() => {

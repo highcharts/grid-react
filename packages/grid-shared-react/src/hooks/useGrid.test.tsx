@@ -11,7 +11,10 @@ interface DeferredInit {
     resolve: () => Promise<void>;
 }
 
-function createDeferredGrid(initQueue: DeferredInit[]): GridType<TestOptions> {
+function createDeferredGrid(
+    initQueue: DeferredInit[],
+    destroyedIds: number[] = []
+): GridType<TestOptions> {
     let nextId = 0;
 
     return {
@@ -19,6 +22,7 @@ function createDeferredGrid(initQueue: DeferredInit[]): GridType<TestOptions> {
             const id = ++nextId;
             const grid: GridInstance<TestOptions> = {
                 destroy: () => {
+                    destroyedIds.push(id);
                     container.innerHTML = '';
                 },
                 update: () => {}
@@ -48,9 +52,10 @@ function createDeferredGrid(initQueue: DeferredInit[]): GridType<TestOptions> {
 describe('useGrid', () => {
     it('keeps the active grid when StrictMode double-inits', async () => {
         const initQueue: DeferredInit[] = [];
-        const Grid = createDeferredGrid(initQueue);
+        const destroyedIds: number[] = [];
+        const Grid = createDeferredGrid(initQueue, destroyedIds);
 
-        const { container } = render(
+        const { container, unmount } = render(
             <StrictMode>
                 <BaseGrid options={{}} Grid={Grid} />
             </StrictMode>
@@ -68,5 +73,9 @@ describe('useGrid', () => {
         await waitFor(() => {
             expect(container.querySelector('[data-grid-id="1"]')).not.toBeNull();
         });
+
+        unmount();
+
+        expect(destroyedIds).toEqual([1]);
     });
 });

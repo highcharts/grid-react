@@ -53,6 +53,7 @@ export const useDeclarativeGridOptions: UseDeclarativeGridOptionsFn = (
     );
     const gridOptions = useMemo(
         () => build(childOptions, options),
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         [childOptions, options, ...buildDeps]
     );
 
