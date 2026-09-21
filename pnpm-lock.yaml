@@ -57,8 +57,8 @@ importers:
   examples/grid-lite/components-react:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: '>=3.1.0'
-        version: 3.1.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
         version: link:../../../packages/grid-lite-react
@@ -94,8 +94,8 @@ importers:
   examples/grid-lite/minimal-nextjs:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: '>=3.1.0'
-        version: 3.1.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
         version: link:../../../packages/grid-lite-react
@@ -125,8 +125,8 @@ importers:
   examples/grid-lite/minimal-react:
     dependencies:
       '@highcharts/grid-lite':
-        specifier: '>=3.1.0'
-        version: 3.1.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@highcharts/grid-lite-react':
         specifier: workspace:*
         version: link:../../../packages/grid-lite-react
@@ -156,8 +156,8 @@ importers:
   examples/grid-pro/components-react:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: '>=3.1.0'
-        version: 3.1.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
         version: link:../../../packages/grid-pro-react
@@ -193,8 +193,8 @@ importers:
   examples/grid-pro/minimal-nextjs:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: '>=3.1.0'
-        version: 3.1.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
         version: link:../../../packages/grid-pro-react
@@ -224,8 +224,8 @@ importers:
   examples/grid-pro/minimal-react:
     dependencies:
       '@highcharts/grid-pro':
-        specifier: '>=3.1.0'
-        version: 3.1.0
+        specifier: ^3.2.0
+        version: 3.2.0
       '@highcharts/grid-pro-react':
         specifier: workspace:*
         version: link:../../../packages/grid-pro-react
@@ -849,8 +849,14 @@ packages:
   '@highcharts/grid-lite@3.1.0':
     resolution: {integrity: sha512-WEYEjhlSK1kSuakRjqjiAclCydxxc1lrJsrkdt9xLojf3UKiSq3m35qTLLwrJDFlzr24I614qTS8q21eTnQj8Q==}
 
+  '@highcharts/grid-lite@3.2.0':
+    resolution: {integrity: sha512-Jktl5cUbHPgAEsel2wr54e+9UahUUEWeHi0W+IJc3pJQuJqAQaZdY1NWF8rhJclhiT16aQIc1vBq4jKh6yHk5g==}
+
   '@highcharts/grid-pro@3.1.0':
     resolution: {integrity: sha512-QzAPfZUIjbrBBDPg17jmVauaLO5d4ogGW8LIfffKMX1Jtk1waKjBzHg0PdsvX/NZ/vNkt7L2RrMtl+kBaDopxg==}
+
+  '@highcharts/grid-pro@3.2.0':
+    resolution: {integrity: sha512-iwMKO2HFSs6nSvNKpNN/6U/0tQ6mUIg01eU6lBsXhd8OX8R6/dlP+4dtOjpsjpQomj5H4fGgFxgjMGNaaai6Aw==}
 
   '@humanfs/core@0.19.1':
     resolution: {integrity: sha512-5DyQ4+1JEUzejeK1JGICcideyfUbGixgS9jNgex5nqkW+cY7WZhxBigmieN5Qnw9ZosSNVC9KQKyb+GUaGyKUA==}
@@ -2797,7 +2803,11 @@ snapshots:
 
   '@highcharts/grid-lite@3.1.0': {}
 
+  '@highcharts/grid-lite@3.2.0': {}
+
   '@highcharts/grid-pro@3.1.0': {}
+
+  '@highcharts/grid-pro@3.2.0': {}
 
   '@humanfs/core@0.19.1': {}
 
