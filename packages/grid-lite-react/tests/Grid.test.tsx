@@ -1,5 +1,5 @@
-import { createGridTests } from '@highcharts/grid-shared-react/src/test/createGridTests';
-import { Grid, GridOptions } from '../index';
+import { createGridTests } from '@highcharts/grid-shared-react/tests/createGridTests';
+import { Grid, GridOptions } from '../src/index';
 
 createGridTests<GridOptions>(
     'Grid Lite',

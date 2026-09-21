@@ -65,7 +65,12 @@ export default function Home() {
 
   return (
     <>
-        <Grid options={proOptions} gridRef={gridRef} callback={onGridCallback} />
+        <Grid
+          gridKey="AAAA-BBBB-CCCC-DDDD-EEEE-FFFF"
+          options={proOptions}
+          gridRef={gridRef}
+          callback={onGridCallback}
+        />
         <button onClick={onButtonClick}>Click me</button>
     </>
   );
