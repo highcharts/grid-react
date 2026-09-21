@@ -7,7 +7,7 @@
  *
  */
 
-import { useRef, useImperativeHandle, forwardRef, ForwardedRef } from 'react';
+import { useRef, useImperativeHandle, forwardRef, ForwardedRef, ReactNode } from 'react';
 import {
     useGrid,
     GridType,
@@ -15,29 +15,54 @@ import {
 } from '../hooks/useGrid';
 
 /**
- * Ref handle exposed by Grid components
+ * Ref handle exposed by Grid components.
  */
 export interface GridRefHandle<TOptions> {
     /**
-     * Access to the underlying grid instance
+     * Access to the underlying grid instance.
      */
     readonly grid: GridInstance<TOptions> | null;
 }
 
 /**
- * Props for Grid component
+ * Props for the Grid component.
  */
 export interface GridProps<TOptions> {
     /**
-     * Grid configuration options
+     * Options JSON, same as in the Grid JS API.
+     *
+     * Links to Grid.Options
      */
-    options: TOptions;
+    options?: TOptions;
     /**
-     * Optional ref to access the grid instance
+     * Optional CSS class names on the React mount container (parent of
+     * `.hcg-container`). Independent of `theme`.
+     */
+    className?: string;
+    /**
+     * Optional CSS class names mapped to Core `rendering.table.className` on
+     * `.hcg-table`. Independent of `className` / `theme`.
+     *
+     * Links to Grid.Options.rendering.table.className
+     */
+    tableClassName?: string;
+    /**
+     * Omitted uses the Core default (`hcg-theme-default`). An empty string
+     * disables the theme.
+     *
+     * Links to Grid.Options.rendering.theme
+     */
+    theme?: string;
+    /**
+     * Declarative option components (e.g. Caption) passed as children.
+     */
+    children?: ReactNode;
+    /**
+     * Ref to access the grid instance.
      */
     gridRef?: ForwardedRef<GridRefHandle<TOptions>>;
     /**
-     * Optional callback to be called when the grid is initialized
+     * Callback to be called when the grid is initialized.
      */
     callback?: (grid: GridInstance<TOptions>) => void;
 }
@@ -45,18 +70,18 @@ export interface GridProps<TOptions> {
 /**
  * Props for BaseGrid component
  */
-export interface BaseGridProps<TOptions> extends GridProps<TOptions> {
-    /**
-     * Grid instance (from @highcharts/grid-lite or @highcharts/grid-pro)
-     */
+export interface BaseGridProps<TOptions> {
+    options?: TOptions;
     Grid: GridType<TOptions>;
+    callback?: (grid: GridInstance<TOptions>) => void;
+    className?: string;
 }
 
 export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
     props: BaseGridProps<TOptions>,
     ref: ForwardedRef<GridRefHandle<TOptions>>
 ) {
-    const { options, Grid, callback } = props;
+    const { options, Grid, callback, className } = props;
     const containerRef = useRef<HTMLDivElement>(null);
 
     const currGridRef = useGrid({
@@ -76,5 +101,5 @@ export const BaseGrid = forwardRef(function BaseGrid<TOptions>(
         []
     );
 
-    return <div ref={containerRef} />;
+    return <div ref={containerRef} className={className} />;
 });
