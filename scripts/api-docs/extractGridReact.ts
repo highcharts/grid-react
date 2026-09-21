@@ -423,10 +423,13 @@ export function buildTree(
         }
         const children: Record<string, unknown> = {};
         for (const c of listed) {
+            const prefix = category === 'Grid' ?
+                c.name :
+                `${category}.${c.name}`;
             const props: Record<string, unknown> = {};
             for (const p of c.props) {
                 props[p.name] = treeNode(
-                    `${category}.${c.name}.${p.name}`,
+                    `${prefix}.${p.name}`,
                     p.name,
                     c.sourceFile,
                     {
@@ -439,7 +442,7 @@ export function buildTree(
                 );
             }
             children[c.name] = treeNode(
-                `${category}.${c.name}`,
+                prefix,
                 c.name,
                 c.sourceFile,
                 { description: componentBody(c) },
@@ -447,14 +450,16 @@ export function buildTree(
                 props
             );
         }
-        tree[category] = treeNode(
-            category,
-            category,
-            undefined,
-            { description: CATEGORY_COPY[category] },
-            undefined,
-            children
-        );
+        tree[category] = category === 'Grid' ?
+            children.Grid :
+            treeNode(
+                category,
+                category,
+                undefined,
+                { description: CATEGORY_COPY[category] },
+                undefined,
+                children
+            );
     }
 
     return tree;

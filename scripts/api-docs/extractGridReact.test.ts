@@ -134,11 +134,13 @@ describe('extractGridReact', () => {
             commit: expect.any(String)
         }));
 
-        const grid = (
-            tree.Grid as {
-                children: Record<string, { doclet: { description?: string } }>;
-            }
-        ).children.Grid;
+        const grid = tree.Grid as {
+            doclet: { description?: string };
+            meta: { fullname: string };
+            children: Record<string, { meta: { fullname: string } }>;
+        };
+        expect(grid.meta.fullname).toBe('Grid');
+        expect(grid.children.Grid).toBeUndefined();
         expect(grid.doclet.description).toContain(
             "from '@highcharts/grid-lite-react'; // or '@highcharts/grid-pro-react'"
         );
