@@ -90,8 +90,8 @@ export function App() {
           age: [23, 34, 45]
         }}
       />
-      <Column columnId="name" headerFormat="Name" />
-      <Column columnId="age" dataType="number" headerFormat="Age" />
+      <Column id="name" headerFormat="Name" />
+      <Column id="age" dataType="number" headerFormat="Age" />
     </Grid>
   );
 }
@@ -135,8 +135,8 @@ export function App() {
           age: [23, 34, 45]
         }}
       />
-      <Column columnId="name" headerFormat="Name" />
-      <Column columnId="age" dataType="number" headerFormat="Age" />
+      <Column id="name" headerFormat="Name" />
+      <Column id="age" dataType="number" headerFormat="Age" />
     </Grid>
   );
 }

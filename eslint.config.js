@@ -38,13 +38,13 @@ export default defineConfig(
                 ignoreStrings: true,
                 ignoreTemplateLiterals: true
             }],
-            // Core hooks rules (skip React Compiler suite from flat.recommended).
+            // Core hooks rules.
             'react-hooks/rules-of-hooks': 'error',
             'react-hooks/exhaustive-deps': 'warn',
         },
     },
     {
-        files: ['scripts/**/*.js', '**/next.config.js'],
+        files: ['scripts/**/*.{js,ts}', '**/next.config.js'],
         languageOptions: {
             globals: {
                 ...globals.node,

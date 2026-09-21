@@ -9,6 +9,12 @@
 
 import type { PaginationProps } from './paginationProps';
 
+/**
+ * Page size and pagination controls. Position in the JSX tree sets
+ * `pagination.position` (`top` before other components, `bottom` after).
+ *
+ * Links to Grid.Options.pagination
+ */
 export function Pagination<TOptions = unknown>(
     _props: PaginationProps<TOptions>
 ) {
