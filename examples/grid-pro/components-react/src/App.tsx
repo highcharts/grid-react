@@ -15,7 +15,7 @@ import {
 const GRID_KEY = 'AAAA-BBBB-CCCC-DDDD-EEEE-FFFF';
 
 function App() {
-  const [dataSource, setDataSource] = useState({
+  const [dataSource] = useState({
     name: [
       'Alice Nguyen', 'Bob Berg', 'Charlie Dupont', 'David Sato', 'Eve Shaw',
       'John Hale', 'Jane Ortiz', 'Jim Novak', 'Jill Meyer', 'Jack Quinn',
@@ -39,15 +39,6 @@ function App() {
       41000, 59000, 64000, 76000, 82000
     ]
   });
-
-  const onButtonClick = () => {
-    setDataSource({
-      name: ['John Hale', 'Jane Ortiz', 'Jim Novak', 'Jill Meyer', 'Jack Quinn'],
-      age: [30, 25, 35, 40, 45],
-      city: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Miami'],
-      salary: [40000, 35000, 45000, 50000, 55000]
-    });
-  };
 
   const onGridCallback = (grid: GridInstance<GridOptions>) => {
     console.info('(callback) grid:', grid);
@@ -162,15 +153,6 @@ function App() {
             }}
           />
         </Grid>
-        <div id="controls" className="mt-4">
-          <button
-            type="button"
-            onClick={onButtonClick}
-            className="rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm font-medium text-slate-700 shadow-sm hover:bg-slate-50 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-200 dark:hover:bg-slate-800"
-          >
-            Update data
-          </button>
-        </div>
       </div>
     </div>
   );
