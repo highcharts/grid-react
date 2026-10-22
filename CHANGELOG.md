@@ -1,5 +1,17 @@
 # Changelog
 
+## [3.3.0] - 2026-10-22
+
+### Features
+- Added JSX components API for Grid Lite and Grid Pro React. (#29) - 2026-10-08
+
+
+## [3.2.0] - 2026-09-18
+
+### Other
+- Bumped Grid dependency version to v3.2.0. - 2026-09-18
+
+
 ## [3.1.0] - 2026-08-06
 
 ### Other
