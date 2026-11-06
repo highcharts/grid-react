@@ -17,7 +17,7 @@
 ## Why Highcharts Grid Lite React?
 
 - **Options or JSX** - Pass a Grid `options` object, compose with React components such as `Data`, `Column`, `Caption`, and `Pagination`, or mix both
-- **Self-Contained Package** - Grid setup, cleanup, and CSS are handled for you
+- **Self-Contained Package** - Grid setup and cleanup are handled for you
 - **Built for Large Tables** - Row virtualization keeps scrolling smooth with thousands of records
 - **Interactive by Default** - Sorting, filtering, and pagination without extra libraries
 - **Accessibility First** - Renders a semantic HTML table with keyboard navigation and screen reader support
@@ -48,6 +48,14 @@ yarn add @highcharts/grid-lite-react
 ```
 
 > **Note:** `@highcharts/grid-lite` is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
+
+### Styles
+
+Import the Grid CSS once in your app, for example in your entry file or root layout:
+
+```js
+import '@highcharts/grid-lite/css/grid-lite.css';
+```
 
 ## Quick Start
 
@@ -209,7 +217,13 @@ export default function Page() {
 }
 ```
 
-The React package loads Grid CSS automatically. See the [Next.js guide](https://www.highcharts.com/docs/grid/frameworks/nextjs) for more detail.
+Import the Grid CSS in `app/layout.tsx` (App Router) or `pages/_app.tsx` (Pages Router):
+
+```tsx
+import '@highcharts/grid-lite/css/grid-lite.css';
+```
+
+See the [Next.js guide](https://www.highcharts.com/docs/grid/frameworks/nextjs) for more detail.
 
 ## Documentation
 

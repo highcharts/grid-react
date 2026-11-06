@@ -6,7 +6,7 @@ const isExternal = (id) => [
     'react',
     'react-dom',
     '@highcharts/grid-lite'
-].some((pattern) => id.startsWith(pattern)) || id.endsWith('.css');
+].some((pattern) => id.startsWith(pattern));
 
 export default [{
     input: 'src/index.ts',

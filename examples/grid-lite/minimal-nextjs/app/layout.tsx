@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import '@highcharts/grid-lite/css/grid-lite.css';
 import './globals.css';
 
 export const metadata: Metadata = {
