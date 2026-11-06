@@ -8,7 +8,7 @@
  */
 
 import type { GridProps as BaseGridProps } from '@highcharts/grid-shared-react';
-import type GridPro from '@highcharts/grid-pro';
+import type GridPro from '@highcharts/grid-pro/es-modules/masters/grid-pro.src.js';
 import type { GridEventCallback } from '@highcharts/grid-pro/es-modules/Grid/Pro/GridEvents.js';
 import type {
     RowPinningChangeEventCallback

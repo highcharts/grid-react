@@ -7,13 +7,13 @@
  *
  */
 
-import GridLite from '@highcharts/grid-lite';
+import type GridLite from '@highcharts/grid-lite/es-modules/masters/grid-lite.src.js';
 import type { IndividualColumnOptions } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
 import * as Shared from '@highcharts/grid-shared-react';
 
 export { default as Grid } from './Grid';
 export { default as GridLite } from './Grid';
-export { DataTable, DataConnector } from '@highcharts/grid-lite';
+export { DataTable, DataConnector } from '@highcharts/grid-lite/es-modules/masters/grid-lite.src.js';
 export { merge } from '@highcharts/grid-lite/es-modules/Shared/Utilities.js';
 
 export type CaptionProps = Shared.CaptionProps<GridLite.Options['caption']>;
