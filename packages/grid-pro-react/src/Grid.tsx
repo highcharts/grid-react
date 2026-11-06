@@ -12,7 +12,6 @@ import {
     useDeclarativeGridOptions
 } from '@highcharts/grid-shared-react';
 import Grid from '@highcharts/grid-pro/es-modules/masters/grid-pro.src.js';
-import '@highcharts/grid-pro/css/grid-pro.css';
 import type { GridProProps } from './utils/mappers/grid';
 import {
     getGridEventPropDeps

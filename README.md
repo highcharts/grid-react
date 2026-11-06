@@ -6,7 +6,7 @@
 
 <img src="https://assets.highcharts.com/images/highcharts-logo.svg" />
 
-<p>Official React packages for Highcharts Grid Lite and Highcharts Grid Pro. Built for React patterns, with a JSX-native API, TypeScript types, and the Grid CSS included.</p>
+<p>Official React packages for Highcharts Grid Lite and Highcharts Grid Pro. Built for React patterns, with a JSX-native API and TypeScript types.</p>
 
 <img src="https://img.shields.io/npm/v/%40highcharts%2Fgrid-lite-react?style=flat&logoColor=white&label=grid-lite-react&labelColor=2a2a2a&color=e53e3e" alt="Grid Lite React NPM Version" />
 <img src="https://img.shields.io/npm/v/%40highcharts%2Fgrid-pro-react?style=flat&logoColor=white&label=grid-pro-react&labelColor=2a2a2a&color=e53e3e" alt="Grid Pro React NPM Version" />
@@ -20,7 +20,7 @@ This is the working repository for the Grid React packages. If you want to use G
 
 - **Options or JSX** - Pass a Grid `options` object, compose with React components such as `Data`, `Column`, `Caption`, and `Pagination`, or mix both
 - **Lite and Pro** - Start with free Grid Lite, or use Grid Pro for editing, validation, sparklines, and events
-- **Self-Contained Packages** - Grid setup, cleanup, and CSS are handled for you
+- **Self-Contained Packages** - Grid setup and cleanup are handled for you
 - **Built for Large Tables** - Row virtualization keeps scrolling smooth with thousands of records
 - **Accessibility First** - Semantic HTML tables with keyboard navigation and screen reader support
 - **TypeScript Ready** - First-class types for options, refs, events, and component props
@@ -51,6 +51,13 @@ npm install @highcharts/grid-pro-react
 ## Quick Start
 
 Components are optional. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
+
+Import the Grid CSS once in your app, for example in your entry file or root layout:
+
+```js
+import '@highcharts/grid-lite/css/grid-lite.css'; // Grid Lite
+import '@highcharts/grid-pro/css/grid-pro.css';   // Grid Pro
+```
 
 ### Grid Lite
 

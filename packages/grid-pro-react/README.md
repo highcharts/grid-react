@@ -50,6 +50,14 @@ yarn add @highcharts/grid-pro-react
 
 > **Note:** `@highcharts/grid-pro` is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
 
+### Styles
+
+Import the Grid CSS once in your app, for example in your entry file or root layout:
+
+```js
+import '@highcharts/grid-pro/css/grid-pro.css';
+```
+
 ## Quick Start
 
 Pass your Grid Pro license key with `gridKey`. Components are optional. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
@@ -224,7 +232,13 @@ export default function Page() {
 }
 ```
 
-The React package loads Grid CSS automatically. See the [Next.js guide](https://www.highcharts.com/docs/grid/frameworks/nextjs) for more detail.
+Import the Grid CSS in `app/layout.tsx` (App Router) or `pages/_app.tsx` (Pages Router):
+
+```tsx
+import '@highcharts/grid-pro/css/grid-pro.css';
+```
+
+See the [Next.js guide](https://www.highcharts.com/docs/grid/frameworks/nextjs) for more detail.
 
 ## Documentation
 
