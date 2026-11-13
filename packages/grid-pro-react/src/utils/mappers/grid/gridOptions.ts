@@ -88,11 +88,11 @@ export type GridEventProps = GridLevelEventProps & RowPinningEventProps;
 export interface GridProProps
     extends BaseGridProps<GridProOptions>, GridEventProps {
     /**
-     * Grid Pro license key.
+     * Grid Pro license key. When set, overrides `options.gridKey`.
      *
      * Links to Grid.Options.gridKey
      */
-    gridKey: string;
+    gridKey?: string;
 }
 
 /** Flat event prop → nested Grid option path for grid props. */
