@@ -52,7 +52,7 @@ yarn add @highcharts/grid-pro-react
 
 ## Quick Start
 
-Pass your Grid Pro license key with `gridKey`. Components are optional. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
+Pass your Grid Pro license key with the `gridKey` prop or `options.gridKey`. The prop overrides the options value. You can pass a Grid `options` object to `<Grid>` the same way as before, use JSX components, or mix both.
 
 ### Using options
 
@@ -130,7 +130,7 @@ The grid is rendered inside a container. You can pass layout, theme, and Pro eve
 </Grid>
 ```
 
-- `gridKey` is required and sets your Grid Pro license key
+- `gridKey` sets the Grid Pro license key and overrides `options.gridKey` when both are set
 - `className` applies to the React mount container
 - `tableClassName` applies to the rendered table
 - `theme` sets the Grid theme (`rendering.theme`)

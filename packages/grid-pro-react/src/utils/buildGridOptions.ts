@@ -27,7 +27,7 @@ import {
  * (parent of `.hcg-container`).
  */
 export function buildGridOptions(
-    gridKey: string,
+    gridKey: string | undefined,
     childOptions: Record<string, unknown>,
     options: GridProOptions | undefined,
     props: GridProProps
@@ -54,7 +54,8 @@ export function buildGridOptions(
         normalizeGridEventProps(props)
     ) as GridProOptions;
 
-    result.gridKey = gridKey;
+    // Prop wins when set. An omitted prop must not wipe options.gridKey.
+    result.gridKey = gridKey ?? result.gridKey;
 
     return result;
 }
