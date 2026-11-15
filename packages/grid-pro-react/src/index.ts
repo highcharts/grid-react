@@ -14,7 +14,7 @@ import type { ProPaginationProps } from './utils/mappers/pagination';
 
 export { default as Grid } from './Grid';
 export { default as GridPro } from './Grid';
-export { DataTable, DataConnector } from '@highcharts/grid-pro';
+export { DataTable, DataConnector } from '@highcharts/grid-pro/es-modules/masters/grid-pro.src.js';
 export { merge } from '@highcharts/grid-pro/es-modules/Shared/Utilities.js';
 
 export type CaptionProps = Shared.CaptionProps<GridProOptions['caption']>;
