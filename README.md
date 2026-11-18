@@ -245,4 +245,4 @@ Commercial support packages are available, see [Highcharts Advantage](https://ww
 
 ## License
 
-SEE LICENSE IN [LICENSE](https://github.com/highcharts/grid-react/blob/main/LICENSE).
+SEE LICENSE IN [LICENSE.txt](https://github.com/highcharts/grid-react/blob/main/LICENSE.txt).
