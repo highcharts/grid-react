@@ -11,7 +11,7 @@ import {
     BaseGrid,
     useDeclarativeGridOptions
 } from '@highcharts/grid-shared-react';
-import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src';
+import Grid from '@highcharts/grid-lite/es-modules/masters/grid-lite.src.js';
 import '@highcharts/grid-lite/css/grid-lite.css';
 import type { Options } from '@highcharts/grid-lite/es-modules/Grid/Core/Options';
 import type { GridProps } from '@highcharts/grid-shared-react';
