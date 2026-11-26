@@ -46,7 +46,7 @@ npm install @highcharts/grid-lite-react
 npm install @highcharts/grid-pro-react
 ```
 
-> **Note:** The matching Grid Core package is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
+> **Note:** The matching Grid Core package (`@highcharts/grid-lite` or `@highcharts/grid-pro`), `react` and `react-dom` are peer dependencies. npm v7+ and pnpm v8+ install them automatically; with yarn, add the Grid Core package explicitly. Requires React 18 or higher.
 
 ## Quick Start
 
@@ -230,8 +230,7 @@ Highcharts Grid React components can be used in Next.js applications. Grid uses 
 - [Grid Lite React](./packages/grid-lite-react/README.md)
 - [Grid Pro React](./packages/grid-pro-react/README.md)
 - [Highcharts Grid with React](https://www.highcharts.com/docs/grid/frameworks/react)
-- [Highcharts Grid Lite](https://www.highcharts.com/docs/grid/getting-started/grid-lite)
-- [Highcharts Grid Pro](https://www.highcharts.com/docs/grid/getting-started/grid-pro)
+- [Highcharts Grid installation](https://www.highcharts.com/docs/grid/installation)
 - [Changelog](./CHANGELOG.md)
 - [Releasing](./RELEASING.md)
 

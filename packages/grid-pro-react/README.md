@@ -45,10 +45,10 @@ npm install @highcharts/grid-pro-react
 Or using yarn:
 
 ```bash
-yarn add @highcharts/grid-pro-react
+yarn add @highcharts/grid-pro-react @highcharts/grid-pro
 ```
 
-> **Note:** `@highcharts/grid-pro` is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
+> **Note:** `@highcharts/grid-pro`, `react` and `react-dom` are peer dependencies. npm v7+ and pnpm v8+ install them automatically; yarn does not, so add `@highcharts/grid-pro` explicitly as shown above. Requires React 18 or higher.
 
 ## Quick Start
 
@@ -230,7 +230,7 @@ The React package loads Grid CSS automatically. See the [Next.js guide](https://
 
 For comprehensive guides and API documentation, visit the [Highcharts Grid React documentation](https://www.highcharts.com/docs/grid/frameworks/react).
 
-- [Grid Pro getting started](https://www.highcharts.com/docs/grid/getting-started/grid-pro)
+- [Grid installation](https://www.highcharts.com/docs/grid/installation)
 - [Highcharts Grid overview](https://www.highcharts.com/docs/grid/general)
 
 ## Support and feedback
