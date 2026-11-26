@@ -44,10 +44,10 @@ npm install @highcharts/grid-lite-react
 Or using yarn:
 
 ```bash
-yarn add @highcharts/grid-lite-react
+yarn add @highcharts/grid-lite-react @highcharts/grid-lite
 ```
 
-> **Note:** `@highcharts/grid-lite` is included as a dependency. `react` and `react-dom` are peer dependencies and are installed automatically with npm v7+. Requires React 18 or higher.
+> **Note:** `@highcharts/grid-lite`, `react` and `react-dom` are peer dependencies. npm v7+ and pnpm v8+ install them automatically; yarn does not, so add `@highcharts/grid-lite` explicitly as shown above. Requires React 18 or higher.
 
 ## Quick Start
 
@@ -215,7 +215,7 @@ The React package loads Grid CSS automatically. See the [Next.js guide](https://
 
 For comprehensive guides and API documentation, visit the [Highcharts Grid React documentation](https://www.highcharts.com/docs/grid/frameworks/react).
 
-- [Grid Lite getting started](https://www.highcharts.com/docs/grid/getting-started/grid-lite)
+- [Grid installation](https://www.highcharts.com/docs/grid/installation)
 - [Highcharts Grid overview](https://www.highcharts.com/docs/grid/general)
 
 ## Support and feedback

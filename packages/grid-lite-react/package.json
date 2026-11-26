@@ -1,7 +1,7 @@
 {
     "name": "@highcharts/grid-lite-react",
     "version": "3.3.0",
-    "description": "Official React integration for Highcharts Grid Lite",
+    "description": "Official React data grid component for Highcharts Grid Lite. Free, fast and accessible React table with sorting, filtering, pagination and row virtualization.",
     "type": "module",
     "main": "dist/index.js",
     "module": "dist/index.js",
@@ -13,10 +13,22 @@
     ],
     "keywords": [
         "highcharts",
-        "grid",
+        "highcharts-grid",
         "react",
+        "react-component",
+        "react-grid",
+        "react-data-grid",
+        "react-table",
         "data-grid",
-        "table"
+        "datagrid",
+        "data-table",
+        "datatable",
+        "grid",
+        "table",
+        "virtualization",
+        "accessibility",
+        "typescript",
+        "nextjs"
     ],
     "author": "Highsoft AS",
     "license": "SEE LICENSE.txt",
@@ -25,7 +37,7 @@
         "url": "https://github.com/highcharts/grid-react.git",
         "directory": "packages/grid-lite-react"
     },
-    "homepage": "https://www.highcharts.com",
+    "homepage": "https://www.highcharts.com/docs/grid/frameworks/react/getting-started",
     "bugs": {
         "url": "https://github.com/highcharts/grid-react/issues"
     },
